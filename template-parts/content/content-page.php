@@ -32,7 +32,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="nova-container">
 		<div class="page-body entry-content">
 			<?php
-			the_content();
+			$gpi_raw = get_the_content();
+			// If plain content has headings and is not already pre-assembled with complex columns/patterns
+			if ( function_exists( 'gpi_auto_layout' ) && preg_match( '/<h[2-4]/i', $gpi_raw ) && ! has_block( 'core/columns' ) ) {
+				echo gpi_auto_layout( $gpi_raw ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			} else {
+				the_content();
+			}
 
 			wp_link_pages(
 				array(

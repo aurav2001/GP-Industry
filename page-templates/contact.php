@@ -38,10 +38,19 @@ while ( have_posts() ) :
 
 					<div class="entry-content is-wide">
 						<?php
-						the_content();
+						$gpi_content = get_the_content();
+						$has_form    = false;
 
-						if ( ! trim( get_the_content() ) && current_user_can( 'edit_pages' ) ) {
-							echo '<div class="template-hint">' . gpi_icon( 'sparkles', 18 ) . esc_html__( 'Tip: install a form plugin (Contact Form 7, WPForms, Fluent Forms…) and paste its shortcode or block into this page’s content — it will appear in this card. This note is only visible to editors.', 'gp-industry' ) . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						if ( ! empty( $gpi_content ) ) {
+							the_content();
+							if ( preg_match( '/(<form|wpforms|wpcf7|fluentform|ninja_forms|formidable)/i', $gpi_content ) ) {
+								$has_form = true;
+							}
+						}
+
+						// If no third-party form plugin was embedded in content, load built-in form
+						if ( ! $has_form ) {
+							get_template_part( 'template-parts/page/contact-form' );
 						}
 						?>
 					</div>

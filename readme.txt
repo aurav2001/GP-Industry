@@ -4,7 +4,7 @@ Tags: blog, portfolio, one-column, two-columns, right-sidebar, custom-menu, cust
 Requires at least: 6.3
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 2.4.0
+Stable tag: 2.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,7 +26,7 @@ GP-Industry is a lightweight classic theme with a premium look:
 * Styles for every core Gutenberg block plus custom block styles (Gradient button, Card group, Highlight quote)
 * Page templates: Products Page & Services Page (auto grid of child pages), Product Detail & Service Detail (sidebar with siblings, contact card, quote button), About Page (split hero), Contact Page (form card + contact info + Google Map), Full Width, Blank Canvas
 * 15 industrial block patterns under "GP-Industry Sections": Hero, Products Grid, Services Grid, Industries We Serve, Our Process, Why Choose Us, Stats, Certifications & Clients, Product Specifications table, Projects Gallery, Testimonials, Leadership Team, FAQ, Quote banner, Request a Quote form section
-* Homepage stats strip (years, clients, projects, countries) from the Customizer
+* Homepage sections, all editable in the Customizer: hero slideshow, features, stats strip, about/intro (image + checklist + badge), products showcase (child pages), industries we serve, our process, testimonials, client/certification logos, FAQ, latest news, quote CTA
 * Two header styles: floating glass "island" bar (default) or classic full-width; optional dismissible announcement bar
 * Accessible: skip link, focus styles, ARIA on toggles, reduced-motion support
 * Translation-ready (text domain: gp-industry)
@@ -58,6 +58,9 @@ Sections alternate a subtle background band. Block patterns, columns and groups 
 4. Contact: fill Customize → GP-Industry Options → Contact Info; paste your form plugin's shortcode/block into the page content.
 
 == Changelog ==
+
+= 2.5.0 =
+* 7 new homepage sections editable from the Customizer (About, Products, Industries, Process, Testimonials, Clients & Certifications, FAQ) with list fields using one item per line.
 
 = 2.4.0 =
 * Appearance → GP-Industry Setup: one-click demo page import (with menu + front page) and page-template repair for pages migrated from another theme.

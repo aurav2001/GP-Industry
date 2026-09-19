@@ -19,6 +19,22 @@ if ( gpi_get_option( 'show_stats', true ) ) {
 	get_template_part( 'template-parts/sections/stats' );
 }
 
+if ( gpi_get_option( 'show_home_about', true ) ) {
+	get_template_part( 'template-parts/sections/home-about' );
+}
+
+if ( gpi_get_option( 'show_home_products', true ) ) {
+	get_template_part( 'template-parts/sections/home-products' );
+}
+
+if ( gpi_get_option( 'show_home_industries', true ) ) {
+	get_template_part( 'template-parts/sections/home-industries' );
+}
+
+if ( gpi_get_option( 'show_home_process', true ) ) {
+	get_template_part( 'template-parts/sections/home-process' );
+}
+
 // If a static front page is set and has content, show it between sections.
 if ( is_page() && have_posts() ) {
 	while ( have_posts() ) {
@@ -37,6 +53,18 @@ if ( is_page() && have_posts() ) {
 		}
 	}
 	wp_reset_postdata();
+}
+
+if ( gpi_get_option( 'show_home_testimonials', true ) ) {
+	get_template_part( 'template-parts/sections/home-testimonials' );
+}
+
+if ( gpi_get_option( 'show_home_clients', true ) ) {
+	get_template_part( 'template-parts/sections/home-clients' );
+}
+
+if ( gpi_get_option( 'show_home_faq', true ) ) {
+	get_template_part( 'template-parts/sections/home-faq' );
 }
 
 if ( gpi_get_option( 'show_home_posts', true ) ) {

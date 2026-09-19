@@ -64,6 +64,10 @@ function gpi_option_defaults() {
 		'stat_4_label'    => esc_html__( 'Countries supplied', 'gp-industry' ),
 	);
 
+	if ( function_exists( 'gpi_home_defaults' ) ) {
+		$defaults = array_merge( $defaults, gpi_home_defaults() );
+	}
+
 	return $defaults;
 }
 
@@ -98,7 +102,7 @@ function gpi_body_classes( $classes ) {
 		$classes[] = 'nova-reading';
 	}
 
-	if ( is_page_template( array( 'page-templates/full-width.php', 'page-templates/services.php', 'page-templates/about.php', 'page-templates/contact.php', 'page-templates/service-single.php', 'page-templates/products.php', 'page-templates/product-single.php', 'page-templates/auto-design.php' ) ) ) {
+	if ( is_page_template( array( 'page-templates/full-width.php', 'page-templates/services.php', 'page-templates/about.php', 'page-templates/contact.php', 'page-templates/service-single.php', 'page-templates/products.php', 'page-templates/product-single.php', 'page-templates/auto-design.php', 'page-templates/courses.php', 'page-templates/course-single.php' ) ) ) {
 		$classes[] = 'is-full-width';
 	}
 
