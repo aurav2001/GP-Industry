@@ -234,7 +234,7 @@ msgstr ""
 msgid "End-to-end production from prototyping to high-volume runs."
 msgstr ""
 
-#: inc/block-patterns.php:186 inc/block-patterns.php:187 inc/block-patterns.php:188 page-templates/services.php:29 template-parts/page/child-grid.php:19
+#: inc/block-patterns.php:186 inc/block-patterns.php:187 inc/block-patterns.php:188 page-templates/courses.php:138 page-templates/courses.php:160 page-templates/courses.php:182 page-templates/services.php:29 template-parts/page/child-grid.php:19
 msgid "Learn more"
 msgstr ""
 
@@ -446,7 +446,7 @@ msgstr ""
 msgid "Surface finish"
 msgstr ""
 
-#: inc/block-patterns.php:342 page-templates/course-single.php:57
+#: inc/block-patterns.php:342 page-templates/course-single.php:59
 msgid "Certification"
 msgstr ""
 
@@ -656,6 +656,54 @@ msgstr ""
 
 #: inc/block-patterns.php:484
 msgid "Replace this paragraph with your form plugin shortcode or block (Contact Form 7, WPForms, Fluent Forms…), e.g. [contact-form-7 id=\"123\"]."
+msgstr ""
+
+#: inc/contact-form.php:31
+msgid "Thank you! Your message has been sent."
+msgstr ""
+
+#: inc/contact-form.php:42
+msgid "Please fill in all required fields (Name, Email, Message)."
+msgstr ""
+
+#: inc/contact-form.php:46
+msgid "Please provide a valid email address."
+msgstr ""
+
+#: inc/contact-form.php:54
+msgid "New enquiry"
+msgstr ""
+
+#: inc/contact-form.php:57 inc/template-functions.php:259
+msgid "Name"
+msgstr ""
+
+#: inc/contact-form.php:59 inc/customizer.php:519 inc/template-functions.php:260 template-parts/page/contact-card.php:49
+msgid "Email"
+msgstr ""
+
+#: inc/contact-form.php:61 inc/customizer.php:514 template-parts/page/contact-card.php:46
+msgid "Phone"
+msgstr ""
+
+#: inc/contact-form.php:63
+msgid "Subject"
+msgstr ""
+
+#: inc/contact-form.php:65
+msgid "Message"
+msgstr ""
+
+#: inc/contact-form.php:73
+msgid "Thank you! Your message has been sent successfully. We will contact you shortly."
+msgstr ""
+
+#: inc/contact-form.php:91
+msgid "Sent!"
+msgstr ""
+
+#: inc/contact-form.php:91
+msgid "Please check the form"
 msgstr ""
 
 #: inc/customizer-home.php:24
@@ -1202,14 +1250,6 @@ msgstr ""
 msgid "Address"
 msgstr ""
 
-#: inc/customizer.php:514 template-parts/page/contact-card.php:46
-msgid "Phone"
-msgstr ""
-
-#: inc/customizer.php:519 inc/template-functions.php:260 template-parts/page/contact-card.php:49
-msgid "Email"
-msgstr ""
-
 #: inc/customizer.php:524
 msgid "Working hours"
 msgstr ""
@@ -1611,10 +1651,6 @@ msgid "Toggle submenu"
 msgstr ""
 
 #: inc/template-functions.php:259
-msgid "Name"
-msgstr ""
-
-#: inc/template-functions.php:259
 msgid "Your name"
 msgstr ""
 
@@ -1764,151 +1800,151 @@ msgstr ""
 msgid "Map"
 msgstr ""
 
-#: page-templates/course-single.php:19
+#: page-templates/course-single.php:21
 msgid "8 Weeks (Self-paced + Live)"
 msgstr ""
 
-#: page-templates/course-single.php:24
+#: page-templates/course-single.php:26
 msgid "Beginner to Advanced"
 msgstr ""
 
-#: page-templates/course-single.php:29
+#: page-templates/course-single.php:31
 msgid "Govt. / Industry Recognized Certificate"
 msgstr ""
 
-#: page-templates/course-single.php:38
+#: page-templates/course-single.php:40
 msgid "Popular Course"
 msgstr ""
 
-#: page-templates/course-single.php:50
+#: page-templates/course-single.php:52
 msgid "Duration"
 msgstr ""
 
-#: page-templates/course-single.php:64
+#: page-templates/course-single.php:66
 msgid "Student Rating"
 msgstr ""
 
-#: page-templates/course-single.php:84
+#: page-templates/course-single.php:86
 msgid "What You Will Learn In This Course"
 msgstr ""
 
-#: page-templates/course-single.php:86
+#: page-templates/course-single.php:88
 msgid "Hands-on practical training with real-world case studies"
 msgstr ""
 
-#: page-templates/course-single.php:87
+#: page-templates/course-single.php:89
 msgid "Industry standard best practices, safety codes & procedures"
 msgstr ""
 
-#: page-templates/course-single.php:88
+#: page-templates/course-single.php:90
 msgid "Comprehensive troubleshooting, tools & modern techniques"
 msgstr ""
 
-#: page-templates/course-single.php:89
+#: page-templates/course-single.php:91
 msgid "Live project completion with mentor guidance and evaluation"
 msgstr ""
 
-#: page-templates/course-single.php:95
+#: page-templates/course-single.php:97
 msgid "Course Overview & Curriculum"
 msgstr ""
 
-#: page-templates/course-single.php:104
+#: page-templates/course-single.php:106
 msgid "This course is tailored for students and working professionals aiming to master industrial and engineering principles through structured modules, practical lab sessions, and direct expert mentorship."
 msgstr ""
 
-#: page-templates/course-single.php:109
+#: page-templates/course-single.php:111
 msgid "Module 1"
 msgstr ""
 
-#: page-templates/course-single.php:110
+#: page-templates/course-single.php:112
 msgid "Fundamental Concepts & Industry Introduction"
 msgstr ""
 
-#: page-templates/course-single.php:113
+#: page-templates/course-single.php:115
 msgid "Overview of foundational theories, safety guidelines, terminology, and core workflow setup."
 msgstr ""
 
-#: page-templates/course-single.php:118
+#: page-templates/course-single.php:120
 msgid "Module 2"
 msgstr ""
 
-#: page-templates/course-single.php:119
+#: page-templates/course-single.php:121
 msgid "Applied Technical Methodologies & Tools"
 msgstr ""
 
-#: page-templates/course-single.php:122
+#: page-templates/course-single.php:124
 msgid "Working with industrial equipment, software simulations, and diagnostic instruments."
 msgstr ""
 
-#: page-templates/course-single.php:127
+#: page-templates/course-single.php:129
 msgid "Module 3"
 msgstr ""
 
-#: page-templates/course-single.php:128
+#: page-templates/course-single.php:130
 msgid "Advanced Optimization & Real-World Capstone Project"
 msgstr ""
 
-#: page-templates/course-single.php:131
+#: page-templates/course-single.php:133
 msgid "Execution of an end-to-end industrial project, final review, and certification assessment."
 msgstr ""
 
-#: page-templates/course-single.php:145
+#: page-templates/course-single.php:147
 msgid "Industry Recognized Certification"
 msgstr ""
 
-#: page-templates/course-single.php:146
+#: page-templates/course-single.php:148
 msgid "Upon successful completion, receive a verified digital certificate that you can showcase on LinkedIn, your resume, and to prospective employers."
 msgstr ""
 
-#: page-templates/course-single.php:155
+#: page-templates/course-single.php:157
 msgid "Admissions Open"
 msgstr ""
 
-#: page-templates/course-single.php:156
+#: page-templates/course-single.php:158
 msgid "Enroll In This Course"
 msgstr ""
 
-#: page-templates/course-single.php:157
+#: page-templates/course-single.php:159
 msgid "Limited seats per batch for personalized mentoring."
 msgstr ""
 
-#: page-templates/course-single.php:160
+#: page-templates/course-single.php:162
 msgid "Full Course Access & Materials"
 msgstr ""
 
-#: page-templates/course-single.php:161
+#: page-templates/course-single.php:163
 msgid "1-on-1 Mentor Doubt Sessions"
 msgstr ""
 
-#: page-templates/course-single.php:162
+#: page-templates/course-single.php:164
 msgid "Practical Lab & Project Assignments"
 msgstr ""
 
-#: page-templates/course-single.php:163
+#: page-templates/course-single.php:165
 msgid "Placement Assistance & Resume Review"
 msgstr ""
 
-#: page-templates/course-single.php:168
+#: page-templates/course-single.php:170
 msgid "Request Syllabus & Fee Details"
 msgstr ""
 
-#: page-templates/course-single.php:174
+#: page-templates/course-single.php:178
 msgid "Your Name"
 msgstr ""
 
-#: page-templates/course-single.php:177 template-parts/page/contact-form.php:83
+#: page-templates/course-single.php:181 template-parts/page/contact-form.php:33
 msgid "Phone / WhatsApp"
 msgstr ""
 
-#: page-templates/course-single.php:180 template-parts/page/contact-form.php:74
+#: page-templates/course-single.php:184
 msgid "Email Address"
 msgstr ""
 
-#: page-templates/course-single.php:185
-msgid "Download Syllabus / Inquire"
+#: page-templates/course-single.php:189
+msgid "Request syllabus & fees"
 msgstr ""
 
-#: page-templates/course-single.php:195
+#: page-templates/course-single.php:199
 msgid "Have questions about eligibility?"
 msgstr ""
 
@@ -1925,7 +1961,7 @@ msgid "Certified"
 msgstr ""
 
 #: page-templates/courses.php:107
-msgid "View Syllabus"
+msgid "View syllabus"
 msgstr ""
 
 #: page-templates/courses.php:127
@@ -1942,10 +1978,6 @@ msgstr ""
 
 #: page-templates/courses.php:137
 msgid "Certificate Included"
-msgstr ""
-
-#: page-templates/courses.php:138 page-templates/courses.php:160 page-templates/courses.php:182
-msgid "Learn More"
 msgstr ""
 
 #: page-templates/courses.php:149
@@ -2121,64 +2153,40 @@ msgstr ""
 msgid "Hours"
 msgstr ""
 
-#: template-parts/page/contact-form.php:24
-msgid "Please fill in all required fields (Name, Email, Message)."
+#: template-parts/page/contact-form.php:25
+msgid "Full name"
 msgstr ""
 
-#: template-parts/page/contact-form.php:27
-msgid "Please provide a valid email address."
-msgstr ""
-
-#: template-parts/page/contact-form.php:38
-msgid "Thank you! Your message has been sent successfully. We will contact you shortly."
-msgstr ""
-
-#: template-parts/page/contact-form.php:48
-msgid "Success!"
-msgstr ""
-
-#: template-parts/page/contact-form.php:56
-msgid "Error:"
-msgstr ""
-
-#: template-parts/page/contact-form.php:67
-msgid "Full Name"
-msgstr ""
-
-#: template-parts/page/contact-form.php:69
+#: template-parts/page/contact-form.php:26
 msgid "e.g. Rahul Sharma"
 msgstr ""
 
-#: template-parts/page/contact-form.php:76
-msgid "name@company.com"
+#: template-parts/page/contact-form.php:29
+msgid "Email address"
 msgstr ""
 
-#: template-parts/page/contact-form.php:85
-msgid "+91 98765 43210"
+#: template-parts/page/contact-form.php:37
+msgid "Subject / enquiry type"
 msgstr ""
 
-#: template-parts/page/contact-form.php:90
-msgid "Subject / Inquiry Type"
+#: template-parts/page/contact-form.php:38
+msgid "e.g. Quote for machined parts"
 msgstr ""
 
-#: template-parts/page/contact-form.php:92
-msgid "e.g. Course Admission / Project Quote"
+#: template-parts/page/contact-form.php:41
+msgid "Your message / requirement"
 msgstr ""
 
-#: template-parts/page/contact-form.php:98
-msgid "Your Message / Requirement"
+#: template-parts/page/contact-form.php:42
+msgid "Describe your requirement, quantities, materials, drawings…"
 msgstr ""
 
-#: template-parts/page/contact-form.php:100
-msgid "Describe your requirement, questions, or schedule a consultation…"
+#: template-parts/page/contact-form.php:47
+msgid "Send message"
 msgstr ""
 
-#: template-parts/page/contact-form.php:106
-msgid "Send Message"
-msgstr ""
-
-#: template-parts/page/contact-form.php:110
-msgid "We respect your privacy. We never share your data with third parties."
+#: template-parts/page/contact-form.php:48
+msgid "We respect your privacy and never share your data."
 msgstr ""
 
 #: template-parts/post/author-box.php:22

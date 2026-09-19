@@ -1,6 +1,7 @@
 <?php
 /**
- * Built-in Modern Contact Form Template Part
+ * Built-in contact / quote form (used on the Contact Page template when no
+ * form plugin is embedded in the content).
  *
  * @package GPIndustry
  */
@@ -9,106 +10,42 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$gpi_status = '';
-$gpi_msg    = '';
-
-if ( isset( $_POST['gpi_contact_nonce'] ) && wp_verify_nonce( sanitize_key( $_POST['gpi_contact_nonce'] ), 'gpi_contact_action' ) ) {
-	$name    = isset( $_POST['gpi_name'] ) ? sanitize_text_field( wp_unslash( $_POST['gpi_name'] ) ) : '';
-	$email   = isset( $_POST['gpi_email'] ) ? sanitize_email( wp_unslash( $_POST['gpi_email'] ) ) : '';
-	$phone   = isset( $_POST['gpi_phone'] ) ? sanitize_text_field( wp_unslash( $_POST['gpi_phone'] ) ) : '';
-	$subject = isset( $_POST['gpi_subject'] ) ? sanitize_text_field( wp_unslash( $_POST['gpi_subject'] ) ) : '';
-	$message = isset( $_POST['gpi_message'] ) ? sanitize_textarea_field( wp_unslash( $_POST['gpi_message'] ) ) : '';
-
-	if ( empty( $name ) || empty( $email ) || empty( $message ) ) {
-		$gpi_status = 'error';
-		$gpi_msg    = esc_html__( 'Please fill in all required fields (Name, Email, Message).', 'gp-industry' );
-	} elseif ( ! is_email( $email ) ) {
-		$gpi_status = 'error';
-		$gpi_msg    = esc_html__( 'Please provide a valid email address.', 'gp-industry' );
-	} else {
-		$admin_email = get_option( 'admin_email' );
-		$mail_subject = $subject ? '[' . get_bloginfo( 'name' ) . '] ' . $subject : '[' . get_bloginfo( 'name' ) . '] New Contact Inquiry';
-		$mail_body    = "Name: $name\nEmail: $email\nPhone: $phone\nSubject: $subject\n\nMessage:\n$message\n";
-		$headers      = array( 'Content-Type: text/plain; charset=UTF-8', "Reply-To: $name <$email>" );
-
-		$sent = wp_mail( $admin_email, $mail_subject, $mail_body, $headers );
-
-		// Even if local mail server is unconfigured, provide clean friendly feedback
-		$gpi_status = 'success';
-		$gpi_msg    = esc_html__( 'Thank you! Your message has been sent successfully. We will contact you shortly.', 'gp-industry' );
-	}
-}
+$gpi_result = gpi_process_contact_form();
 ?>
 
-<div class="gpi-built-in-form-wrapper">
-	<?php if ( 'success' === $gpi_status ) : ?>
-		<div class="gpi-alert gpi-alert-success" role="alert">
-			<span class="gpi-alert-icon">✓</span>
-			<div>
-				<strong><?php esc_html_e( 'Success!', 'gp-industry' ); ?></strong>
-				<p><?php echo esc_html( $gpi_msg ); ?></p>
-			</div>
-		</div>
-	<?php elseif ( 'error' === $gpi_status ) : ?>
-		<div class="gpi-alert gpi-alert-error" role="alert">
-			<span class="gpi-alert-icon">⚠</span>
-			<div>
-				<strong><?php esc_html_e( 'Error:', 'gp-industry' ); ?></strong>
-				<p><?php echo esc_html( $gpi_msg ); ?></p>
-			</div>
-		</div>
-	<?php endif; ?>
+<div class="gpi-form-wrapper">
+	<?php gpi_contact_form_alert( $gpi_result ); ?>
 
-	<form method="post" action="<?php echo esc_url( get_permalink() ); ?>" class="gpi-modern-contact-form" id="contact-form">
+	<form method="post" action="<?php echo esc_url( get_permalink() . '#contact-form' ); ?>" class="gpi-form" id="contact-form" novalidate>
 		<?php wp_nonce_field( 'gpi_contact_action', 'gpi_contact_nonce' ); ?>
+		<div class="gpi-hp" aria-hidden="true"><label>Website<input type="text" name="gpi_website" tabindex="-1" autocomplete="off"></label></div>
 
-		<div class="gpi-form-row gpi-form-grid-2">
-			<div class="gpi-form-group">
-				<label for="gpi_name" class="gpi-label"><?php esc_html_e( 'Full Name', 'gp-industry' ); ?> <span class="gpi-required">*</span></label>
-				<div class="gpi-input-wrap">
-					<input type="text" name="gpi_name" id="gpi_name" class="gpi-input" required placeholder="<?php esc_attr_e( 'e.g. Rahul Sharma', 'gp-industry' ); ?>" value="<?php echo isset( $_POST['gpi_name'] ) && 'success' !== $gpi_status ? esc_attr( wp_unslash( $_POST['gpi_name'] ) ) : ''; ?>">
-				</div>
+		<div class="gpi-form-grid">
+			<div class="gpi-field">
+				<label for="gpi_name"><?php esc_html_e( 'Full name', 'gp-industry' ); ?> <span class="required">*</span></label>
+				<input type="text" name="gpi_name" id="gpi_name" required placeholder="<?php esc_attr_e( 'e.g. Rahul Sharma', 'gp-industry' ); ?>" value="<?php echo esc_attr( gpi_contact_form_value( 'gpi_name', $gpi_result ) ); ?>">
 			</div>
-
-			<div class="gpi-form-group">
-				<label for="gpi_email" class="gpi-label"><?php esc_html_e( 'Email Address', 'gp-industry' ); ?> <span class="gpi-required">*</span></label>
-				<div class="gpi-input-wrap">
-					<input type="email" name="gpi_email" id="gpi_email" class="gpi-input" required placeholder="<?php esc_attr_e( 'name@company.com', 'gp-industry' ); ?>" value="<?php echo isset( $_POST['gpi_email'] ) && 'success' !== $gpi_status ? esc_attr( wp_unslash( $_POST['gpi_email'] ) ) : ''; ?>">
-				</div>
+			<div class="gpi-field">
+				<label for="gpi_email"><?php esc_html_e( 'Email address', 'gp-industry' ); ?> <span class="required">*</span></label>
+				<input type="email" name="gpi_email" id="gpi_email" required placeholder="name@company.com" value="<?php echo esc_attr( gpi_contact_form_value( 'gpi_email', $gpi_result ) ); ?>">
 			</div>
-		</div>
-
-		<div class="gpi-form-row gpi-form-grid-2">
-			<div class="gpi-form-group">
-				<label for="gpi_phone" class="gpi-label"><?php esc_html_e( 'Phone / WhatsApp', 'gp-industry' ); ?></label>
-				<div class="gpi-input-wrap">
-					<input type="tel" name="gpi_phone" id="gpi_phone" class="gpi-input" placeholder="<?php esc_attr_e( '+91 98765 43210', 'gp-industry' ); ?>" value="<?php echo isset( $_POST['gpi_phone'] ) && 'success' !== $gpi_status ? esc_attr( wp_unslash( $_POST['gpi_phone'] ) ) : ''; ?>">
-				</div>
+			<div class="gpi-field">
+				<label for="gpi_phone"><?php esc_html_e( 'Phone / WhatsApp', 'gp-industry' ); ?></label>
+				<input type="tel" name="gpi_phone" id="gpi_phone" placeholder="+91 98765 43210" value="<?php echo esc_attr( gpi_contact_form_value( 'gpi_phone', $gpi_result ) ); ?>">
 			</div>
-
-			<div class="gpi-form-group">
-				<label for="gpi_subject" class="gpi-label"><?php esc_html_e( 'Subject / Inquiry Type', 'gp-industry' ); ?></label>
-				<div class="gpi-input-wrap">
-					<input type="text" name="gpi_subject" id="gpi_subject" class="gpi-input" placeholder="<?php esc_attr_e( 'e.g. Course Admission / Project Quote', 'gp-industry' ); ?>" value="<?php echo isset( $_POST['gpi_subject'] ) && 'success' !== $gpi_status ? esc_attr( wp_unslash( $_POST['gpi_subject'] ) ) : ''; ?>">
-				</div>
+			<div class="gpi-field">
+				<label for="gpi_subject"><?php esc_html_e( 'Subject / enquiry type', 'gp-industry' ); ?></label>
+				<input type="text" name="gpi_subject" id="gpi_subject" placeholder="<?php esc_attr_e( 'e.g. Quote for machined parts', 'gp-industry' ); ?>" value="<?php echo esc_attr( gpi_contact_form_value( 'gpi_subject', $gpi_result ) ); ?>">
 			</div>
-		</div>
-
-		<div class="gpi-form-group">
-			<label for="gpi_message" class="gpi-label"><?php esc_html_e( 'Your Message / Requirement', 'gp-industry' ); ?> <span class="gpi-required">*</span></label>
-			<div class="gpi-input-wrap">
-				<textarea name="gpi_message" id="gpi_message" class="gpi-textarea" rows="5" required placeholder="<?php esc_attr_e( 'Describe your requirement, questions, or schedule a consultation…', 'gp-industry' ); ?>"><?php echo isset( $_POST['gpi_message'] ) && 'success' !== $gpi_status ? esc_textarea( wp_unslash( $_POST['gpi_message'] ) ) : ''; ?></textarea>
+			<div class="gpi-field gpi-field-full">
+				<label for="gpi_message"><?php esc_html_e( 'Your message / requirement', 'gp-industry' ); ?> <span class="required">*</span></label>
+				<textarea name="gpi_message" id="gpi_message" rows="5" required placeholder="<?php esc_attr_e( 'Describe your requirement, quantities, materials, drawings…', 'gp-industry' ); ?>"><?php echo esc_textarea( gpi_contact_form_value( 'gpi_message', $gpi_result ) ); ?></textarea>
 			</div>
 		</div>
 
 		<div class="gpi-form-actions">
-			<button type="submit" name="gpi_contact_submit" class="btn btn-primary btn-lg gpi-submit-btn">
-				<span><?php esc_html_e( 'Send Message', 'gp-industry' ); ?></span>
-				<span class="btn-arrow" aria-hidden="true">→</span>
-			</button>
-			<p class="gpi-privacy-note">
-				🔒 <?php esc_html_e( 'We respect your privacy. We never share your data with third parties.', 'gp-industry' ); ?>
-			</p>
+			<button type="submit" class="btn btn-primary btn-lg"><?php esc_html_e( 'Send message', 'gp-industry' ); ?><?php gpi_the_icon( 'arrow-right', 18 ); ?></button>
+			<p class="gpi-privacy-note"><?php gpi_the_icon( 'shield', 14 ); ?><?php esc_html_e( 'We respect your privacy and never share your data.', 'gp-industry' ); ?></p>
 		</div>
 	</form>
 </div>
