@@ -4,7 +4,7 @@ Tags: blog, portfolio, one-column, two-columns, right-sidebar, custom-menu, cust
 Requires at least: 6.3
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 2.3.0
+Stable tag: 2.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,6 +34,7 @@ GP-Industry is a lightweight classic theme with a premium look:
 == Setup ==
 
 1. Appearance → Themes → Activate GP-Industry.
+2. Appearance → GP-Industry Setup → "Import demo pages" — creates Home, About, Products (+3), Services (+3), Industries, Projects, Contact, News with designed sections, sets the front page and the menu. Then just edit the text. (Coming from another theme? "Repair templates" re-points pages that used the old theme's templates.)
 2. Appearance → Menus → create a menu and assign it to "Primary Menu" (and optionally "Footer Menu").
 3. Appearance → Customize → GP-Industry Options to set colors, hero text, features, CTA, blog layout, footer and social links.
 4. Optional: Settings → Reading → set a static front page to use the landing page sections; set a "Posts page" so the "View all" link works.
@@ -57,6 +58,10 @@ Sections alternate a subtle background band. Block patterns, columns and groups 
 4. Contact: fill Customize → GP-Industry Options → Contact Info; paste your form plugin's shortcode/block into the page content.
 
 == Changelog ==
+
+= 2.4.0 =
+* Appearance → GP-Industry Setup: one-click demo page import (with menu + front page) and page-template repair for pages migrated from another theme.
+* Old-theme page templates are re-mapped automatically on activation.
 
 = 2.3.0 =
 * Auto layout: smart templates convert plain headings/paragraphs/lists/images into designed sections and cards.

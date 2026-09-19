@@ -194,6 +194,9 @@ function gpi_auto_layout( $content = null ) {
 	$sec_index  = 0;
 
 	foreach ( $sections as $section ) {
+		if ( ! $section['title'] && empty( $section['blocks'] ) ) {
+			continue; // Nothing to render (e.g. only an eyebrow that moved to the next section).
+		}
 		$has_cards = false;
 		$has_only_text = true;
 		foreach ( $section['blocks'] as $b ) {

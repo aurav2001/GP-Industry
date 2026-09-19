@@ -178,7 +178,7 @@ msgstr ""
 msgid "Components, machinery and industrial solutions engineered to specification and delivered on schedule. Replace this text with your own pitch."
 msgstr ""
 
-#: inc/block-patterns.php:148 inc/block-patterns.php:352 inc/block-patterns.php:460 inc/customizer.php:239 inc/customizer.php:440 template-parts/page/detail-layout.php:18 template-parts/sections/cta.php:14 template-parts/sections/hero.php:15
+#: inc/block-patterns.php:148 inc/block-patterns.php:352 inc/block-patterns.php:460 inc/customizer.php:239 inc/customizer.php:429 template-parts/page/detail-layout.php:18 template-parts/sections/cta.php:14 template-parts/sections/hero.php:15
 msgid "Request a Quote"
 msgstr ""
 
@@ -186,35 +186,35 @@ msgstr ""
 msgid "Download Brochure"
 msgstr ""
 
-#: inc/block-patterns.php:162
+#: inc/block-patterns.php:162 inc/setup-page.php:319
 msgid "Precision Machined Parts"
 msgstr ""
 
-#: inc/block-patterns.php:162
+#: inc/block-patterns.php:162 inc/setup-page.php:319
 msgid "CNC turned and milled components in steel, aluminium and brass to ±0.01 mm."
 msgstr ""
 
-#: inc/block-patterns.php:163
+#: inc/block-patterns.php:163 inc/setup-page.php:320
 msgid "Industrial Fasteners"
 msgstr ""
 
-#: inc/block-patterns.php:163
+#: inc/block-patterns.php:163 inc/setup-page.php:320
 msgid "Bolts, nuts, studs and custom fasteners in grades 8.8, 10.9, 12.9 and stainless."
 msgstr ""
 
-#: inc/block-patterns.php:164
+#: inc/block-patterns.php:164 inc/setup-page.php:321
 msgid "Fabricated Assemblies"
 msgstr ""
 
-#: inc/block-patterns.php:164
+#: inc/block-patterns.php:164 inc/setup-page.php:321
 msgid "Welded structures, enclosures and sub-assemblies built to your drawings."
 msgstr ""
 
-#: inc/block-patterns.php:172 page-templates/products.php:33
+#: inc/block-patterns.php:172 page-templates/products.php:29
 msgid "View details"
 msgstr ""
 
-#: inc/block-patterns.php:175 page-templates/products.php:31
+#: inc/block-patterns.php:175 page-templates/products.php:27
 msgid "Our products"
 msgstr ""
 
@@ -226,35 +226,35 @@ msgstr ""
 msgid "Duplicate a column to add more product categories."
 msgstr ""
 
-#: inc/block-patterns.php:186
+#: inc/block-patterns.php:186 inc/setup-page.php:355
 msgid "Contract Manufacturing"
 msgstr ""
 
-#: inc/block-patterns.php:186
+#: inc/block-patterns.php:186 inc/setup-page.php:355
 msgid "End-to-end production from prototyping to high-volume runs."
 msgstr ""
 
-#: inc/block-patterns.php:186 inc/block-patterns.php:187 inc/block-patterns.php:188 page-templates/services.php:33 template-parts/page/child-grid.php:19
+#: inc/block-patterns.php:186 inc/block-patterns.php:187 inc/block-patterns.php:188 page-templates/services.php:29 template-parts/page/child-grid.php:19
 msgid "Learn more"
 msgstr ""
 
-#: inc/block-patterns.php:187
+#: inc/block-patterns.php:187 inc/setup-page.php:356
 msgid "Maintenance & Repair"
 msgstr ""
 
-#: inc/block-patterns.php:187
+#: inc/block-patterns.php:187 inc/setup-page.php:356
 msgid "Preventive maintenance, breakdown support and spare parts supply."
 msgstr ""
 
-#: inc/block-patterns.php:188
+#: inc/block-patterns.php:188 inc/setup-page.php:357
 msgid "Design & Engineering"
 msgstr ""
 
-#: inc/block-patterns.php:188
+#: inc/block-patterns.php:188 inc/setup-page.php:357
 msgid "CAD/CAM design, reverse engineering and DFM consultation."
 msgstr ""
 
-#: inc/block-patterns.php:189 page-templates/services.php:31 template-parts/page/child-grid.php:17
+#: inc/block-patterns.php:189 page-templates/services.php:27 template-parts/page/child-grid.php:17
 msgid "Our services"
 msgstr ""
 
@@ -310,7 +310,7 @@ msgstr ""
 msgid "Clean-room grade components."
 msgstr ""
 
-#: inc/block-patterns.php:218
+#: inc/block-patterns.php:218 inc/setup-page.php:383
 msgid "Industries"
 msgstr ""
 
@@ -318,7 +318,7 @@ msgstr ""
 msgid "Industries we serve"
 msgstr ""
 
-#: inc/block-patterns.php:218
+#: inc/block-patterns.php:218 inc/setup-page.php:385
 msgid "Proven supply experience across regulated and high-volume sectors."
 msgstr ""
 
@@ -390,7 +390,7 @@ msgstr ""
 msgid "Why choose us"
 msgstr ""
 
-#: inc/block-patterns.php:272
+#: inc/block-patterns.php:272 inc/setup-page.php:281
 msgid "A manufacturing partner you can depend on"
 msgstr ""
 
@@ -398,19 +398,19 @@ msgstr ""
 msgid "Talk to an engineer"
 msgstr ""
 
-#: inc/block-patterns.php:287 inc/customizer.php:377
+#: inc/block-patterns.php:287 inc/template-functions.php:58
 msgid "Years in business"
 msgstr ""
 
-#: inc/block-patterns.php:288 inc/customizer.php:378
+#: inc/block-patterns.php:288 inc/template-functions.php:60
 msgid "Clients served"
 msgstr ""
 
-#: inc/block-patterns.php:289 inc/customizer.php:379
+#: inc/block-patterns.php:289 inc/template-functions.php:62
 msgid "Projects delivered"
 msgstr ""
 
-#: inc/block-patterns.php:290 inc/customizer.php:380
+#: inc/block-patterns.php:290 inc/template-functions.php:64
 msgid "Countries supplied"
 msgstr ""
 
@@ -502,7 +502,7 @@ msgstr ""
 msgid "Custom jigs & fixtures"
 msgstr ""
 
-#: inc/block-patterns.php:375
+#: inc/block-patterns.php:375 inc/setup-page.php:394
 msgid "Projects"
 msgstr ""
 
@@ -866,7 +866,7 @@ msgstr ""
 msgid "Show features section"
 msgstr ""
 
-#: inc/customizer.php:320 inc/customizer.php:406
+#: inc/customizer.php:320 inc/customizer.php:395
 msgid "Eyebrow label"
 msgstr ""
 
@@ -874,7 +874,7 @@ msgstr ""
 msgid "Built on quality, safety and reliability"
 msgstr ""
 
-#: inc/customizer.php:325 inc/customizer.php:411
+#: inc/customizer.php:325 inc/customizer.php:400
 msgid "Section title"
 msgstr ""
 
@@ -886,247 +886,199 @@ msgstr ""
 msgid "Section description"
 msgstr ""
 
-#: inc/customizer.php:336
-msgid "Certified Quality"
-msgstr ""
-
-#: inc/customizer.php:336
-msgid "ISO-certified processes with 100% inspection before every dispatch."
-msgstr ""
-
-#: inc/customizer.php:337
-msgid "Advanced Machinery"
-msgstr ""
-
-#: inc/customizer.php:337
-msgid "CNC, automated lines and modern tooling for precision at scale."
-msgstr ""
-
-#: inc/customizer.php:338
-msgid "On-time Delivery"
-msgstr ""
-
-#: inc/customizer.php:338
-msgid "Robust logistics and inventory planning keep your production moving."
-msgstr ""
-
-#: inc/customizer.php:339
-msgid "Safety First"
-msgstr ""
-
-#: inc/customizer.php:339
-msgid "Zero-compromise safety standards across every plant and site."
-msgstr ""
-
-#: inc/customizer.php:340
-msgid "Skilled Workforce"
-msgstr ""
-
-#: inc/customizer.php:340
-msgid "Experienced engineers and technicians with decades of industry know-how."
-msgstr ""
-
 #: inc/customizer.php:341
-msgid "Sustainable Practices"
-msgstr ""
-
-#: inc/customizer.php:341
-msgid "Energy-efficient production and responsible waste management."
-msgstr ""
-
-#: inc/customizer.php:347
 msgid "Feature %d icon"
 msgstr ""
 
-#: inc/customizer.php:354
+#: inc/customizer.php:348
 msgid "Feature %d title"
 msgstr ""
 
-#: inc/customizer.php:360
+#: inc/customizer.php:354
 msgid "Feature %d text"
 msgstr ""
 
-#: inc/customizer.php:361
+#: inc/customizer.php:355
 msgid "Leave the title empty to hide this feature."
 msgstr ""
 
-#: inc/customizer.php:368
+#: inc/customizer.php:362
 msgid "Homepage: Stats Strip"
 msgstr ""
 
-#: inc/customizer.php:368
+#: inc/customizer.php:362
 msgid "Key numbers shown below the features (years, clients, projects…). Leave a number empty to hide it."
 msgstr ""
 
-#: inc/customizer.php:371
+#: inc/customizer.php:365
 msgid "Show stats strip"
 msgstr ""
 
-#: inc/customizer.php:385
+#: inc/customizer.php:374
 msgid "Stat %d number"
 msgstr ""
 
-#: inc/customizer.php:391
+#: inc/customizer.php:380
 msgid "Stat %d label"
 msgstr ""
 
-#: inc/customizer.php:398
+#: inc/customizer.php:387
 msgid "Homepage: Latest Posts"
 msgstr ""
 
-#: inc/customizer.php:401
+#: inc/customizer.php:390
 msgid "Show latest posts section"
 msgstr ""
 
-#: inc/customizer.php:405 template-parts/sections/latest-posts.php:26
+#: inc/customizer.php:394 template-parts/sections/latest-posts.php:26
 msgid "News & updates"
 msgstr ""
 
-#: inc/customizer.php:410 template-parts/sections/latest-posts.php:27
+#: inc/customizer.php:399 template-parts/sections/latest-posts.php:27
 msgid "Latest from the plant floor"
 msgstr ""
 
-#: inc/customizer.php:416
+#: inc/customizer.php:405
 msgid "Number of posts"
 msgstr ""
 
-#: inc/customizer.php:423
+#: inc/customizer.php:412
 msgid "Homepage: Call to Action"
 msgstr ""
 
-#: inc/customizer.php:426
+#: inc/customizer.php:415
 msgid "Show call-to-action banner"
 msgstr ""
 
-#: inc/customizer.php:430 template-parts/sections/cta.php:12
+#: inc/customizer.php:419 template-parts/sections/cta.php:12
 msgid "Need a reliable manufacturing partner?"
 msgstr ""
 
-#: inc/customizer.php:431
+#: inc/customizer.php:420
 msgid "Title"
 msgstr ""
 
-#: inc/customizer.php:435 template-parts/sections/cta.php:13
+#: inc/customizer.php:424 template-parts/sections/cta.php:13
 msgid "Share your drawings or requirements and our engineering team will send a detailed quotation within 24 hours."
 msgstr ""
 
-#: inc/customizer.php:436
+#: inc/customizer.php:425
 msgid "Text"
 msgstr ""
 
-#: inc/customizer.php:441
+#: inc/customizer.php:430
 msgid "Button text"
 msgstr ""
 
-#: inc/customizer.php:446
+#: inc/customizer.php:435
 msgid "Button link"
 msgstr ""
 
-#: inc/customizer.php:452
+#: inc/customizer.php:441
 msgid "Blog & Posts"
 msgstr ""
 
-#: inc/customizer.php:455
+#: inc/customizer.php:444
 msgid "Blog layout"
 msgstr ""
 
-#: inc/customizer.php:459
+#: inc/customizer.php:448
 msgid "Full-width grid"
 msgstr ""
 
-#: inc/customizer.php:460
+#: inc/customizer.php:449
 msgid "With sidebar"
 msgstr ""
 
-#: inc/customizer.php:464
+#: inc/customizer.php:453
 msgid "Excerpt length (words)"
 msgstr ""
 
-#: inc/customizer.php:470
+#: inc/customizer.php:459
 msgid "Show breadcrumbs"
 msgstr ""
 
-#: inc/customizer.php:475
+#: inc/customizer.php:464
 msgid "Show reading progress bar on posts"
 msgstr ""
 
-#: inc/customizer.php:480
+#: inc/customizer.php:469
 msgid "Show share buttons on posts"
 msgstr ""
 
-#: inc/customizer.php:485
+#: inc/customizer.php:474
 msgid "Show author box on posts"
 msgstr ""
 
-#: inc/customizer.php:490
+#: inc/customizer.php:479
 msgid "Show related posts"
 msgstr ""
 
-#: inc/customizer.php:496
+#: inc/customizer.php:485
 msgid "Footer"
 msgstr ""
 
-#: inc/customizer.php:499
+#: inc/customizer.php:488
 msgid "Footer tagline"
 msgstr ""
 
-#: inc/customizer.php:500
+#: inc/customizer.php:489
 msgid "Defaults to the site tagline."
 msgstr ""
 
-#: inc/customizer.php:505
+#: inc/customizer.php:494
 msgid "Copyright text"
 msgstr ""
 
-#: inc/customizer.php:506
+#: inc/customizer.php:495
 msgid "Use {year} for the current year. Leave empty for the default."
 msgstr ""
 
-#: inc/customizer.php:511
+#: inc/customizer.php:500
 msgid "Show \"back to top\" button"
 msgstr ""
 
-#: inc/customizer.php:517
+#: inc/customizer.php:506
 msgid "Contact Info"
 msgstr ""
 
-#: inc/customizer.php:517
+#: inc/customizer.php:506
 msgid "Shown on pages using the \"Contact Page\" template and in the Service Detail sidebar."
 msgstr ""
 
-#: inc/customizer.php:520 template-parts/page/contact-card.php:43
+#: inc/customizer.php:509 template-parts/page/contact-card.php:43
 msgid "Address"
 msgstr ""
 
-#: inc/customizer.php:525 template-parts/page/contact-card.php:46
+#: inc/customizer.php:514 template-parts/page/contact-card.php:46
 msgid "Phone"
 msgstr ""
 
-#: inc/customizer.php:530 inc/template-functions.php:209 template-parts/page/contact-card.php:49
+#: inc/customizer.php:519 inc/template-functions.php:256 template-parts/page/contact-card.php:49
 msgid "Email"
 msgstr ""
 
-#: inc/customizer.php:535
+#: inc/customizer.php:524
 msgid "Working hours"
 msgstr ""
 
-#: inc/customizer.php:540
+#: inc/customizer.php:529
 msgid "Google Maps embed URL"
 msgstr ""
 
-#: inc/customizer.php:541
+#: inc/customizer.php:530
 msgid "Google Maps → Share → Embed a map → copy only the src=\"…\" URL."
 msgstr ""
 
-#: inc/customizer.php:545 page-templates/contact.php:33
+#: inc/customizer.php:534 page-templates/contact.php:33
 msgid "Send us a message"
 msgstr ""
 
-#: inc/customizer.php:546
+#: inc/customizer.php:535
 msgid "Form card title"
 msgstr ""
 
-#: inc/customizer.php:552
+#: inc/customizer.php:541
 msgid "Social Links"
 msgstr ""
 
@@ -1234,55 +1186,323 @@ msgstr ""
 msgid "Sparkles"
 msgstr ""
 
-#: inc/template-functions.php:113
+#: inc/setup-page.php:84 inc/setup-page.php:85 inc/setup-page.php:163
+msgid "GP-Industry Setup"
+msgstr ""
+
+#: inc/setup-page.php:106
+msgid "GP-Industry is active."
+msgstr ""
+
+#: inc/setup-page.php:107
+msgid "Import ready-made demo pages (Home, About, Products, Services, Industries, Projects, Contact) and set up the menu in one click."
+msgstr ""
+
+#: inc/setup-page.php:109
+msgid "Open Setup"
+msgstr ""
+
+#: inc/setup-page.php:129
+msgid "Demo import finished: %1$d pages created, %2$d already existed and were kept. Front page, blog page and primary menu are set."
+msgstr ""
+
+#: inc/setup-page.php:133
+msgid "Templates repaired on %d page(s)."
+msgstr ""
+
+#: inc/setup-page.php:167
+msgid "1. Import demo pages"
+msgstr ""
+
+#: inc/setup-page.php:168
+msgid "Creates fully designed pages you can simply edit: Home (front page), About Us, Products (+3 product pages), Services (+3 service pages), Industries, Projects, Contact, News. Pages that already exist with the same slug are left untouched. Also sets the front page, blog page and the primary menu."
+msgstr ""
+
+#: inc/setup-page.php:172
+msgid "Import demo pages"
+msgstr ""
+
+#: inc/setup-page.php:177
+msgid "2. Repair page templates from a previous theme"
+msgstr ""
+
+#: inc/setup-page.php:181
+msgid "Pages that still point to a template file from your old theme fall back to a plain layout. Currently: %d page(s). This maps them to the matching GP-Industry template (contact → Contact Page, services → Services Page, about → About Page, others → Designed Sections)."
+msgstr ""
+
+#: inc/setup-page.php:187
+msgid "Repair templates"
+msgstr ""
+
+#: inc/setup-page.php:192
+msgid "How pages get their design"
+msgstr ""
+
+#: inc/setup-page.php:194
+msgid "Pick a template in the page editor sidebar: About Page, Services Page, Products Page, Contact Page or \"Designed Sections (Auto)\"."
+msgstr ""
+
+#: inc/setup-page.php:195
+msgid "H2 = section title · H3 + paragraph = card (add an image under the H3 for an image card) · bullet list = checklist · short line before a heading = small label."
+msgstr ""
+
+#: inc/setup-page.php:196
+msgid "For richer sections use the block inserter → Patterns → \"GP-Industry Sections\" (pricing, process, certifications, gallery, team, FAQ…)."
+msgstr ""
+
+#: inc/setup-page.php:197
+msgid "Services / Products: create child pages under the Services or Products page — they appear as cards automatically."
+msgstr ""
+
+#: inc/setup-page.php:199
+msgid "Open Customizer"
+msgstr ""
+
+#: inc/setup-page.php:271 inc/template-tags.php:168 template-parts/header/site-nav.php:53
+msgid "Home"
+msgstr ""
+
+#: inc/setup-page.php:280
+msgid "Who we are"
+msgstr ""
+
+#: inc/setup-page.php:282
+msgid "Founded in 1998, GP-Industry has grown from a single workshop into a multi-plant manufacturer serving automotive, energy, construction and infrastructure customers across 40 countries. Edit this text with your company story."
+msgstr ""
+
+#: inc/setup-page.php:283
+msgid "Our mission is simple: deliver precision components and reliable industrial solutions with uncompromising quality, safety and on-time performance."
+msgstr ""
+
+#: inc/setup-page.php:284
+msgid "Our strengths"
+msgstr ""
+
+#: inc/setup-page.php:285
+msgid "Why clients choose us"
+msgstr ""
+
+#: inc/setup-page.php:286
+msgid "Every part we ship is backed by certified processes, modern machinery and an experienced team."
+msgstr ""
+
+#: inc/setup-page.php:287 inc/template-functions.php:40
+msgid "Certified Quality"
+msgstr ""
+
+#: inc/setup-page.php:287
+msgid "ISO 9001:2015 quality systems with in-house CMM, hardness and NDT testing on every batch."
+msgstr ""
+
+#: inc/setup-page.php:288
+msgid "Modern Infrastructure"
+msgstr ""
+
+#: inc/setup-page.php:288
+msgid "CNC machining centres, automated fabrication lines and 3-shift capacity for large orders."
+msgstr ""
+
+#: inc/setup-page.php:289
+msgid "Experienced Team"
+msgstr ""
+
+#: inc/setup-page.php:289
+msgid "Engineers and technicians with decades of hands-on industry experience."
+msgstr ""
+
+#: inc/setup-page.php:290
+msgid "Our certifications"
+msgstr ""
+
+#: inc/setup-page.php:296
+msgid "About Us"
+msgstr ""
+
+#: inc/setup-page.php:298
+msgid "Serving industry since 1998 with certified quality and on-time delivery."
+msgstr ""
+
+#: inc/setup-page.php:309 page-templates/product-single.php:29
+msgid "Products"
+msgstr ""
+
+#: inc/setup-page.php:311
+msgid "Engineered components and equipment built to your specification."
+msgstr ""
+
+#: inc/setup-page.php:325
+msgid "Key features"
+msgstr ""
+
+#: inc/setup-page.php:326
+msgid "Material test certificate with every batch"
+msgstr ""
+
+#: inc/setup-page.php:326
+msgid "Custom sizes and finishes on request"
+msgstr ""
+
+#: inc/setup-page.php:326
+msgid "Prototype to high-volume production"
+msgstr ""
+
+#: inc/setup-page.php:326
+msgid "Export packing available"
+msgstr ""
+
+#: inc/setup-page.php:345 page-templates/service-single.php:28 template-parts/page/detail-layout.php:17
+msgid "Services"
+msgstr ""
+
+#: inc/setup-page.php:347
+msgid "From design and prototyping to production, maintenance and supply."
+msgstr ""
+
+#: inc/setup-page.php:361
+msgid "What is included"
+msgstr ""
+
+#: inc/setup-page.php:362
+msgid "Consultation"
+msgstr ""
+
+#: inc/setup-page.php:362
+msgid "We review your drawings and requirements and propose the best approach."
+msgstr ""
+
+#: inc/setup-page.php:363
+msgid "Execution"
+msgstr ""
+
+#: inc/setup-page.php:363
+msgid "Skilled teams deliver the work with in-process quality checks."
+msgstr ""
+
+#: inc/setup-page.php:364
+msgid "Support"
+msgstr ""
+
+#: inc/setup-page.php:364
+msgid "Documentation, training and after-delivery support."
+msgstr ""
+
+#: inc/setup-page.php:396
+msgid "A selection of recent work from our plant floor."
+msgstr ""
+
+#: inc/setup-page.php:405
+msgid "Contact"
+msgstr ""
+
+#: inc/setup-page.php:407
+msgid "Send us your drawings or requirements — we reply within one business day."
+msgstr ""
+
+#: inc/setup-page.php:408
+msgid "Install a form plugin (Contact Form 7, WPForms, Fluent Forms…) and paste its shortcode or block here to show the quote form in this card."
+msgstr ""
+
+#: inc/setup-page.php:416
+msgid "News"
+msgstr ""
+
+#: inc/setup-page.php:437 inc/theme-setup.php:56
+msgid "Primary Menu"
+msgstr ""
+
+#: inc/template-functions.php:41
+msgid "ISO-certified processes with 100% inspection before every dispatch."
+msgstr ""
+
+#: inc/template-functions.php:43
+msgid "Advanced Machinery"
+msgstr ""
+
+#: inc/template-functions.php:44
+msgid "CNC, automated lines and modern tooling for precision at scale."
+msgstr ""
+
+#: inc/template-functions.php:46
+msgid "On-time Delivery"
+msgstr ""
+
+#: inc/template-functions.php:47
+msgid "Robust logistics and inventory planning keep your production moving."
+msgstr ""
+
+#: inc/template-functions.php:49
+msgid "Safety First"
+msgstr ""
+
+#: inc/template-functions.php:50
+msgid "Zero-compromise safety standards across every plant and site."
+msgstr ""
+
+#: inc/template-functions.php:52
+msgid "Skilled Workforce"
+msgstr ""
+
+#: inc/template-functions.php:53
+msgid "Experienced engineers and technicians with decades of industry know-how."
+msgstr ""
+
+#: inc/template-functions.php:55
+msgid "Sustainable Practices"
+msgstr ""
+
+#: inc/template-functions.php:56
+msgid "Energy-efficient production and responsible waste management."
+msgstr ""
+
+#: inc/template-functions.php:160
 msgid "Toggle submenu"
 msgstr ""
 
-#: inc/template-functions.php:208
+#: inc/template-functions.php:255
 msgid "Name"
 msgstr ""
 
-#: inc/template-functions.php:208
+#: inc/template-functions.php:255
 msgid "Your name"
 msgstr ""
 
-#: inc/template-functions.php:209
+#: inc/template-functions.php:256
 msgid "you@example.com"
 msgstr ""
 
-#: inc/template-functions.php:210 template-parts/post/author-box.php:30
+#: inc/template-functions.php:257 template-parts/post/author-box.php:30
 msgid "Website"
 msgstr ""
 
-#: inc/template-functions.php:223
+#: inc/template-functions.php:270
 msgid "Comment"
 msgstr ""
 
-#: inc/template-functions.php:223
+#: inc/template-functions.php:270
 msgid "Share your thoughts…"
 msgstr ""
 
-#: inc/template-functions.php:225
+#: inc/template-functions.php:272
 msgid "Leave a comment"
 msgstr ""
 
-#: inc/template-functions.php:228
+#: inc/template-functions.php:275
 msgid "Your email address will not be published."
 msgstr ""
 
-#: inc/template-functions.php:256
+#: inc/template-functions.php:303
 msgid "Gradient"
 msgstr ""
 
-#: inc/template-functions.php:264
+#: inc/template-functions.php:311
 msgid "Light (for gradient backgrounds)"
 msgstr ""
 
-#: inc/template-functions.php:272
+#: inc/template-functions.php:319
 msgid "Card"
 msgstr ""
 
-#: inc/template-functions.php:280
+#: inc/template-functions.php:327
 msgid "Highlight"
 msgstr ""
 
@@ -1304,10 +1524,6 @@ msgstr ""
 
 #: inc/template-tags.php:152
 msgid "Featured"
-msgstr ""
-
-#: inc/template-tags.php:168 template-parts/header/site-nav.php:53
-msgid "Home"
 msgstr ""
 
 #: inc/template-tags.php:189
@@ -1352,10 +1568,6 @@ msgid_plural "%d min read"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/theme-setup.php:56
-msgid "Primary Menu"
-msgstr ""
-
 #: inc/theme-setup.php:57
 msgid "Footer Menu"
 msgstr ""
@@ -1388,7 +1600,7 @@ msgstr ""
 msgid "Our company"
 msgstr ""
 
-#: page-templates/about.php:35
+#: page-templates/about.php:34
 msgid "Tip: open the editor, click \"+\" → Patterns → Nova and insert Our Process, Certifications, Stats, Team or FAQ sections here. This note is only visible to editors."
 msgstr ""
 
@@ -1408,15 +1620,11 @@ msgstr ""
 msgid "Product"
 msgstr ""
 
-#: page-templates/product-single.php:29
-msgid "Products"
-msgstr ""
-
 #: page-templates/products.php:16
 msgid "Product range"
 msgstr ""
 
-#: page-templates/products.php:32
+#: page-templates/products.php:28
 msgid "Browse our product categories"
 msgstr ""
 
@@ -1424,15 +1632,11 @@ msgstr ""
 msgid "Service"
 msgstr ""
 
-#: page-templates/service-single.php:28 template-parts/page/detail-layout.php:17
-msgid "Services"
-msgstr ""
-
 #: page-templates/services.php:16
 msgid "What we do"
 msgstr ""
 
-#: page-templates/services.php:32
+#: page-templates/services.php:28
 msgid "Industrial services we provide"
 msgstr ""
 
