@@ -1,0 +1,140 @@
+/**
+ * GP-Industry – Design tokens
+ * Dark is the default scheme; [data-theme="light"] overrides surfaces & text.
+ */
+:root {
+	/* Brand */
+	--color-primary: #6366f1;
+	--color-primary-rgb: 99, 102, 241;
+	--color-primary-hover: #4f46e5;
+	--color-accent: #ec4899;
+	--color-accent-rgb: 236, 72, 153;
+	--color-secondary: #06b6d4;
+	--color-success: #22c55e;
+	--color-warning: #f59e0b;
+	--color-danger: #ef4444;
+
+	--color-primary-soft: rgba(var(--color-primary-rgb), 0.14);
+	--color-primary-border: rgba(var(--color-primary-rgb), 0.35);
+
+	/* Gradients */
+	--gradient-hero: linear-gradient(135deg, var(--color-primary) 0%, #8b5cf6 50%, var(--color-accent) 100%);
+	--gradient-text: linear-gradient(90deg, var(--color-primary) 0%, var(--color-accent) 100%);
+	--gradient-glow: radial-gradient(60% 50% at 50% 0%, rgba(var(--color-primary-rgb), 0.18), transparent 70%);
+	--gradient-card: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0) 100%);
+
+	/* Surfaces (dark) */
+	--bg-page: #0b0f19;
+	--bg-surface: #111827;
+	--bg-surface-2: #172033;
+	--bg-surface-elevated: #1e293b;
+	--bg-glass: rgba(11, 15, 25, 0.72);
+	--bg-glass-strong: rgba(11, 15, 25, 0.92);
+	--bg-glass-card: rgba(30, 41, 59, 0.55);
+	--bg-input: #0f172a;
+	--bg-footer: #080c14;
+	--bg-code: #0f172a;
+
+	/* Text (dark) */
+	--text-primary: #f8fafc;
+	--text-secondary: #94a3b8;
+	--text-muted: #64748b;
+	--text-body: #cbd5e1;
+	--text-inverse: #0f172a;
+	--text-on-primary: #ffffff;
+
+	/* Borders */
+	--border-subtle: rgba(255, 255, 255, 0.08);
+	--border-strong: rgba(255, 255, 255, 0.16);
+	--border-hover: rgba(var(--color-primary-rgb), 0.4);
+
+	/* Shadows */
+	--shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+	--shadow-md: 0 10px 30px -8px rgba(0, 0, 0, 0.45);
+	--shadow-lg: 0 24px 60px -16px rgba(0, 0, 0, 0.6);
+	--shadow-glow: 0 8px 30px rgba(var(--color-primary-rgb), 0.35);
+	--shadow-glow-strong: 0 12px 40px rgba(var(--color-primary-rgb), 0.5);
+
+	/* Typography */
+	--font-heading: 'Outfit', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+	--font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+	--font-mono: ui-monospace, 'JetBrains Mono', 'Fira Code', Menlo, Consolas, monospace;
+
+	--text-xs: 0.75rem;
+	--text-sm: 0.875rem;
+	--text-base: 1rem;
+	--text-lg: 1.125rem;
+	--text-xl: 1.25rem;
+	--text-2xl: 1.5rem;
+	--text-3xl: 2rem;
+	--text-4xl: 2.5rem;
+
+	/* Spacing */
+	--spacing-xs: 0.25rem;
+	--spacing-sm: 0.5rem;
+	--spacing-md: 1rem;
+	--spacing-lg: 1.5rem;
+	--spacing-xl: 2rem;
+	--spacing-2xl: 3rem;
+	--spacing-3xl: 5rem;
+	--spacing-4xl: 7rem;
+
+	--section-pad: clamp(3.5rem, 8vw, 6.5rem);
+	--section-pad-sm: clamp(2.5rem, 5vw, 4rem);
+
+	/* Radii */
+	--radius-sm: 8px;
+	--radius-md: 12px;
+	--radius-lg: 16px;
+	--radius-xl: 24px;
+	--radius-pill: 9999px;
+
+	/* Motion */
+	--ease: cubic-bezier(0.4, 0, 0.2, 1);
+	--ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+	--transition-fast: 150ms var(--ease);
+	--transition-base: 250ms var(--ease);
+	--transition-slow: 450ms var(--ease);
+	--transition-bounce: 350ms var(--ease-bounce);
+
+	/* Layout */
+	--container-max-width: 1240px;
+	--content-max-width: 780px;
+	--container-gutter: clamp(1rem, 4vw, 2rem);
+	--header-height: 76px;
+
+	color-scheme: dark;
+}
+
+/* ---------- Light scheme ---------- */
+[data-theme="light"] {
+	--gradient-glow: radial-gradient(60% 50% at 50% 0%, rgba(var(--color-primary-rgb), 0.12), transparent 70%);
+	--gradient-card: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 100%);
+
+	--bg-page: #f7f8fc;
+	--bg-surface: #ffffff;
+	--bg-surface-2: #f3f4f9;
+	--bg-surface-elevated: #eef0f7;
+	--bg-glass: rgba(247, 248, 252, 0.75);
+	--bg-glass-strong: rgba(255, 255, 255, 0.92);
+	--bg-glass-card: rgba(255, 255, 255, 0.7);
+	--bg-input: #ffffff;
+	--bg-footer: #0b0f19;
+	--bg-code: #0f172a;
+
+	--text-primary: #0f172a;
+	--text-secondary: #475569;
+	--text-muted: #94a3b8;
+	--text-body: #334155;
+	--text-inverse: #f8fafc;
+
+	--border-subtle: rgba(15, 23, 42, 0.08);
+	--border-strong: rgba(15, 23, 42, 0.16);
+
+	--shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+	--shadow-md: 0 10px 30px -10px rgba(15, 23, 42, 0.18);
+	--shadow-lg: 0 24px 60px -20px rgba(15, 23, 42, 0.25);
+	--shadow-glow: 0 8px 30px rgba(var(--color-primary-rgb), 0.28);
+
+	color-scheme: light;
+}

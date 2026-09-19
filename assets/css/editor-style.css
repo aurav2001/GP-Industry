@@ -1,0 +1,914 @@
+/**
+ * GP-Industry – Block editor styles
+ * Makes the editor canvas match the front-end long-form typography.
+ */
+.editor-styles-wrapper {
+	font-family: var(--font-body);
+	font-size: 1.1rem;
+	line-height: 1.8;
+	color: var(--text-body);
+	background-color: var(--bg-page);
+}
+
+.editor-styles-wrapper .wp-block {
+	max-width: 780px;
+}
+
+.editor-styles-wrapper .wp-block[data-align="wide"] {
+	max-width: 1040px;
+}
+
+.editor-styles-wrapper .wp-block[data-align="full"] {
+	max-width: none;
+}
+
+.editor-styles-wrapper h1,
+.editor-styles-wrapper h2,
+.editor-styles-wrapper h3,
+.editor-styles-wrapper h4,
+.editor-styles-wrapper h5,
+.editor-styles-wrapper h6,
+.editor-styles-wrapper .editor-post-title__input {
+	font-family: var(--font-heading);
+	font-weight: 700;
+	letter-spacing: -0.015em;
+	line-height: 1.2;
+	color: var(--text-primary);
+}
+
+.editor-styles-wrapper .editor-post-title__input {
+	font-size: 2.75rem;
+	font-weight: 800;
+	letter-spacing: -0.03em;
+	text-align: center;
+}
+
+.editor-styles-wrapper h2 { font-size: 1.85rem; }
+.editor-styles-wrapper h3 { font-size: 1.5rem; }
+.editor-styles-wrapper h4 { font-size: 1.25rem; }
+
+.editor-styles-wrapper a {
+	color: var(--color-primary);
+}
+
+.editor-styles-wrapper li::marker {
+	color: var(--color-primary);
+}
+
+.editor-styles-wrapper .wp-block-quote {
+	padding: 1.25rem 1.5rem 1.25rem 1.75rem;
+	background: var(--bg-surface);
+	border-left: 4px solid var(--color-primary);
+	border-radius: 0 12px 12px 0;
+	font-style: italic;
+	color: var(--text-primary);
+}
+
+.editor-styles-wrapper .wp-block-quote.is-style-nova-highlight {
+	border: 1px solid rgba(var(--color-primary-rgb), 0.35);
+	background: rgba(var(--color-primary-rgb), 0.14);
+	border-radius: 16px;
+	text-align: center;
+	padding: 2rem;
+	font-size: 1.25em;
+}
+
+.editor-styles-wrapper .wp-block-pullquote {
+	border: 0;
+	border-top: 2px solid var(--color-primary);
+	border-bottom: 2px solid var(--color-primary);
+}
+
+.editor-styles-wrapper .wp-block-pullquote p {
+	font-family: var(--font-heading);
+	color: var(--text-primary);
+}
+
+.editor-styles-wrapper .wp-block-code,
+.editor-styles-wrapper .wp-block-preformatted {
+	background: var(--bg-code);
+	color: #e2e8f0;
+	border: 1px solid var(--border-subtle);
+	border-radius: 12px;
+	padding: 1.25rem 1.5rem;
+	font-family: var(--font-mono);
+	font-size: 0.9rem;
+}
+
+.editor-styles-wrapper :not(pre) > code {
+	padding: 0.15em 0.45em;
+	background: rgba(var(--color-primary-rgb), 0.14);
+	color: var(--color-primary);
+	border-radius: 6px;
+	font-family: var(--font-mono);
+	font-size: 0.88em;
+}
+
+.editor-styles-wrapper .wp-block-table table {
+	border-collapse: collapse;
+	border: 1px solid var(--border-subtle);
+}
+
+.editor-styles-wrapper .wp-block-table th,
+.editor-styles-wrapper .wp-block-table td {
+	padding: 0.75rem 1rem;
+	border: 1px solid var(--border-subtle);
+}
+
+.editor-styles-wrapper .wp-block-table th {
+	background: var(--bg-surface-elevated);
+	color: var(--text-primary);
+}
+
+.editor-styles-wrapper .wp-block-image img,
+.editor-styles-wrapper .wp-block-cover {
+	border-radius: 12px;
+}
+
+.editor-styles-wrapper .wp-block-button__link {
+	background: var(--color-primary);
+	color: #fff;
+	border-radius: 9999px;
+	font-weight: 600;
+	font-family: var(--font-body);
+}
+
+.editor-styles-wrapper .wp-block-button.is-style-outline .wp-block-button__link {
+	background: transparent;
+	border: 2px solid var(--color-primary);
+	color: var(--color-primary);
+}
+
+.editor-styles-wrapper .wp-block-button.is-style-nova-gradient .wp-block-button__link {
+	background: var(--gradient-hero);
+	color: #fff;
+	border: 0;
+}
+
+.editor-styles-wrapper .wp-block-group.is-style-nova-card {
+	padding: 2rem;
+	background: var(--bg-surface);
+	border: 1px solid var(--border-subtle);
+	border-radius: 16px;
+}
+
+.editor-styles-wrapper .wp-block-separator {
+	border: 0;
+	border-top: 1px solid var(--border-subtle);
+}
+
+.editor-styles-wrapper .has-drop-cap:not(:focus)::first-letter {
+	font-family: var(--font-heading);
+	font-size: 4.5em;
+	font-weight: 800;
+	color: var(--color-primary);
+}
+
+.editor-styles-wrapper figcaption {
+	color: var(--text-muted);
+	font-size: 0.875rem;
+	text-align: center;
+}
+
+/* ---------- Shared section classes used by Nova patterns ---------- */
+.section-eyebrow {
+	display: inline-block;
+	margin-bottom: 0.6rem;
+	font-size: 0.75rem;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--color-primary);
+}
+
+.section-title {
+	font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+	letter-spacing: -0.025em;
+}
+
+.section-text {
+	color: var(--text-secondary);
+	font-size: 1.125rem;
+}
+
+.section-heading.align-center {
+	text-align: center;
+}
+
+.hero-title {
+	font-size: clamp(2.4rem, 5vw, 4rem);
+	font-weight: 800;
+	letter-spacing: -0.035em;
+	line-height: 1.08;
+}
+
+.hero-title span {
+	background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+	font-size: 1.2rem;
+	color: var(--text-secondary);
+}
+
+.cta-banner {
+	position: relative;
+	padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.5rem, 5vw, 4rem);
+	text-align: center;
+	color: #fff;
+	background: var(--gradient-hero);
+	border-radius: var(--radius-xl);
+}
+
+.cta-banner .cta-title,
+.cta-banner .cta-text {
+	color: #fff;
+}
+
+.wp-block-button.is-style-nova-light .wp-block-button__link {
+	background: #fff;
+	color: #0f172a;
+}
+
+.section-pad {
+	padding-block: 2rem;
+}
+
+/* ==========================================================================
+   26. Block patterns (GP-Industry Sections)
+   ========================================================================== */
+.nova-section {
+	padding-block: clamp(2rem, 5vw, 3.5rem);
+}
+
+.entry-content .nova-section {
+	margin-bottom: 0;
+}
+
+.nova-section .section-heading {
+	margin-bottom: var(--spacing-xl);
+}
+
+.nova-section .section-eyebrow,
+.nova-section .section-title,
+.nova-section .section-text {
+	margin-top: 0;
+}
+
+.nova-section .section-title {
+	margin-bottom: 0.5rem;
+}
+
+.nova-section-hero {
+	text-align: center;
+}
+
+.nova-pattern-hero .hero-title {
+	margin-bottom: var(--spacing-lg);
+}
+
+.nova-pattern-hero-image {
+	max-width: 1040px;
+	margin: var(--spacing-2xl) auto 0;
+	padding: 8px;
+	background: var(--bg-glass-card);
+	border: 1px solid var(--border-strong);
+	border-radius: var(--radius-xl);
+	box-shadow: var(--shadow-lg);
+}
+
+.nova-pattern-hero-image img {
+	width: 100%;
+	border-radius: calc(var(--radius-xl) - 6px);
+}
+
+/* Cards (services / generic) */
+.nova-cards,
+.nova-pricing,
+.nova-testimonials,
+.nova-team,
+.nova-stats {
+	gap: var(--spacing-lg) !important;
+}
+
+.nova-card,
+.nova-price-card,
+.nova-testimonial,
+.nova-team-card,
+.wp-block-group.is-style-nova-card {
+	padding: var(--spacing-xl);
+	background: var(--bg-surface);
+	border: 1px solid var(--border-subtle);
+	border-radius: var(--radius-lg);
+	transition: transform var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.nova-card:hover,
+.nova-price-card:hover,
+.nova-testimonial:hover,
+.nova-team-card:hover {
+	transform: translateY(-5px);
+	border-color: var(--border-hover);
+	box-shadow: var(--shadow-lg);
+}
+
+.nova-card-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 56px;
+	height: 56px;
+	margin-bottom: var(--spacing-md);
+	font-size: 1.6rem;
+	line-height: 1;
+	border-radius: var(--radius-md);
+	background: var(--color-primary-soft);
+	border: 1px solid var(--color-primary-border);
+}
+
+.nova-card-title {
+	font-size: 1.25rem;
+	margin-bottom: 0.5rem;
+}
+
+.nova-card-text {
+	color: var(--text-secondary);
+	font-size: 0.95rem;
+	margin-bottom: var(--spacing-md);
+}
+
+.nova-card .wp-block-buttons {
+	margin-bottom: 0;
+}
+
+/* Features split */
+.nova-split {
+	gap: clamp(2rem, 5vw, 4rem) !important;
+}
+
+.nova-split-image img {
+	border-radius: var(--radius-xl);
+	box-shadow: var(--shadow-lg);
+	border: 1px solid var(--border-subtle);
+}
+
+.nova-feature-row {
+	position: relative;
+	padding-left: 3rem;
+	margin-bottom: var(--spacing-lg);
+}
+
+.nova-feature-row::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 2px;
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	background: var(--gradient-hero) padding-box;
+	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='11' fill='%23000' stroke='none'/%3E%3C/svg%3E") center / contain no-repeat;
+	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='11' fill='%23000' stroke='none'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.nova-feature-row::after {
+	content: '';
+	position: absolute;
+	left: 9px;
+	top: 11px;
+	width: 14px;
+	height: 8px;
+	border-left: 2.5px solid #fff;
+	border-bottom: 2.5px solid #fff;
+	transform: rotate(-45deg);
+}
+
+.nova-feature-row h4 {
+	font-size: 1.1rem;
+	margin-bottom: 0.25rem;
+}
+
+.nova-feature-row p {
+	color: var(--text-secondary);
+	font-size: 0.95rem;
+	margin-bottom: 0;
+}
+
+/* Stats */
+.nova-stat {
+	padding: var(--spacing-lg);
+	text-align: center;
+	background: var(--bg-surface);
+	border: 1px solid var(--border-subtle);
+	border-radius: var(--radius-lg);
+}
+
+.nova-stat-number {
+	font-family: var(--font-heading);
+	font-size: clamp(2rem, 4vw, 2.75rem);
+	font-weight: 800;
+	line-height: 1.1;
+	margin-bottom: 0.25rem !important;
+	background: var(--gradient-text);
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.nova-stat-label {
+	color: var(--text-secondary);
+	font-size: var(--text-sm);
+	font-weight: 500;
+	margin-bottom: 0 !important;
+}
+
+/* Pricing */
+.nova-price-card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+}
+
+.nova-price-card.is-featured {
+	border-color: var(--color-primary-border);
+	box-shadow: 0 0 0 1px var(--color-primary-border), var(--shadow-glow);
+}
+
+.nova-price-card.is-featured::before {
+	content: 'Popular';
+	position: absolute;
+	top: -12px;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 0.25rem 0.8rem;
+	font-size: var(--text-xs);
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: #fff;
+	background: var(--gradient-hero);
+	border-radius: var(--radius-pill);
+}
+
+.nova-price-plan {
+	font-weight: 700;
+	font-size: var(--text-sm);
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--color-primary);
+	margin-bottom: 0.5rem !important;
+}
+
+.nova-price {
+	font-family: var(--font-heading);
+	font-size: 3rem;
+	font-weight: 800;
+	line-height: 1;
+	letter-spacing: -0.03em;
+	margin-bottom: 0.5rem !important;
+}
+
+.nova-price span {
+	font-size: 1rem;
+	font-weight: 500;
+	color: var(--text-muted);
+	letter-spacing: 0;
+}
+
+.nova-price-text {
+	color: var(--text-secondary);
+	font-size: 0.95rem;
+	padding-bottom: var(--spacing-md);
+	border-bottom: 1px solid var(--border-subtle);
+}
+
+.nova-price-list {
+	list-style: none;
+	padding: 0 !important;
+	margin: 0 0 var(--spacing-lg);
+	flex: 1;
+}
+
+.nova-price-list li {
+	position: relative;
+	padding-left: 1.6rem;
+	margin-bottom: 0.6rem;
+	font-size: 0.95rem;
+	color: var(--text-body);
+}
+
+.nova-price-list li::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0.35em;
+	width: 14px;
+	height: 8px;
+	border-left: 2px solid var(--color-success);
+	border-bottom: 2px solid var(--color-success);
+	transform: rotate(-45deg);
+}
+
+.nova-price-card .wp-block-buttons {
+	margin-bottom: 0;
+}
+
+.nova-price-card .wp-block-button {
+	width: 100%;
+}
+
+.nova-price-card .wp-block-button__link {
+	width: 100%;
+}
+
+/* Testimonials */
+.nova-testimonial-stars {
+	color: var(--color-warning);
+	letter-spacing: 0.1em;
+	margin-bottom: 0.75rem !important;
+}
+
+.nova-testimonial-text {
+	font-size: 1.05rem;
+	line-height: 1.7;
+	color: var(--text-primary);
+}
+
+.nova-testimonial-author {
+	font-size: var(--text-sm);
+	color: var(--text-secondary);
+	margin-bottom: 0 !important;
+	padding-top: var(--spacing-md);
+	border-top: 1px solid var(--border-subtle);
+}
+
+.nova-testimonial-author strong {
+	color: var(--text-primary);
+}
+
+/* Team */
+.nova-team-card {
+	text-align: center;
+	padding: var(--spacing-lg);
+}
+
+.nova-team-photo {
+	margin: 0 auto var(--spacing-md);
+	width: 120px;
+}
+
+.nova-team-photo img {
+	width: 120px;
+	height: 120px;
+	object-fit: cover;
+	border-radius: 50% !important;
+	border: 3px solid var(--bg-surface-elevated);
+	box-shadow: var(--shadow-glow);
+}
+
+.nova-team-name {
+	font-size: 1.1rem;
+	margin-bottom: 0.2rem;
+}
+
+.nova-team-role {
+	font-size: var(--text-sm);
+	color: var(--text-secondary);
+	margin-bottom: 0 !important;
+}
+
+/* FAQ */
+.nova-faq {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+.nova-faq-item,
+.wp-block-details {
+	padding: 0;
+	background: var(--bg-surface);
+	border: 1px solid var(--border-subtle);
+	border-radius: var(--radius-md);
+	transition: border-color var(--transition-fast);
+}
+
+.nova-faq-item[open],
+.wp-block-details[open] {
+	border-color: var(--border-hover);
+}
+
+.nova-faq-item summary,
+.wp-block-details summary {
+	position: relative;
+	padding: 1rem 3rem 1rem 1.25rem;
+	font-family: var(--font-heading);
+	font-weight: 600;
+	font-size: 1.05rem;
+	color: var(--text-primary);
+	cursor: pointer;
+	list-style: none;
+}
+
+.nova-faq-item summary::-webkit-details-marker,
+.wp-block-details summary::-webkit-details-marker {
+	display: none;
+}
+
+.nova-faq-item summary::after,
+.wp-block-details summary::after {
+	content: '';
+	position: absolute;
+	right: 1.25rem;
+	top: 50%;
+	width: 9px;
+	height: 9px;
+	border-right: 2px solid var(--color-primary);
+	border-bottom: 2px solid var(--color-primary);
+	transform: translateY(-70%) rotate(45deg);
+	transition: transform var(--transition-base);
+}
+
+.nova-faq-item[open] summary::after,
+.wp-block-details[open] summary::after {
+	transform: translateY(-30%) rotate(225deg);
+}
+
+.nova-faq-item > :not(summary),
+.wp-block-details > :not(summary) {
+	padding: 0 1.25rem 1rem;
+	margin: 0;
+	color: var(--text-secondary);
+}
+
+/* CTA pattern & light button */
+.entry-content .cta-banner .cta-title,
+.entry-content .cta-banner .cta-text {
+	color: #fff;
+}
+
+.entry-content .cta-banner .cta-text {
+	color: rgba(255, 255, 255, 0.85);
+}
+
+.wp-block-button.is-style-nova-light .wp-block-button__link {
+	background: #fff;
+	color: #0f172a;
+	border: 0;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.wp-block-button.is-style-nova-light .wp-block-button__link:hover {
+	background: #fff;
+	color: #0f172a;
+}
+
+/* Contact pattern */
+.nova-contact {
+	gap: var(--spacing-xl) !important;
+}
+
+.nova-contact-info,
+.nova-contact-form {
+	padding: var(--spacing-xl);
+	background: var(--bg-surface);
+	border: 1px solid var(--border-subtle);
+	border-radius: var(--radius-lg);
+}
+
+.nova-contact-info p {
+	color: var(--text-secondary);
+}
+
+/* ---------- Industrial pattern classes ---------- */
+/* Process steps */
+.nova-process {
+	gap: var(--spacing-lg) !important;
+	counter-reset: step;
+}
+
+.nova-step {
+	position: relative;
+	padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-lg);
+	background: var(--bg-surface);
+	border: 1px solid var(--border-subtle);
+	border-radius: var(--radius-lg);
+}
+
+.nova-step::after {
+	content: '';
+	position: absolute;
+	top: 2.6rem;
+	right: -1.6rem;
+	width: 1.6rem;
+	height: 2px;
+	background: linear-gradient(90deg, var(--color-primary), transparent);
+}
+
+.nova-step:last-child::after {
+	display: none;
+}
+
+.nova-step-number {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 48px;
+	height: 48px;
+	margin-bottom: var(--spacing-md) !important;
+	font-family: var(--font-heading);
+	font-weight: 800;
+	font-size: 1.1rem;
+	color: #fff;
+	background: var(--gradient-hero);
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-glow);
+}
+
+.nova-step-title {
+	font-size: 1.15rem;
+	margin-bottom: 0.4rem;
+}
+
+.nova-step-text {
+	color: var(--text-secondary);
+	font-size: 0.95rem;
+	margin-bottom: 0 !important;
+}
+
+/* Certifications & clients */
+.nova-certs {
+	gap: var(--spacing-md) !important;
+	margin-bottom: var(--spacing-2xl) !important;
+}
+
+.nova-cert {
+	padding: var(--spacing-lg) var(--spacing-md);
+	background: var(--bg-surface);
+	border: 1px solid var(--border-subtle);
+	border-radius: var(--radius-lg);
+	transition: transform var(--transition-base), border-color var(--transition-base);
+}
+
+.nova-cert:hover {
+	transform: translateY(-4px);
+	border-color: var(--color-primary-border);
+}
+
+.nova-cert-icon {
+	font-size: 2rem;
+	line-height: 1;
+	margin-bottom: 0.5rem !important;
+}
+
+.nova-cert-name {
+	font-weight: 700;
+	font-size: var(--text-sm);
+	margin-bottom: 0 !important;
+}
+
+.nova-clients-label {
+	font-size: var(--text-xs);
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--text-muted);
+	margin-bottom: var(--spacing-md) !important;
+}
+
+.nova-clients {
+	gap: var(--spacing-md) !important;
+}
+
+.nova-client {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 72px;
+	padding: 0.75rem;
+	border: 1px dashed var(--border-strong);
+	border-radius: var(--radius-md);
+	opacity: 0.75;
+	transition: opacity var(--transition-fast), border-color var(--transition-fast);
+}
+
+.nova-client:hover {
+	opacity: 1;
+	border-color: var(--color-primary);
+}
+
+.nova-client-name {
+	font-family: var(--font-heading);
+	font-weight: 800;
+	font-size: 1.1rem;
+	letter-spacing: -0.01em;
+	color: var(--text-secondary);
+	margin: 0 !important;
+}
+
+.nova-client img {
+	max-height: 44px;
+	width: auto;
+	filter: grayscale(1);
+	transition: filter var(--transition-fast);
+}
+
+.nova-client:hover img {
+	filter: none;
+}
+
+/* Product cards with images */
+.nova-product-card {
+	padding: 10px 10px var(--spacing-lg) !important;
+}
+
+.nova-product-image {
+	margin: 0 0 var(--spacing-md) !important;
+}
+
+.nova-product-image img {
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+	border-radius: calc(var(--radius-lg) - 6px) !important;
+}
+
+.nova-product-card .nova-card-title,
+.nova-product-card .nova-card-text,
+.nova-product-card .wp-block-buttons {
+	padding-inline: 0.5rem;
+}
+
+/* Industries */
+.nova-industries {
+	margin-bottom: var(--spacing-lg) !important;
+}
+
+.nova-industry-card {
+	display: flex;
+	flex-direction: column;
+	padding: var(--spacing-lg) !important;
+}
+
+.nova-industry-card .nova-card-icon {
+	width: 48px;
+	height: 48px;
+	font-size: 1.35rem;
+	margin-bottom: 0.75rem !important;
+}
+
+.nova-industry-card .nova-card-title {
+	font-size: 1.1rem;
+}
+
+.nova-industry-card .nova-card-text {
+	margin-bottom: 0 !important;
+}
+
+/* Specs table */
+.nova-specs table {
+	font-size: 0.95rem;
+}
+
+.nova-specs td:first-child {
+	width: 34%;
+	color: var(--text-primary);
+	background: var(--bg-surface-elevated);
+}
+
+/* Projects gallery */
+.nova-projects.wp-block-gallery {
+	gap: var(--spacing-md) !important;
+}
+
+.nova-projects .wp-block-image {
+	position: relative;
+	border-radius: var(--radius-lg);
+	overflow: hidden;
+	border: 1px solid var(--border-subtle);
+}
+
+.nova-projects .wp-block-image img {
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+	transition: transform 600ms var(--ease);
+}
+
+.nova-projects .wp-block-image:hover img {
+	transform: scale(1.05);
+}
+
+.nova-projects .wp-block-image figcaption {
+	position: absolute;
+	inset: auto 0 0 0;
+	margin: 0;
+	padding: 2.5rem 1rem 0.9rem;
+	text-align: left;
+	font-weight: 600;
+	color: #fff;
+	background: linear-gradient(180deg, transparent, rgba(5, 8, 18, 0.85));
+}
+

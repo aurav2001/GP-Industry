@@ -1,0 +1,20 @@
+/*
+Theme Name: GP-Industry
+Theme URI: https://example.com/gp-industry
+Author: Gulshan Pandey
+Author URI: https://example.com
+Description: A modern WordPress theme for industrial, manufacturing and engineering companies. Hero background slideshow, dark & light modes, floating header, Products / Services / About / Contact page templates, 15 industrial block patterns (products, industries, process, certifications, specs, projects, quote), stats strip, and full block editor support.
+Version: 2.3.0
+Requires at least: 6.3
+Tested up to: 6.7
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: gp-industry
+Tags: blog, e-commerce, portfolio, one-column, two-columns, right-sidebar, custom-menu, custom-logo, featured-images, threaded-comments, translation-ready, block-styles, wide-blocks, editor-style
+*/
+
+/*
+ * All theme styles live in /assets/css/.
+ * This file only holds the theme header WordPress needs.
+ */

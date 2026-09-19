@@ -1,0 +1,51 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 2,
+	"settings": {
+		"appearanceTools": true,
+		"layout": {
+			"contentSize": "780px",
+			"wideSize": "1040px"
+		},
+		"color": {
+			"defaultPalette": false,
+			"defaultGradients": false,
+			"palette": [
+				{ "slug": "nova-primary", "color": "#6366f1", "name": "Primary" },
+				{ "slug": "nova-accent", "color": "#ec4899", "name": "Accent" },
+				{ "slug": "nova-surface", "color": "#111827", "name": "Surface" },
+				{ "slug": "nova-text", "color": "#f8fafc", "name": "Text" },
+				{ "slug": "nova-muted", "color": "#94a3b8", "name": "Muted" },
+				{ "slug": "white", "color": "#ffffff", "name": "White" },
+				{ "slug": "black", "color": "#0b0f19", "name": "Black" }
+			],
+			"gradients": [
+				{ "slug": "nova-gradient", "gradient": "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%)", "name": "Nova Gradient" }
+			]
+		},
+		"typography": {
+			"fontFamilies": [
+				{ "slug": "heading", "name": "Outfit", "fontFamily": "'Outfit', system-ui, sans-serif" },
+				{ "slug": "body", "name": "Plus Jakarta Sans", "fontFamily": "'Plus Jakarta Sans', system-ui, sans-serif" },
+				{ "slug": "mono", "name": "Monospace", "fontFamily": "ui-monospace, Menlo, Consolas, monospace" }
+			],
+			"fontSizes": [
+				{ "slug": "small", "size": "0.875rem", "name": "Small" },
+				{ "slug": "medium", "size": "1.1rem", "name": "Medium" },
+				{ "slug": "large", "size": "1.5rem", "name": "Large" },
+				{ "slug": "x-large", "size": "2.25rem", "name": "Extra Large" },
+				{ "slug": "xx-large", "size": "3rem", "name": "Huge" }
+			]
+		},
+		"spacing": {
+			"units": [ "px", "em", "rem", "%", "vw" ]
+		}
+	},
+	"styles": {
+		"elements": {
+			"button": {
+				"border": { "radius": "9999px" }
+			}
+		}
+	}
+}

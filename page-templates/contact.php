@@ -1,0 +1,66 @@
+<?php
+/**
+ * Template Name: Contact Page
+ * Template Post Type: page
+ *
+ * Hero + two columns: your content (drop a form shortcode / form block here) and
+ * the contact info card from Customizer → Contact Info + optional Google Map.
+ *
+ * @package GPIndustry
+ */
+
+get_header();
+
+while ( have_posts() ) :
+	the_post();
+
+	get_template_part(
+		'template-parts/page/page-hero',
+		null,
+		array(
+			'eyebrow' => esc_html__( 'Get in touch', 'gp-industry' ),
+		)
+	);
+
+	$gpi_map = gpi_get_option( 'contact_map', '' );
+	?>
+
+	<article id="post-<?php the_ID(); ?>" <?php post_class( 'template-page template-contact' ); ?>>
+		<div class="nova-container">
+			<div class="contact-layout">
+				<div class="contact-form-card" data-reveal>
+					<?php
+					$gpi_form_title = gpi_get_option( 'contact_form_title', esc_html__( 'Send us a message', 'gp-industry' ) );
+					if ( $gpi_form_title ) :
+						?>
+						<h2 class="contact-form-title"><?php echo esc_html( $gpi_form_title ); ?></h2>
+					<?php endif; ?>
+
+					<div class="entry-content is-wide">
+						<?php
+						the_content();
+
+						if ( ! trim( get_the_content() ) && current_user_can( 'edit_pages' ) ) {
+							echo '<div class="template-hint">' . gpi_icon( 'sparkles', 18 ) . esc_html__( 'Tip: install a form plugin (Contact Form 7, WPForms, Fluent Forms…) and paste its shortcode or block into this page’s content — it will appear in this card. This note is only visible to editors.', 'gp-industry' ) . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						}
+						?>
+					</div>
+				</div>
+
+				<?php get_template_part( 'template-parts/page/contact-card' ); ?>
+			</div>
+		</div>
+
+		<?php if ( $gpi_map && false !== strpos( $gpi_map, 'google.com/maps' ) ) : ?>
+			<div class="nova-container">
+				<div class="contact-map" data-reveal>
+					<iframe src="<?php echo esc_url( $gpi_map ); ?>" width="100%" height="420" style="border:0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" title="<?php esc_attr_e( 'Map', 'gp-industry' ); ?>"></iframe>
+				</div>
+			</div>
+		<?php endif; ?>
+	</article>
+
+	<?php
+endwhile;
+
+get_footer();
