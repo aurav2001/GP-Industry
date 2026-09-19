@@ -332,16 +332,10 @@ function gpi_theme_customize_register( $wp_customize ) {
 		'type'    => 'textarea',
 	) );
 
-	$feature_defaults = array(
-		1 => array( 'award', esc_html__( 'Certified Quality', 'gp-industry' ), esc_html__( 'ISO-certified processes with 100% inspection before every dispatch.', 'gp-industry' ) ),
-		2 => array( 'cog', esc_html__( 'Advanced Machinery', 'gp-industry' ), esc_html__( 'CNC, automated lines and modern tooling for precision at scale.', 'gp-industry' ) ),
-		3 => array( 'truck', esc_html__( 'On-time Delivery', 'gp-industry' ), esc_html__( 'Robust logistics and inventory planning keep your production moving.', 'gp-industry' ) ),
-		4 => array( 'hardhat', esc_html__( 'Safety First', 'gp-industry' ), esc_html__( 'Zero-compromise safety standards across every plant and site.', 'gp-industry' ) ),
-		5 => array( 'users', esc_html__( 'Skilled Workforce', 'gp-industry' ), esc_html__( 'Experienced engineers and technicians with decades of industry know-how.', 'gp-industry' ) ),
-		6 => array( 'leaf', esc_html__( 'Sustainable Practices', 'gp-industry' ), esc_html__( 'Energy-efficient production and responsible waste management.', 'gp-industry' ) ),
-	);
+	$defaults = gpi_option_defaults();
 
-	foreach ( $feature_defaults as $i => $def ) {
+	foreach ( array( 1, 2, 3, 4, 5, 6 ) as $i ) {
+		$def = array( $defaults["feature_{$i}_icon"], $defaults["feature_{$i}_title"], $defaults["feature_{$i}_text"] );
 		$add( "feature_{$i}_icon", array( 'default' => $def[0], 'sanitize_callback' => 'gpi_sanitize_select' ), array(
 			/* translators: %d: feature number */
 			'label'   => sprintf( esc_html__( 'Feature %d icon', 'gp-industry' ), $i ),
@@ -373,13 +367,8 @@ function gpi_theme_customize_register( $wp_customize ) {
 		'type'    => 'checkbox',
 	) );
 
-	$stat_defaults = array(
-		1 => array( '25+', esc_html__( 'Years in business', 'gp-industry' ) ),
-		2 => array( '500+', esc_html__( 'Clients served', 'gp-industry' ) ),
-		3 => array( '10K+', esc_html__( 'Projects delivered', 'gp-industry' ) ),
-		4 => array( '40+', esc_html__( 'Countries supplied', 'gp-industry' ) ),
-	);
-	foreach ( $stat_defaults as $i => $def ) {
+	foreach ( array( 1, 2, 3, 4 ) as $i ) {
+		$def = array( $defaults["stat_{$i}_number"], $defaults["stat_{$i}_label"] );
 		$add( "stat_{$i}_number", array( 'default' => $def[0], 'sanitize_callback' => 'sanitize_text_field' ), array(
 			/* translators: %d: stat number */
 			'label'   => sprintf( esc_html__( 'Stat %d number', 'gp-industry' ), $i ),

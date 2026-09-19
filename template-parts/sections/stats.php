@@ -11,11 +11,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $gpi_stats = array();
 for ( $gpi_i = 1; $gpi_i <= 4; $gpi_i++ ) {
-	$gpi_number = gpi_get_option( "stat_{$gpi_i}_number", '' );
+	$gpi_number = gpi_get_option( "stat_{$gpi_i}_number" );
 	if ( '' === $gpi_number ) {
 		continue;
 	}
-	$gpi_stats[] = array( $gpi_number, gpi_get_option( "stat_{$gpi_i}_label", '' ) );
+	$gpi_stats[] = array( $gpi_number, gpi_get_option( "stat_{$gpi_i}_label" ) );
 }
 
 if ( empty( $gpi_stats ) ) {

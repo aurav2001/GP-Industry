@@ -16,8 +16,55 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @param mixed  $default Default value.
  * @return mixed
  */
-function gpi_get_option( $key, $default = '' ) {
+function gpi_get_option( $key, $default = null ) {
+	if ( null === $default ) {
+		$defaults = gpi_option_defaults();
+		$default  = isset( $defaults[ $key ] ) ? $defaults[ $key ] : '';
+	}
 	return get_theme_mod( 'gpi_' . $key, $default );
+}
+
+/**
+ * Default values shared by the Customizer and the templates.
+ *
+ * @return array
+ */
+function gpi_option_defaults() {
+	static $defaults = null;
+	if ( null !== $defaults ) {
+		return $defaults;
+	}
+
+	$defaults = array(
+		'feature_1_icon'  => 'award',
+		'feature_1_title' => esc_html__( 'Certified Quality', 'gp-industry' ),
+		'feature_1_text'  => esc_html__( 'ISO-certified processes with 100% inspection before every dispatch.', 'gp-industry' ),
+		'feature_2_icon'  => 'cog',
+		'feature_2_title' => esc_html__( 'Advanced Machinery', 'gp-industry' ),
+		'feature_2_text'  => esc_html__( 'CNC, automated lines and modern tooling for precision at scale.', 'gp-industry' ),
+		'feature_3_icon'  => 'truck',
+		'feature_3_title' => esc_html__( 'On-time Delivery', 'gp-industry' ),
+		'feature_3_text'  => esc_html__( 'Robust logistics and inventory planning keep your production moving.', 'gp-industry' ),
+		'feature_4_icon'  => 'hardhat',
+		'feature_4_title' => esc_html__( 'Safety First', 'gp-industry' ),
+		'feature_4_text'  => esc_html__( 'Zero-compromise safety standards across every plant and site.', 'gp-industry' ),
+		'feature_5_icon'  => 'users',
+		'feature_5_title' => esc_html__( 'Skilled Workforce', 'gp-industry' ),
+		'feature_5_text'  => esc_html__( 'Experienced engineers and technicians with decades of industry know-how.', 'gp-industry' ),
+		'feature_6_icon'  => 'leaf',
+		'feature_6_title' => esc_html__( 'Sustainable Practices', 'gp-industry' ),
+		'feature_6_text'  => esc_html__( 'Energy-efficient production and responsible waste management.', 'gp-industry' ),
+		'stat_1_number'   => '25+',
+		'stat_1_label'    => esc_html__( 'Years in business', 'gp-industry' ),
+		'stat_2_number'   => '500+',
+		'stat_2_label'    => esc_html__( 'Clients served', 'gp-industry' ),
+		'stat_3_number'   => '10K+',
+		'stat_3_label'    => esc_html__( 'Projects delivered', 'gp-industry' ),
+		'stat_4_number'   => '40+',
+		'stat_4_label'    => esc_html__( 'Countries supplied', 'gp-industry' ),
+	);
+
+	return $defaults;
 }
 
 /**

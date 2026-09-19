@@ -11,14 +11,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $gpi_features = array();
 for ( $gpi_i = 1; $gpi_i <= 6; $gpi_i++ ) {
-	$gpi_title = gpi_get_option( "feature_{$gpi_i}_title", '' );
+	$gpi_title = gpi_get_option( "feature_{$gpi_i}_title" );
 	if ( '' === $gpi_title ) {
 		continue;
 	}
 	$gpi_features[] = array(
-		'icon'  => gpi_get_option( "feature_{$gpi_i}_icon", 'bolt' ),
+		'icon'  => gpi_get_option( "feature_{$gpi_i}_icon" ),
 		'title' => $gpi_title,
-		'text'  => gpi_get_option( "feature_{$gpi_i}_text", '' ),
+		'text'  => gpi_get_option( "feature_{$gpi_i}_text" ),
 	);
 }
 
