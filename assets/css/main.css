@@ -32,6 +32,7 @@
  * 28. Auto layout
  * 29. Homepage sections
  * 30. Built-in form, courses
+ * 31. Services landing
  */
 
 /* ==========================================================================
@@ -6639,5 +6640,323 @@ a.contact-value:hover {
 
 	.courses-card-grid {
 		grid-template-columns: 1fr;
+	}
+}
+
+/* ==========================================================================
+   31. Services landing: trust strip, glance nav, zigzag sections
+   ========================================================================== */
+.trust-strip {
+	margin-top: -0.5rem;
+	padding-bottom: var(--spacing-xl);
+}
+
+.trust-pills {
+	list-style: none;
+	margin: 0;
+	padding: 0.5rem;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.5rem;
+	background: var(--bg-glass-card);
+	border: 1px solid var(--border-subtle);
+	border-radius: var(--radius-pill);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+}
+
+.trust-pills li {
+	display: flex;
+	align-items: baseline;
+	gap: 0.45rem;
+	padding: 0.5rem 1.1rem;
+	border-radius: var(--radius-pill);
+	font-size: var(--text-sm);
+	color: var(--text-secondary);
+}
+
+.trust-pills strong {
+	font-family: var(--font-heading);
+	font-size: 1.2rem;
+	font-weight: 800;
+	letter-spacing: -0.02em;
+	background: var(--gradient-text);
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+/* At a glance */
+.glance-section {
+	padding-bottom: var(--spacing-xl);
+}
+
+.glance-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 0.75rem;
+}
+
+.glance-item {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	padding: 0.85rem 1rem;
+	color: var(--text-primary);
+	background: var(--bg-surface);
+	border: 1px solid var(--border-subtle);
+	border-radius: var(--radius-md);
+	font-weight: 600;
+	font-size: 0.95rem;
+	transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.glance-item:hover {
+	color: var(--text-primary);
+	transform: translateY(-3px);
+	border-color: var(--border-hover);
+	box-shadow: var(--shadow-md);
+}
+
+.glance-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	width: 38px;
+	height: 38px;
+	border-radius: var(--radius-sm);
+	color: var(--color-primary);
+	background: var(--color-primary-soft);
+}
+
+.glance-title {
+	flex: 1;
+	line-height: 1.25;
+}
+
+.glance-arrow {
+	color: var(--text-muted);
+	transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.glance-item:hover .glance-arrow {
+	color: var(--color-primary);
+	transform: translateX(3px);
+}
+
+/* Zigzag */
+.zigzag-item {
+	position: relative;
+	padding-block: clamp(3rem, 7vw, 5.5rem);
+	scroll-margin-top: calc(var(--header-height) + 1rem);
+}
+
+.zigzag-item:nth-child(even)::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: var(--bg-surface);
+	border-top: 1px solid var(--border-subtle);
+	border-bottom: 1px solid var(--border-subtle);
+	z-index: -1;
+}
+
+[data-theme="light"] .zigzag-item:nth-child(even)::before {
+	background: var(--bg-surface-2);
+}
+
+.zigzag-inner {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: clamp(2rem, 6vw, 5rem);
+	align-items: center;
+}
+
+.zigzag-item.is-reversed .zigzag-media {
+	order: 2;
+}
+
+.zigzag-media {
+	position: relative;
+}
+
+.zigzag-frame {
+	position: relative;
+	border-radius: var(--radius-xl);
+	overflow: hidden;
+	border: 1px solid var(--border-subtle);
+	box-shadow: var(--shadow-lg), 0 0 0 1px rgba(var(--color-primary-rgb), 0.08);
+	background: var(--bg-surface-elevated);
+	transform: perspective(1400px) rotateY(-4deg);
+	transition: transform 600ms var(--ease);
+}
+
+.zigzag-item.is-reversed .zigzag-frame {
+	transform: perspective(1400px) rotateY(4deg);
+}
+
+.zigzag-item:hover .zigzag-frame {
+	transform: perspective(1400px) rotateY(0);
+}
+
+.zigzag-frame::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(160deg, rgba(var(--color-primary-rgb), 0.16), transparent 50%);
+	pointer-events: none;
+}
+
+.zigzag-frame img {
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+}
+
+.zigzag-placeholder {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1.25rem;
+	aspect-ratio: 4 / 3;
+	background:
+		radial-gradient(circle at 25% 20%, rgba(var(--color-primary-rgb), 0.35), transparent 55%),
+		radial-gradient(circle at 80% 85%, rgba(var(--color-accent-rgb), 0.28), transparent 55%),
+		var(--bg-surface-elevated);
+}
+
+.zigzag-placeholder-icon {
+	display: inline-flex;
+	padding: 1.25rem;
+	border-radius: var(--radius-lg);
+	color: #fff;
+	background: var(--gradient-hero);
+	box-shadow: var(--shadow-glow);
+}
+
+.zigzag-placeholder-lines {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	width: 45%;
+}
+
+.zigzag-placeholder-lines span {
+	height: 8px;
+	border-radius: 4px;
+	background: var(--border-strong);
+}
+
+.zigzag-placeholder-lines span:nth-child(2) { width: 75%; }
+.zigzag-placeholder-lines span:nth-child(3) { width: 55%; }
+
+.zigzag-number {
+	position: absolute;
+	top: -1.25rem;
+	left: -1rem;
+	z-index: 1;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 64px;
+	height: 64px;
+	font-family: var(--font-heading);
+	font-size: 1.35rem;
+	font-weight: 800;
+	color: #fff;
+	background: var(--gradient-hero);
+	border-radius: var(--radius-lg);
+	box-shadow: var(--shadow-glow-strong);
+}
+
+.zigzag-item.is-reversed .zigzag-number {
+	left: auto;
+	right: -1rem;
+}
+
+.zigzag-title {
+	font-size: clamp(1.7rem, 3vw, 2.4rem);
+	letter-spacing: -0.025em;
+	margin-bottom: 0.85rem;
+}
+
+.zigzag-text {
+	font-size: 1.08rem;
+	line-height: 1.75;
+	color: var(--text-secondary);
+	margin-bottom: var(--spacing-lg);
+}
+
+.zigzag-list {
+	list-style: none;
+	margin: 0 0 var(--spacing-xl);
+	padding: 0;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+	gap: 0.65rem 1.25rem;
+}
+
+.zigzag-list li {
+	display: flex;
+	gap: 0.6rem;
+	align-items: flex-start;
+	font-size: 0.97rem;
+	color: var(--text-body);
+	line-height: 1.5;
+}
+
+.zigzag-check {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	width: 20px;
+	height: 20px;
+	margin-top: 0.15em;
+	border-radius: 50%;
+	color: #fff;
+	background: var(--gradient-hero);
+}
+
+.zigzag-check .nova-icon {
+	stroke-width: 3;
+}
+
+.zigzag-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+}
+
+@media (max-width: 900px) {
+	.zigzag-inner {
+		grid-template-columns: 1fr;
+		gap: var(--spacing-xl);
+	}
+
+	.zigzag-item.is-reversed .zigzag-media {
+		order: 0;
+	}
+
+	.zigzag-frame,
+	.zigzag-item.is-reversed .zigzag-frame {
+		transform: none;
+	}
+
+	.zigzag-number,
+	.zigzag-item.is-reversed .zigzag-number {
+		left: 1rem;
+		right: auto;
+		top: 1rem;
+		width: 52px;
+		height: 52px;
+		font-size: 1.1rem;
+	}
+
+	.trust-pills {
+		border-radius: var(--radius-lg);
 	}
 }

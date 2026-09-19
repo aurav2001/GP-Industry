@@ -158,6 +158,12 @@ function gpi_home_customize_register( $wp_customize ) {
 	}
 	$add( 'home_clients_names', array( 'default' => $d['home_clients_names'], 'sanitize_callback' => 'sanitize_textarea_field' ), array( 'label' => esc_html__( 'Text fallback (one name per line, used when no logos are uploaded)', 'gp-industry' ), 'section' => 'gpi_home_clients', 'type' => 'textarea' ) );
 
+	/* ---- Services page extras ---- */
+	$wp_customize->add_section( 'gpi_services_page', array( 'title' => esc_html__( 'Services Page: Sections', 'gp-industry' ), 'description' => esc_html__( 'Extra sections shown on pages using the "Services Page" template (they reuse the homepage Process / Testimonials / FAQ content).', 'gp-industry' ), 'panel' => 'gpi_panel', 'priority' => 56 ) );
+	$add( 'services_show_process', array( 'default' => true, 'sanitize_callback' => 'gpi_sanitize_checkbox' ), array( 'label' => esc_html__( 'Show "Our Process"', 'gp-industry' ), 'section' => 'gpi_services_page', 'type' => 'checkbox' ) );
+	$add( 'services_show_testimonials', array( 'default' => true, 'sanitize_callback' => 'gpi_sanitize_checkbox' ), array( 'label' => esc_html__( 'Show testimonials', 'gp-industry' ), 'section' => 'gpi_services_page', 'type' => 'checkbox' ) );
+	$add( 'services_show_faq', array( 'default' => true, 'sanitize_callback' => 'gpi_sanitize_checkbox' ), array( 'label' => esc_html__( 'Show FAQ', 'gp-industry' ), 'section' => 'gpi_services_page', 'type' => 'checkbox' ) );
+
 	/* ---- FAQ ---- */
 	$wp_customize->add_section( 'gpi_home_faq', array( 'title' => esc_html__( 'Homepage: FAQ', 'gp-industry' ), 'panel' => 'gpi_panel', 'priority' => 54 ) );
 	$add( 'show_home_faq', array( 'default' => true, 'sanitize_callback' => 'gpi_sanitize_checkbox' ), array( 'label' => esc_html__( 'Show FAQ', 'gp-industry' ), 'section' => 'gpi_home_faq', 'type' => 'checkbox' ) );

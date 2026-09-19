@@ -4,7 +4,7 @@ Tags: blog, portfolio, one-column, two-columns, right-sidebar, custom-menu, cust
 Requires at least: 6.3
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 2.6.0
+Stable tag: 2.7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -54,10 +54,13 @@ Sections alternate a subtle background band. Block patterns, columns and groups 
 
 1. Pages → Add New → in the right sidebar choose a Template (Services Page, About Page, Contact Page…).
 2. Click the "+" inserter → Patterns tab → "GP-Industry Sections" and insert the sections you want. Edit text, duplicate columns to add more cards.
-3. Services: create child pages (Page Attributes → Parent = your Services page) and give each a featured image + excerpt. They appear automatically as cards. Use the "Service Detail" template on those child pages.
+3. Services: create child pages (Page Attributes → Parent = your Services page). Give each a featured image, an excerpt (the description) and a bullet list in the content (the highlights) — each becomes a full image + text section on the Services page. Use the "Service Detail" template on those child pages.
 4. Contact: fill Customize → GP-Industry Options → Contact Info. The Contact Page shows a built-in form automatically; paste a form plugin shortcode/block into the content to use that instead.
 
 == Changelog ==
+
+= 2.7.0 =
+* Services Page redesigned as a modern landing page: trust strip, at-a-glance navigation, alternating image + text sections per service (featured image, excerpt, bullet highlights, buttons), then Process, Testimonials, FAQ (toggle in Customizer → Services Page: Sections).
 
 = 2.6.0 =
 * Built-in contact / quote form (no plugin needed) with honeypot spam protection; sends to Contact Info email or admin email.

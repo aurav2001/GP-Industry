@@ -234,7 +234,7 @@ msgstr ""
 msgid "End-to-end production from prototyping to high-volume runs."
 msgstr ""
 
-#: inc/block-patterns.php:186 inc/block-patterns.php:187 inc/block-patterns.php:188 page-templates/courses.php:138 page-templates/courses.php:160 page-templates/courses.php:182 page-templates/services.php:29 template-parts/page/child-grid.php:19
+#: inc/block-patterns.php:186 inc/block-patterns.php:187 inc/block-patterns.php:188 page-templates/courses.php:138 page-templates/courses.php:160 page-templates/courses.php:182 template-parts/page/child-grid.php:19 template-parts/page/child-zigzag.php:20
 msgid "Learn more"
 msgstr ""
 
@@ -254,7 +254,7 @@ msgstr ""
 msgid "CAD/CAM design, reverse engineering and DFM consultation."
 msgstr ""
 
-#: inc/block-patterns.php:189 page-templates/services.php:27 template-parts/page/child-grid.php:17
+#: inc/block-patterns.php:189 template-parts/page/child-grid.php:17
 msgid "Our services"
 msgstr ""
 
@@ -746,11 +746,11 @@ msgstr ""
 msgid "Image (factory / team photo)"
 msgstr ""
 
-#: inc/customizer-home.php:108 inc/customizer-home.php:121 inc/customizer-home.php:128 inc/customizer-home.php:136 inc/customizer-home.php:143 inc/customizer-home.php:164 inc/customizer.php:320 inc/customizer.php:395
+#: inc/customizer-home.php:108 inc/customizer-home.php:121 inc/customizer-home.php:128 inc/customizer-home.php:136 inc/customizer-home.php:143 inc/customizer-home.php:170 inc/customizer.php:320 inc/customizer.php:395
 msgid "Eyebrow label"
 msgstr ""
 
-#: inc/customizer-home.php:109 inc/customizer-home.php:122 inc/customizer-home.php:129 inc/customizer-home.php:137 inc/customizer-home.php:144 inc/customizer-home.php:150 inc/customizer-home.php:165 inc/customizer.php:420
+#: inc/customizer-home.php:109 inc/customizer-home.php:122 inc/customizer-home.php:129 inc/customizer-home.php:137 inc/customizer-home.php:144 inc/customizer-home.php:150 inc/customizer-home.php:171 inc/customizer.php:420
 msgid "Title"
 msgstr ""
 
@@ -838,7 +838,7 @@ msgstr ""
 msgid "Homepage: Testimonials"
 msgstr ""
 
-#: inc/customizer-home.php:142
+#: inc/customizer-home.php:142 inc/customizer-home.php:164
 msgid "Show testimonials"
 msgstr ""
 
@@ -863,18 +863,30 @@ msgid "Text fallback (one name per line, used when no logos are uploaded)"
 msgstr ""
 
 #: inc/customizer-home.php:162
-msgid "Homepage: FAQ"
+msgid "Services Page: Sections"
+msgstr ""
+
+#: inc/customizer-home.php:162
+msgid "Extra sections shown on pages using the \"Services Page\" template (they reuse the homepage Process / Testimonials / FAQ content)."
 msgstr ""
 
 #: inc/customizer-home.php:163
+msgid "Show \"Our Process\""
+msgstr ""
+
+#: inc/customizer-home.php:165 inc/customizer-home.php:169
 msgid "Show FAQ"
 msgstr ""
 
-#: inc/customizer-home.php:166
+#: inc/customizer-home.php:168
+msgid "Homepage: FAQ"
+msgstr ""
+
+#: inc/customizer-home.php:172
 msgid "Questions"
 msgstr ""
 
-#: inc/customizer-home.php:166
+#: inc/customizer-home.php:172
 msgid "Question | Answer"
 msgstr ""
 
@@ -2024,12 +2036,17 @@ msgstr ""
 msgid "Service"
 msgstr ""
 
-#: page-templates/services.php:16
+#: page-templates/services.php:24
 msgid "What we do"
 msgstr ""
 
-#: page-templates/services.php:28
-msgid "Industrial services we provide"
+#: page-templates/services.php:41
+msgid "Explore service"
+msgstr ""
+
+#. %s: new page URL
+#: page-templates/services.php:54
+msgid "Tip: create <a href=\"%s\">child pages</a> under this page (Page Attributes → Parent = this page). Each one becomes a full image + text section here — give it a featured image, an excerpt and a bullet list of highlights. This note is only visible to editors."
 msgstr ""
 
 #: search.php:17
@@ -2130,6 +2147,15 @@ msgstr ""
 #. %s: new page URL
 #: template-parts/page/child-grid.php:84
 msgid "Tip: create <a href=\"%s\">child pages</a> under this page (Page Attributes → Parent = this page) and they will appear here automatically as cards with their featured image and excerpt. Or insert a \"GP-Industry Sections\" pattern in the editor. This note is only visible to editors."
+msgstr ""
+
+#. %s: number
+#: template-parts/page/child-zigzag.php:82
+msgid "Service %s"
+msgstr ""
+
+#: template-parts/page/child-zigzag.php:98
+msgid "Get a quote"
 msgstr ""
 
 #: template-parts/page/contact-card.php:20
