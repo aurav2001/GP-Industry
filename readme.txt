@@ -4,7 +4,7 @@ Tags: blog, portfolio, one-column, two-columns, right-sidebar, custom-menu, cust
 Requires at least: 6.3
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 2.7.0
+Stable tag: 2.8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,9 @@ Sections alternate a subtle background band. Block patterns, columns and groups 
 4. Contact: fill Customize → GP-Industry Options → Contact Info. The Contact Page shows a built-in form automatically; paste a form plugin shortcode/block into the content to use that instead.
 
 == Changelog ==
+
+= 2.8.0 =
+* Demo import now covers every template (adds Why Choose Us auto-layout demo, Training + 3 courses), generates placeholder images (hero slideshow, about image, featured images), fills sample contact details and appends pages to an existing menu. Child pages are detected by parent/slug so re-running never duplicates.
 
 = 2.7.0 =
 * Services Page redesigned as a modern landing page: trust strip, at-a-glance navigation, alternating image + text sections per service (featured image, excerpt, bullet highlights, buttons), then Process, Testimonials, FAQ (toggle in Customizer → Services Page: Sections).
