@@ -30,7 +30,7 @@ while ( have_posts() ) :
 			<div class="contact-layout">
 				<div class="contact-form-card" data-reveal>
 					<?php
-					$gpi_form_title = gpi_get_option( 'contact_form_title', esc_html__( 'Send us a message', 'gp-industry' ) );
+					$gpi_form_title = gpi_get_option( 'contact_form_title' );
 					if ( $gpi_form_title ) :
 						?>
 						<h2 class="contact-form-title"><?php echo esc_html( $gpi_form_title ); ?></h2>

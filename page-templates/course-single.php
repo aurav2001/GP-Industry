@@ -198,7 +198,7 @@ while ( have_posts() ) :
 						<div>
 							<small><?php esc_html_e( 'Have questions about eligibility?', 'gp-industry' ); ?></small>
 							<?php
-							$gpi_phone = gpi_get_option( 'contact_phone', '+91 98765 43210' );
+							$gpi_phone = gpi_get_option( 'contact_phone', '' );
 							?>
 							<strong><a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $gpi_phone ) ); ?>"><?php echo esc_html( $gpi_phone ); ?></a></strong>
 						</div>

@@ -62,6 +62,7 @@ function gpi_sanitize_hero_title( $value ) {
  * @param WP_Customize_Manager $wp_customize Manager.
  */
 function gpi_theme_customize_register( $wp_customize ) {
+	$defaults = gpi_option_defaults();
 
 	// Live preview for core settings.
 	$wp_customize->get_setting( 'blogname' )->transport        = 'postMessage';
@@ -189,14 +190,14 @@ function gpi_theme_customize_register( $wp_customize ) {
 		'type'    => 'url',
 	) );
 
-	$add( 'header_cta_text', array( 'default' => esc_html__( 'Get a Quote', 'gp-industry' ), 'sanitize_callback' => 'sanitize_text_field' ), array(
+	$add( 'header_cta_text', array( 'default' => $defaults['header_cta_text'], 'sanitize_callback' => 'sanitize_text_field' ), array(
 		'label'       => esc_html__( 'Header button text', 'gp-industry' ),
 		'description' => esc_html__( 'Leave empty to hide the button.', 'gp-industry' ),
 		'section'     => 'gpi_header',
 		'type'        => 'text',
 	) );
 
-	$add( 'header_cta_url', array( 'default' => '#contact', 'sanitize_callback' => 'esc_url_raw' ), array(
+	$add( 'header_cta_url', array( 'default' => $defaults['header_cta_url'], 'sanitize_callback' => 'esc_url_raw' ), array(
 		'label'   => esc_html__( 'Header button link', 'gp-industry' ),
 		'section' => 'gpi_header',
 		'type'    => 'url',
@@ -217,41 +218,41 @@ function gpi_theme_customize_register( $wp_customize ) {
 		'type'    => 'checkbox',
 	) );
 
-	$add( 'hero_badge', array( 'default' => esc_html__( 'ISO 9001:2015 Certified Manufacturer', 'gp-industry' ), 'sanitize_callback' => 'sanitize_text_field', 'transport' => 'postMessage' ), array(
+	$add( 'hero_badge', array( 'default' => $defaults['hero_badge'], 'sanitize_callback' => 'sanitize_text_field', 'transport' => 'postMessage' ), array(
 		'label'   => esc_html__( 'Badge text', 'gp-industry' ),
 		'section' => 'gpi_hero',
 		'type'    => 'text',
 	) );
 
-	$add( 'hero_title', array( 'default' => 'Engineering excellence for <span>every industry</span>', 'sanitize_callback' => 'gpi_sanitize_hero_title', 'transport' => 'postMessage' ), array(
+	$add( 'hero_title', array( 'default' => $defaults['hero_title'], 'sanitize_callback' => 'gpi_sanitize_hero_title', 'transport' => 'postMessage' ), array(
 		'label'       => esc_html__( 'Hero title', 'gp-industry' ),
 		'description' => esc_html__( 'Wrap words in <span></span> to give them the gradient highlight.', 'gp-industry' ),
 		'section'     => 'gpi_hero',
 		'type'        => 'textarea',
 	) );
 
-	$add( 'hero_subtitle', array( 'default' => esc_html__( 'Precision manufacturing, industrial solutions and reliable supply — delivered on time, every time. Trusted by leading companies for over two decades.', 'gp-industry' ), 'sanitize_callback' => 'sanitize_textarea_field', 'transport' => 'postMessage' ), array(
+	$add( 'hero_subtitle', array( 'default' => $defaults['hero_subtitle'], 'sanitize_callback' => 'sanitize_textarea_field', 'transport' => 'postMessage' ), array(
 		'label'   => esc_html__( 'Hero subtitle', 'gp-industry' ),
 		'section' => 'gpi_hero',
 		'type'    => 'textarea',
 	) );
 
-	$add( 'hero_btn1_text', array( 'default' => esc_html__( 'Request a Quote', 'gp-industry' ), 'sanitize_callback' => 'sanitize_text_field' ), array(
+	$add( 'hero_btn1_text', array( 'default' => $defaults['hero_btn1_text'], 'sanitize_callback' => 'sanitize_text_field' ), array(
 		'label'   => esc_html__( 'Primary button text', 'gp-industry' ),
 		'section' => 'gpi_hero',
 		'type'    => 'text',
 	) );
-	$add( 'hero_btn1_url', array( 'default' => '#contact', 'sanitize_callback' => 'esc_url_raw' ), array(
+	$add( 'hero_btn1_url', array( 'default' => $defaults['hero_btn1_url'], 'sanitize_callback' => 'esc_url_raw' ), array(
 		'label'   => esc_html__( 'Primary button link', 'gp-industry' ),
 		'section' => 'gpi_hero',
 		'type'    => 'url',
 	) );
-	$add( 'hero_btn2_text', array( 'default' => esc_html__( 'Our Products', 'gp-industry' ), 'sanitize_callback' => 'sanitize_text_field' ), array(
+	$add( 'hero_btn2_text', array( 'default' => $defaults['hero_btn2_text'], 'sanitize_callback' => 'sanitize_text_field' ), array(
 		'label'   => esc_html__( 'Secondary button text', 'gp-industry' ),
 		'section' => 'gpi_hero',
 		'type'    => 'text',
 	) );
-	$add( 'hero_btn2_url', array( 'default' => '#products', 'sanitize_callback' => 'esc_url_raw' ), array(
+	$add( 'hero_btn2_url', array( 'default' => $defaults['hero_btn2_url'], 'sanitize_callback' => 'esc_url_raw' ), array(
 		'label'   => esc_html__( 'Secondary button link', 'gp-industry' ),
 		'section' => 'gpi_hero',
 		'type'    => 'url',
@@ -316,23 +317,21 @@ function gpi_theme_customize_register( $wp_customize ) {
 		'section' => 'gpi_features',
 		'type'    => 'checkbox',
 	) );
-	$add( 'features_eyebrow', array( 'default' => esc_html__( 'Why choose us', 'gp-industry' ), 'sanitize_callback' => 'sanitize_text_field' ), array(
+	$add( 'features_eyebrow', array( 'default' => $defaults['features_eyebrow'], 'sanitize_callback' => 'sanitize_text_field' ), array(
 		'label'   => esc_html__( 'Eyebrow label', 'gp-industry' ),
 		'section' => 'gpi_features',
 		'type'    => 'text',
 	) );
-	$add( 'features_title', array( 'default' => esc_html__( 'Built on quality, safety and reliability', 'gp-industry' ), 'sanitize_callback' => 'sanitize_text_field' ), array(
+	$add( 'features_title', array( 'default' => $defaults['features_title'], 'sanitize_callback' => 'sanitize_text_field' ), array(
 		'label'   => esc_html__( 'Section title', 'gp-industry' ),
 		'section' => 'gpi_features',
 		'type'    => 'text',
 	) );
-	$add( 'features_text', array( 'default' => esc_html__( 'From raw material to finished product, every step is controlled, tested and certified.', 'gp-industry' ), 'sanitize_callback' => 'sanitize_textarea_field' ), array(
+	$add( 'features_text', array( 'default' => $defaults['features_text'], 'sanitize_callback' => 'sanitize_textarea_field' ), array(
 		'label'   => esc_html__( 'Section description', 'gp-industry' ),
 		'section' => 'gpi_features',
 		'type'    => 'textarea',
 	) );
-
-	$defaults = gpi_option_defaults();
 
 	foreach ( array( 1, 2, 3, 4, 5, 6 ) as $i ) {
 		$def = array( $defaults["feature_{$i}_icon"], $defaults["feature_{$i}_title"], $defaults["feature_{$i}_text"] );
@@ -391,12 +390,12 @@ function gpi_theme_customize_register( $wp_customize ) {
 		'section' => 'gpi_home_posts',
 		'type'    => 'checkbox',
 	) );
-	$add( 'home_posts_eyebrow', array( 'default' => esc_html__( 'News & updates', 'gp-industry' ), 'sanitize_callback' => 'sanitize_text_field' ), array(
+	$add( 'home_posts_eyebrow', array( 'default' => $defaults['home_posts_eyebrow'], 'sanitize_callback' => 'sanitize_text_field' ), array(
 		'label'   => esc_html__( 'Eyebrow label', 'gp-industry' ),
 		'section' => 'gpi_home_posts',
 		'type'    => 'text',
 	) );
-	$add( 'home_posts_title', array( 'default' => esc_html__( 'Latest from the plant floor', 'gp-industry' ), 'sanitize_callback' => 'sanitize_text_field' ), array(
+	$add( 'home_posts_title', array( 'default' => $defaults['home_posts_title'], 'sanitize_callback' => 'sanitize_text_field' ), array(
 		'label'   => esc_html__( 'Section title', 'gp-industry' ),
 		'section' => 'gpi_home_posts',
 		'type'    => 'text',
@@ -416,22 +415,22 @@ function gpi_theme_customize_register( $wp_customize ) {
 		'section' => 'gpi_cta',
 		'type'    => 'checkbox',
 	) );
-	$add( 'cta_title', array( 'default' => esc_html__( 'Need a reliable manufacturing partner?', 'gp-industry' ), 'sanitize_callback' => 'sanitize_text_field' ), array(
+	$add( 'cta_title', array( 'default' => $defaults['cta_title'], 'sanitize_callback' => 'sanitize_text_field' ), array(
 		'label'   => esc_html__( 'Title', 'gp-industry' ),
 		'section' => 'gpi_cta',
 		'type'    => 'text',
 	) );
-	$add( 'cta_text', array( 'default' => esc_html__( 'Share your drawings or requirements and our engineering team will send a detailed quotation within 24 hours.', 'gp-industry' ), 'sanitize_callback' => 'sanitize_textarea_field' ), array(
+	$add( 'cta_text', array( 'default' => $defaults['cta_text'], 'sanitize_callback' => 'sanitize_textarea_field' ), array(
 		'label'   => esc_html__( 'Text', 'gp-industry' ),
 		'section' => 'gpi_cta',
 		'type'    => 'textarea',
 	) );
-	$add( 'cta_btn_text', array( 'default' => esc_html__( 'Request a Quote', 'gp-industry' ), 'sanitize_callback' => 'sanitize_text_field' ), array(
+	$add( 'cta_btn_text', array( 'default' => $defaults['cta_btn_text'], 'sanitize_callback' => 'sanitize_text_field' ), array(
 		'label'   => esc_html__( 'Button text', 'gp-industry' ),
 		'section' => 'gpi_cta',
 		'type'    => 'text',
 	) );
-	$add( 'cta_btn_url', array( 'default' => '#contact', 'sanitize_callback' => 'esc_url_raw' ), array(
+	$add( 'cta_btn_url', array( 'default' => $defaults['cta_btn_url'], 'sanitize_callback' => 'esc_url_raw' ), array(
 		'label'   => esc_html__( 'Button link', 'gp-industry' ),
 		'section' => 'gpi_cta',
 		'type'    => 'url',
@@ -531,7 +530,7 @@ function gpi_theme_customize_register( $wp_customize ) {
 		'section'     => 'gpi_contact',
 		'type'        => 'url',
 	) );
-	$add( 'contact_form_title', array( 'default' => esc_html__( 'Send us a message', 'gp-industry' ), 'sanitize_callback' => 'sanitize_text_field' ), array(
+	$add( 'contact_form_title', array( 'default' => $defaults['contact_form_title'], 'sanitize_callback' => 'sanitize_text_field' ), array(
 		'label'   => esc_html__( 'Form card title', 'gp-industry' ),
 		'section' => 'gpi_contact',
 		'type'    => 'text',

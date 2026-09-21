@@ -9,10 +9,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$gpi_title = gpi_get_option( 'cta_title', esc_html__( 'Need a reliable manufacturing partner?', 'gp-industry' ) );
-$gpi_text  = gpi_get_option( 'cta_text', esc_html__( 'Share your drawings or requirements and our engineering team will send a detailed quotation within 24 hours.', 'gp-industry' ) );
-$gpi_btn   = gpi_get_option( 'cta_btn_text', esc_html__( 'Request a Quote', 'gp-industry' ) );
-$gpi_url   = gpi_get_option( 'cta_btn_url', '#contact' );
+$gpi_title = gpi_get_option( 'cta_title' );
+$gpi_text  = gpi_get_option( 'cta_text' );
+$gpi_btn   = gpi_get_option( 'cta_btn_text' );
+$gpi_url   = gpi_get_option( 'cta_btn_url' );
 
 if ( ! $gpi_title ) {
 	return;

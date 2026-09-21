@@ -9,8 +9,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$gpi_cta_text = gpi_get_option( 'header_cta_text', esc_html__( 'Get a Quote', 'gp-industry' ) );
-$gpi_cta_url  = gpi_get_option( 'header_cta_url', '#contact' );
+$gpi_cta_text = gpi_get_option( 'header_cta_text' );
+$gpi_cta_url  = gpi_get_option( 'header_cta_url' );
 ?>
 
 <div class="nova-container header-wrap">

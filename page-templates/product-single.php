@@ -20,13 +20,13 @@ while ( have_posts() ) :
 		'template-parts/page/page-hero',
 		null,
 		array(
-			'eyebrow' => $gpi_parent_id ? get_the_title( $gpi_parent_id ) : esc_html__( 'Product', 'gp-industry' ),
+			'eyebrow' => $gpi_parent_id ? get_the_title( $gpi_parent_id ) : esc_html__( 'Solution', 'gp-industry' ),
 			'align'   => 'left',
 		)
 	);
 	?>
 	<article id="post-<?php the_ID(); ?>" <?php post_class( 'template-page template-product-single' ); ?>>
-		<?php get_template_part( 'template-parts/page/detail-layout', null, array( 'nav_title_fallback' => esc_html__( 'Products', 'gp-industry' ) ) ); ?>
+		<?php get_template_part( 'template-parts/page/detail-layout', null, array( 'nav_title_fallback' => esc_html__( 'Solutions', 'gp-industry' ) ) ); ?>
 	</article>
 	<?php
 	get_template_part( 'template-parts/sections/cta' );

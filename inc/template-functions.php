@@ -35,37 +35,71 @@ function gpi_option_defaults() {
 		return $defaults;
 	}
 
+	$company = get_bloginfo( 'name' );
+
 	$defaults = array(
-		'feature_1_icon'  => 'award',
-		'feature_1_title' => esc_html__( 'Certified Quality', 'gp-industry' ),
-		'feature_1_text'  => esc_html__( 'ISO-certified processes with 100% inspection before every dispatch.', 'gp-industry' ),
-		'feature_2_icon'  => 'cog',
-		'feature_2_title' => esc_html__( 'Advanced Machinery', 'gp-industry' ),
-		'feature_2_text'  => esc_html__( 'CNC, automated lines and modern tooling for precision at scale.', 'gp-industry' ),
-		'feature_3_icon'  => 'truck',
-		'feature_3_title' => esc_html__( 'On-time Delivery', 'gp-industry' ),
-		'feature_3_text'  => esc_html__( 'Robust logistics and inventory planning keep your production moving.', 'gp-industry' ),
-		'feature_4_icon'  => 'hardhat',
-		'feature_4_title' => esc_html__( 'Safety First', 'gp-industry' ),
-		'feature_4_text'  => esc_html__( 'Zero-compromise safety standards across every plant and site.', 'gp-industry' ),
-		'feature_5_icon'  => 'users',
-		'feature_5_title' => esc_html__( 'Skilled Workforce', 'gp-industry' ),
-		'feature_5_text'  => esc_html__( 'Experienced engineers and technicians with decades of industry know-how.', 'gp-industry' ),
-		'feature_6_icon'  => 'leaf',
-		'feature_6_title' => esc_html__( 'Sustainable Practices', 'gp-industry' ),
-		'feature_6_text'  => esc_html__( 'Energy-efficient production and responsible waste management.', 'gp-industry' ),
-		'stat_1_number'   => '25+',
-		'stat_1_label'    => esc_html__( 'Years in business', 'gp-industry' ),
-		'stat_2_number'   => '500+',
-		'stat_2_label'    => esc_html__( 'Clients served', 'gp-industry' ),
-		'stat_3_number'   => '10K+',
-		'stat_3_label'    => esc_html__( 'Projects delivered', 'gp-industry' ),
-		'stat_4_number'   => '40+',
-		'stat_4_label'    => esc_html__( 'Countries supplied', 'gp-industry' ),
+		/* Header */
+		'header_cta_text'  => esc_html__( 'Book a Consultation', 'gp-industry' ),
+		'header_cta_url'   => '#contact',
+
+		/* Hero */
+		'hero_badge'       => esc_html__( 'Trusted corporate consultancy partner', 'gp-industry' ),
+		'hero_title'       => 'Smarter workforce & facility solutions for <span>growing businesses</span>',
+		'hero_subtitle'    => esc_html__( 'End-to-end consultancy for staffing, payroll, statutory compliance, facility management and security — so you can focus on running your business while we run the rest.', 'gp-industry' ),
+		'hero_btn1_text'   => esc_html__( 'Book a Consultation', 'gp-industry' ),
+		'hero_btn1_url'    => '#contact',
+		'hero_btn2_text'   => esc_html__( 'Our Services', 'gp-industry' ),
+		'hero_btn2_url'    => '#services',
+
+		/* Features */
+		'features_eyebrow' => esc_html__( 'Why choose us', 'gp-industry' ),
+		'features_title'   => esc_html__( 'One partner for people, compliance and facilities', 'gp-industry' ),
+		'features_text'    => esc_html__( 'Trained personnel, 100% statutory compliance and dependable operations — delivered with accountability.', 'gp-industry' ),
+		'feature_1_icon'   => 'users',
+		'feature_1_title'  => esc_html__( 'Vetted Workforce', 'gp-industry' ),
+		'feature_1_text'   => esc_html__( 'Background-verified, trained and supervised staff from our in-house National Resource Cell.', 'gp-industry' ),
+		'feature_2_icon'   => 'shield',
+		'feature_2_title'  => esc_html__( '100% Statutory Compliance', 'gp-industry' ),
+		'feature_2_text'   => esc_html__( 'PF, ESIC, labour law and payroll compliance handled end-to-end with audit-ready records.', 'gp-industry' ),
+		'feature_3_icon'   => 'target',
+		'feature_3_title'  => esc_html__( 'Tailored Solutions', 'gp-industry' ),
+		'feature_3_text'   => esc_html__( 'Every engagement is designed around your headcount, sites, shifts and budget.', 'gp-industry' ),
+		'feature_4_icon'   => 'clock',
+		'feature_4_title'  => esc_html__( 'Rapid Deployment', 'gp-industry' ),
+		'feature_4_text'   => esc_html__( 'Manpower and facility teams mobilised within days, not weeks.', 'gp-industry' ),
+		'feature_5_icon'   => 'chart',
+		'feature_5_title'  => esc_html__( 'Transparent Reporting', 'gp-industry' ),
+		'feature_5_text'   => esc_html__( 'Monthly MIS, attendance and compliance dashboards for complete visibility.', 'gp-industry' ),
+		'feature_6_icon'   => 'award',
+		'feature_6_title'  => esc_html__( 'Dedicated Account Manager', 'gp-industry' ),
+		'feature_6_text'   => esc_html__( 'A single point of contact who owns service quality and escalations.', 'gp-industry' ),
+
+		/* Stats */
+		'stat_1_number'    => '12+',
+		'stat_1_label'     => esc_html__( 'Years of experience', 'gp-industry' ),
+		'stat_2_number'    => '300+',
+		'stat_2_label'     => esc_html__( 'Corporate clients', 'gp-industry' ),
+		'stat_3_number'    => '5,000+',
+		'stat_3_label'     => esc_html__( 'Personnel deployed', 'gp-industry' ),
+		'stat_4_number'    => '25+',
+		'stat_4_label'     => esc_html__( 'Cities served', 'gp-industry' ),
+
+		/* Latest posts */
+		'home_posts_eyebrow' => esc_html__( 'Insights', 'gp-industry' ),
+		'home_posts_title'   => esc_html__( 'Latest insights & updates', 'gp-industry' ),
+
+		/* CTA */
+		'cta_title'        => esc_html__( 'Ready to streamline your workforce and facilities?', 'gp-industry' ),
+		'cta_text'         => esc_html__( 'Tell us about your requirement and our consultants will get back with a tailored proposal within 24 hours.', 'gp-industry' ),
+		'cta_btn_text'     => esc_html__( 'Request a Proposal', 'gp-industry' ),
+		'cta_btn_url'      => '#contact',
+
+		/* Contact */
+		'contact_form_title' => esc_html__( 'Tell us about your requirement', 'gp-industry' ),
 	);
 
 	if ( function_exists( 'gpi_home_defaults' ) ) {
-		$defaults = array_merge( $defaults, gpi_home_defaults() );
+		$defaults = array_merge( $defaults, gpi_home_defaults( $company ) );
 	}
 
 	return $defaults;

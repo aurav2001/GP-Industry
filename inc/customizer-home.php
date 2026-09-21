@@ -18,43 +18,47 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @return array
  */
-function gpi_home_defaults() {
+function gpi_home_defaults( $company = '' ) {
+	$company = $company ? $company : get_bloginfo( 'name' );
+
 	return array(
 		// About / intro.
-		'home_about_eyebrow' => esc_html__( 'About GP-Industry', 'gp-industry' ),
-		'home_about_title'   => esc_html__( 'Two decades of precision manufacturing', 'gp-industry' ),
-		'home_about_text'    => esc_html__( 'From a single workshop in 1998 to multi-plant operations today, we build components and equipment that keep industries running — with certified processes, modern machinery and a team that cares about every tolerance.', 'gp-industry' ),
-		'home_about_list'    => "ISO 9001:2015 certified plant\nIn-house testing & quality lab\nOn-time delivery across 40+ countries\nDedicated engineering support",
+		/* translators: %s: company name */
+		'home_about_eyebrow' => sprintf( esc_html__( 'About %s', 'gp-industry' ), $company ),
+		'home_about_title'   => esc_html__( 'A consultancy built on people, process and accountability', 'gp-industry' ),
+		/* translators: %s: company name */
+		'home_about_text'    => sprintf( esc_html__( '%s helps organisations run smoothly — from recruiting and managing trained personnel to keeping every statutory obligation in order and every facility spotless and secure. We combine a dedicated in-house resource cell with rigorous compliance practice so our clients get reliable service without the management overhead.', 'gp-industry' ), $company ),
+		'home_about_list'    => "In-house National Resource Cell for sourcing & induction\n100% statutory payroll, PF & ESIC compliance\nPan-India deployment with local supervision\nMonthly MIS and compliance reporting",
 		'home_about_btn'     => esc_html__( 'More about us', 'gp-industry' ),
 		'home_about_url'     => '/about-us/',
 		'home_about_image'   => '',
-		'home_about_badge'   => esc_html__( '25+ Years', 'gp-industry' ),
-		'home_about_badge_2' => esc_html__( 'of industry experience', 'gp-industry' ),
-		// Products.
-		'home_products_eyebrow' => esc_html__( 'Our products', 'gp-industry' ),
-		'home_products_title'   => esc_html__( 'Engineered products, built to specification', 'gp-industry' ),
+		'home_about_badge'   => esc_html__( '12+ Years', 'gp-industry' ),
+		'home_about_badge_2' => esc_html__( 'of consultancy experience', 'gp-industry' ),
+		// Products / solutions.
+		'home_products_eyebrow' => esc_html__( 'Our services', 'gp-industry' ),
+		'home_products_title'   => esc_html__( 'Solutions that keep your business running', 'gp-industry' ),
 		'home_products_page'    => 0,
 		'home_products_count'   => 6,
 		// Industries.
 		'home_industries_eyebrow' => esc_html__( 'Industries', 'gp-industry' ),
 		'home_industries_title'   => esc_html__( 'Industries we serve', 'gp-industry' ),
-		'home_industries_text'    => esc_html__( 'Proven supply experience across regulated and high-volume sectors.', 'gp-industry' ),
-		'home_industries_items'   => "cog | Automotive | OEM and tier-1 component supply\nlayers | Construction | Structural steel and fittings\nbolt | Energy & Power | Turbine, solar and grid hardware\npackage | Oil & Gas | Valves, flanges and pressure parts\ntarget | Aerospace | High-tolerance precision parts\nshield | Medical | Clean-room grade components",
+		'home_industries_text'    => esc_html__( 'Proven experience across corporate, industrial and service sectors.', 'gp-industry' ),
+		'home_industries_items'   => "factory | Manufacturing & Industrial | Plant manpower, housekeeping and security\nlayers | IT & Corporate Offices | Facility management and support staff\nheart | Healthcare | Hygiene, housekeeping and patient-support staff\nglobe | Hospitality & Retail | Front-office, housekeeping and security teams\nhardhat | Real Estate & Infrastructure | Site security, maintenance and admin staffing\naward | Education & Institutions | Campus facility and support services",
 		// Process.
 		'home_process_eyebrow' => esc_html__( 'How we work', 'gp-industry' ),
-		'home_process_title'   => esc_html__( 'From enquiry to delivery in four steps', 'gp-industry' ),
-		'home_process_items'   => "Enquiry & Drawings | Share specifications, drawings or samples. We review feasibility within 24 hours.\nQuotation | Transparent pricing with lead times, tolerances and material certificates.\nProduction & QC | Manufacturing with in-process inspection and final quality reports.\nDelivery | Secure packaging and on-time dispatch — domestic and export.",
+		'home_process_title'   => esc_html__( 'From consultation to deployment in four steps', 'gp-industry' ),
+		'home_process_items'   => "Consultation | We study your sites, headcount, shifts and compliance needs.\nProposal | A tailored plan with SLAs, transparent costing and timelines.\nDeployment | Vetted, trained personnel mobilised with on-site supervision.\nSupport & Reporting | Dedicated account manager, monthly MIS and compliance audits.",
 		// Testimonials.
 		'home_testimonials_eyebrow' => esc_html__( 'Testimonials', 'gp-industry' ),
 		'home_testimonials_title'   => esc_html__( 'What our clients say', 'gp-industry' ),
-		'home_testimonials_items'   => "Consistent quality across 40,000 parts with zero rejections. Their QC documentation made our audit effortless. | Ramesh Iyer | Procurement Head, AutoTech Ltd\nThey took our concept drawings and delivered a production-ready assembly in three weeks. | Sneha Kulkarni | Plant Manager, Vertex Energy\nReliable lead times and honest communication. Exactly what you want from a supplier. | David Müller | Sourcing Director, Nordwerk GmbH",
+		'home_testimonials_items'   => "They took over our payroll and compliance completely — zero notices, zero headaches, and our HR team finally has time for people. | Ramesh Iyer | Head of HR, AutoTech Ltd\nHousekeeping and security at three of our plants are now handled by one accountable partner. The monthly reports make audits effortless. | Sneha Kulkarni | Admin Manager, Vertex Energy\nRapid deployment and honest communication. Exactly what you want from a consultancy. | Priya Nair | Operations Director, Orbit Hospitals",
 		// Clients.
-		'home_clients_title' => esc_html__( 'Trusted by industry leaders', 'gp-industry' ),
-		'home_clients_names' => "Tata Steel\nL&T\nSiemens\nBHEL\nBosch\nABB",
+		'home_clients_title' => esc_html__( 'Trusted by leading organisations', 'gp-industry' ),
+		'home_clients_names' => "Tata Motors\nInfosys\nApollo Hospitals\nDLF\nMarriott\nL&T",
 		// FAQ.
 		'home_faq_eyebrow' => esc_html__( 'FAQ', 'gp-industry' ),
 		'home_faq_title'   => esc_html__( 'Frequently asked questions', 'gp-industry' ),
-		'home_faq_items'   => "What is your minimum order quantity? | Standard items have no MOQ. Custom-machined parts typically start at 100 pieces, but we are happy to quote prototypes and small batches.\nWhich file formats do you accept? | STEP, IGES, DWG, DXF and PDF drawings. Physical samples are also welcome for reverse engineering.\nDo you provide material certificates? | Yes. Every batch ships with a material test certificate and an inspection report on request.\nDo you export? | We supply to 40+ countries with export packing, documentation and freight coordination.",
+		'home_faq_items'   => "How quickly can staff be deployed? | Most engagements go live within 7–10 working days, including sourcing, verification and induction.\nAre your personnel background-verified? | Yes. Every candidate goes through document, address and police verification plus role-specific training before deployment.\nWho handles PF, ESIC and payroll compliance? | We do. Statutory registrations, monthly filings and challans are managed end-to-end with audit-ready records shared every month.\nCan you cover multiple cities or sites? | Yes. We deploy across 25+ cities with local supervisors and a central account manager for consistent service.",
 	);
 }
 
@@ -183,7 +187,7 @@ function gpi_home_products_page_id() {
 	if ( $id ) {
 		return $id;
 	}
-	foreach ( array( 'products', 'our-products', 'services', 'our-services' ) as $slug ) {
+	foreach ( array( 'solutions', 'products', 'our-products', 'services', 'our-services' ) as $slug ) {
 		$page = get_page_by_path( $slug, OBJECT, 'page' );
 		if ( $page ) {
 			return $page->ID;

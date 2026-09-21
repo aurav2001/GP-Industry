@@ -13,7 +13,7 @@ get_header();
 while ( have_posts() ) :
 	the_post();
 
-	get_template_part( 'template-parts/page/page-hero', null, array( 'eyebrow' => esc_html__( 'Product range', 'gp-industry' ) ) );
+	get_template_part( 'template-parts/page/page-hero', null, array( 'eyebrow' => esc_html__( 'Our solutions', 'gp-industry' ) ) );
 	?>
 
 	<article id="post-<?php the_ID(); ?>" <?php post_class( 'template-page template-products' ); ?>>
@@ -24,8 +24,8 @@ while ( have_posts() ) :
 			'template-parts/page/child-grid',
 			null,
 			array(
-				'eyebrow'   => esc_html__( 'Our products', 'gp-industry' ),
-				'title'     => esc_html__( 'Browse our product categories', 'gp-industry' ),
+				'eyebrow'   => esc_html__( 'Solutions', 'gp-industry' ),
+				'title'     => esc_html__( 'Choose the solution that fits your business', 'gp-industry' ),
 				'link_text' => esc_html__( 'View details', 'gp-industry' ),
 				'icon'      => 'package',
 				'anchor'    => 'products',

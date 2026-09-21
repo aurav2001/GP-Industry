@@ -23,8 +23,8 @@ if ( ! $gpi_query->have_posts() ) {
 }
 
 $gpi_blog_url = get_option( 'page_for_posts' ) ? get_permalink( get_option( 'page_for_posts' ) ) : home_url( '/' );
-$gpi_eyebrow  = gpi_get_option( 'home_posts_eyebrow', esc_html__( 'News & updates', 'gp-industry' ) );
-$gpi_title    = gpi_get_option( 'home_posts_title', esc_html__( 'Latest from the plant floor', 'gp-industry' ) );
+$gpi_eyebrow  = gpi_get_option( 'home_posts_eyebrow' );
+$gpi_title    = gpi_get_option( 'home_posts_title' );
 ?>
 
 <section id="articles" class="posts-section section-pad">

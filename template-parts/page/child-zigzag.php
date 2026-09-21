@@ -95,7 +95,7 @@ $gpi_icons = gpi_auto_icons();
 
 					<div class="zigzag-actions">
 						<a class="btn btn-primary" href="<?php echo esc_url( get_permalink( $gpi_child ) ); ?>"><?php echo esc_html( $args['link_text'] ); ?><?php gpi_the_icon( 'arrow-right', 16 ); ?></a>
-						<a class="btn btn-ghost" href="<?php echo esc_url( gpi_get_option( 'header_cta_url', '#contact' ) ); ?>"><?php esc_html_e( 'Get a quote', 'gp-industry' ); ?></a>
+						<a class="btn btn-ghost" href="<?php echo esc_url( gpi_get_option( 'header_cta_url' ) ); ?>"><?php esc_html_e( 'Request a proposal', 'gp-industry' ); ?></a>
 					</div>
 				</div>
 			</div>

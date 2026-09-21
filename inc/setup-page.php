@@ -165,7 +165,7 @@ function gpi_setup_page_render() {
 		<div style="max-width:820px">
 			<div class="card" style="max-width:none">
 				<h2><?php esc_html_e( '1. Import demo pages', 'gp-industry' ); ?></h2>
-				<p><?php esc_html_e( 'Creates fully designed pages you can simply edit: Home (front page), About Us, Why Choose Us (auto-layout demo), Products (+3), Services (+3), Industries, Projects, Training (+3 courses), Contact, News — with generated placeholder images (hero slideshow, featured images) and sample contact details. Pages that already exist with the same slug are left untouched. Also sets the front page, blog page and the primary menu.', 'gp-industry' ); ?></p>
+				<p><?php esc_html_e( 'Creates fully designed pages you can simply edit: Home (front page), About Us, Why Choose Us (auto-layout demo), Solutions (+3), Services (+3), Industries, Case Studies, Training (+3), Contact, Insights — with generated placeholder images (hero slideshow, featured images) and sample contact details. Pages that already exist with the same slug are left untouched. Also sets the front page, blog page and the primary menu.', 'gp-industry' ); ?></p>
 				<form method="post">
 					<?php wp_nonce_field( 'gpi_setup' ); ?>
 					<input type="hidden" name="gpi_setup_action" value="import">
@@ -384,12 +384,14 @@ function gpi_import_demo_pages() {
 		return $o . '</ul><!-- /wp:list -->' . "\n";
 	};
 
-	/* Home: front-page.php renders hero/features/stats/news/CTA; content adds sections between. */
+	$company = get_bloginfo( 'name' );
+
+	/* Home: front-page.php renders hero/features/stats/about/…; content adds sections in between. */
 	$home = gpi_demo_page(
 		array(
 			'post_title'   => esc_html__( 'Home', 'gp-industry' ),
 			'post_name'    => 'home',
-			'post_content' => gpi_pattern_industries() . "\n" . gpi_pattern_process() . "\n" . gpi_pattern_certifications(),
+			'post_content' => gpi_pattern_certifications(),
 		),
 		'',
 		$result
@@ -397,24 +399,31 @@ function gpi_import_demo_pages() {
 
 	/* About */
 	$about_content  = $p( esc_html__( 'Who we are', 'gp-industry' ) );
-	$about_content .= $h( esc_html__( 'A manufacturing partner you can depend on', 'gp-industry' ) );
-	$about_content .= $p( esc_html__( 'Founded in 1998, GP-Industry has grown from a single workshop into a multi-plant manufacturer serving automotive, energy, construction and infrastructure customers across 40 countries. Edit this text with your company story.', 'gp-industry' ) );
-	$about_content .= $p( esc_html__( 'Our mission is simple: deliver precision components and reliable industrial solutions with uncompromising quality, safety and on-time performance.', 'gp-industry' ) );
-	$about_content .= $p( esc_html__( 'Our strengths', 'gp-industry' ) );
-	$about_content .= $h( esc_html__( 'Why clients choose us', 'gp-industry' ) );
-	$about_content .= $p( esc_html__( 'Every part we ship is backed by certified processes, modern machinery and an experienced team.', 'gp-industry' ) );
-	$about_content .= $h( esc_html__( 'Certified Quality', 'gp-industry' ), 3 ) . $p( esc_html__( 'ISO 9001:2015 quality systems with in-house CMM, hardness and NDT testing on every batch.', 'gp-industry' ) );
-	$about_content .= $h( esc_html__( 'Modern Infrastructure', 'gp-industry' ), 3 ) . $p( esc_html__( 'CNC machining centres, automated fabrication lines and 3-shift capacity for large orders.', 'gp-industry' ) );
-	$about_content .= $h( esc_html__( 'Experienced Team', 'gp-industry' ), 3 ) . $p( esc_html__( 'Engineers and technicians with decades of hands-on industry experience.', 'gp-industry' ) );
-	$about_content .= $h( esc_html__( 'Our certifications', 'gp-industry' ) );
-	$about_content .= $ul( array( 'ISO 9001:2015 Quality Management', 'ISO 14001 Environmental Management', 'ISO 45001 Occupational Health & Safety', 'CE Marking for exported equipment' ) );
+	/* translators: %s: company name */
+	$about_content .= $h( sprintf( esc_html__( '%s — your partner for people, compliance and facilities', 'gp-industry' ), $company ) );
+	/* translators: %s: company name */
+	$about_content .= $p( sprintf( esc_html__( '%s is a corporate consultancy that helps organisations run smoothly. We recruit, train and manage personnel, keep every statutory obligation in order, and operate facilities that are clean, safe and secure — so our clients can focus on their core business. Edit this text with your own story.', 'gp-industry' ), $company ) );
+	$about_content .= $p( esc_html__( 'Our approach is simple: understand the client’s sites, shifts and risks first; design a solution around them; then deliver it with dedicated supervision, transparent reporting and complete accountability.', 'gp-industry' ) );
+	$about_content .= $p( esc_html__( 'Corporate Solutions', 'gp-industry' ) );
+	$about_content .= $h( esc_html__( 'Comprehensive facilities & staffing ecosystem', 'gp-industry' ) );
+	$about_content .= $p( esc_html__( 'Tailored corporate services designed to accelerate business productivity, guarantee 100% statutory compliance and ensure robust operational security.', 'gp-industry' ) );
+	$about_content .= $p( esc_html__( 'Workforce Solutions', 'gp-industry' ) );
+	$about_content .= $h( esc_html__( 'HR Staffing & Payroll Management', 'gp-industry' ), 3 ) . $p( esc_html__( 'Trained and vetted personnel, manager-level staff, a dedicated in-house Resource Cell and 100% statutory payroll.', 'gp-industry' ) );
+	$about_content .= $h( esc_html__( 'Statutory Compliance', 'gp-industry' ), 3 ) . $p( esc_html__( 'PF, ESIC, professional tax, labour licences and monthly filings — audit-ready, every month.', 'gp-industry' ) );
+	$about_content .= $h( esc_html__( 'Manpower Outsourcing', 'gp-industry' ), 3 ) . $p( esc_html__( 'Skilled, semi-skilled and support staff deployed on your payroll or ours, with on-site supervision.', 'gp-industry' ) );
+	$about_content .= $p( esc_html__( 'Facility Solutions', 'gp-industry' ) );
+	$about_content .= $h( esc_html__( 'Housekeeping & Hygiene', 'gp-industry' ), 3 ) . $p( esc_html__( 'Mechanised cleaning, pest control and waste management for offices, plants and hospitals.', 'gp-industry' ) );
+	$about_content .= $h( esc_html__( 'Security Services', 'gp-industry' ), 3 ) . $p( esc_html__( 'Trained guards, supervisors and access control aligned with PSARA requirements.', 'gp-industry' ) );
+	$about_content .= $h( esc_html__( 'Facility Management', 'gp-industry' ), 3 ) . $p( esc_html__( 'Front-office, pantry, technical maintenance and vendor management under one contract.', 'gp-industry' ) );
+	$about_content .= $h( esc_html__( 'Our credentials', 'gp-industry' ) );
+	$about_content .= $ul( array( esc_html__( 'ISO 9001:2015 certified quality management', 'gp-industry' ), esc_html__( 'PSARA licensed security operations', 'gp-industry' ), esc_html__( 'Registered under Contract Labour, PF and ESIC acts', 'gp-industry' ), esc_html__( 'MSME and Startup India recognised', 'gp-industry' ) ) );
 	$about_content .= gpi_pattern_process() . "\n" . gpi_pattern_team( $avatar ) . "\n" . gpi_pattern_faq();
 
 	$about = gpi_demo_page(
 		array(
 			'post_title'   => esc_html__( 'About Us', 'gp-industry' ),
 			'post_name'    => 'about-us',
-			'post_excerpt' => esc_html__( 'Serving industry since 1998 with certified quality and on-time delivery.', 'gp-industry' ),
+			'post_excerpt' => esc_html__( 'Corporate staffing, compliance and facility consultancy you can rely on.', 'gp-industry' ),
 			'post_content' => $about_content,
 			'menu_order'   => 10,
 		),
@@ -423,12 +432,12 @@ function gpi_import_demo_pages() {
 	);
 	gpi_demo_featured( $about, esc_html__( 'About Us', 'gp-industry' ), 1 );
 
-	/* Products + children */
+	/* Solutions (Products template) + children */
 	$products = gpi_demo_page(
 		array(
-			'post_title'   => esc_html__( 'Products', 'gp-industry' ),
-			'post_name'    => 'products',
-			'post_excerpt' => esc_html__( 'Engineered components and equipment built to your specification.', 'gp-industry' ),
+			'post_title'   => esc_html__( 'Solutions', 'gp-industry' ),
+			'post_name'    => 'solutions',
+			'post_excerpt' => esc_html__( 'Packaged solutions for workforce, compliance and facility needs.', 'gp-industry' ),
 			'post_content' => '',
 			'menu_order'   => 20,
 		),
@@ -436,15 +445,17 @@ function gpi_import_demo_pages() {
 		$result
 	);
 	$product_items = array(
-		array( 'precision-machined-parts', esc_html__( 'Precision Machined Parts', 'gp-industry' ), esc_html__( 'CNC turned and milled components in steel, aluminium and brass to ±0.01 mm.', 'gp-industry' ) ),
-		array( 'industrial-fasteners', esc_html__( 'Industrial Fasteners', 'gp-industry' ), esc_html__( 'Bolts, nuts, studs and custom fasteners in grades 8.8, 10.9, 12.9 and stainless.', 'gp-industry' ) ),
-		array( 'fabricated-assemblies', esc_html__( 'Fabricated Assemblies', 'gp-industry' ), esc_html__( 'Welded structures, enclosures and sub-assemblies built to your drawings.', 'gp-industry' ) ),
+		array( 'workforce-outsourcing', esc_html__( 'Workforce Outsourcing', 'gp-industry' ), esc_html__( 'Skilled and support staff on our payroll — recruited, verified, trained and supervised for you.', 'gp-industry' ), array( esc_html__( 'Background & police verification', 'gp-industry' ), esc_html__( 'Role-specific induction and training', 'gp-industry' ), esc_html__( 'Replacement guarantee within 48 hours', 'gp-industry' ), esc_html__( 'Attendance & MIS reporting', 'gp-industry' ) ) ),
+		array( 'payroll-compliance', esc_html__( 'Payroll & Statutory Compliance', 'gp-industry' ), esc_html__( 'End-to-end payroll processing with PF, ESIC, PT, LWF and labour-law compliance.', 'gp-industry' ), array( esc_html__( 'Monthly payroll and payslips', 'gp-industry' ), esc_html__( 'PF / ESIC registrations and challans', 'gp-industry' ), esc_html__( 'Labour licence and register maintenance', 'gp-industry' ), esc_html__( 'Audit support and compliance calendar', 'gp-industry' ) ) ),
+		array( 'integrated-facility-management', esc_html__( 'Integrated Facility Management', 'gp-industry' ), esc_html__( 'Housekeeping, security, pantry, front-office and maintenance under a single accountable contract.', 'gp-industry' ), array( esc_html__( 'Mechanised housekeeping & hygiene', 'gp-industry' ), esc_html__( 'PSARA-compliant security', 'gp-industry' ), esc_html__( 'Technical & soft services', 'gp-industry' ), esc_html__( 'Single point of contact & SLAs', 'gp-industry' ) ) ),
 	);
 	foreach ( $product_items as $i => $item ) {
 		$content  = $p( $item[2] );
-		$content .= $ul( array( esc_html__( 'Tolerances up to ±0.01 mm', 'gp-industry' ), esc_html__( 'Steel, aluminium, brass and stainless', 'gp-industry' ), esc_html__( 'Prototype to 10,000+ pcs', 'gp-industry' ), esc_html__( 'Material certificate with every batch', 'gp-industry' ) ) );
-		$content .= $h( esc_html__( 'Key features', 'gp-industry' ) );
-		$content .= $ul( array( esc_html__( 'Material test certificate with every batch', 'gp-industry' ), esc_html__( 'Custom sizes and finishes on request', 'gp-industry' ), esc_html__( 'Prototype to high-volume production', 'gp-industry' ), esc_html__( 'Export packing available', 'gp-industry' ) ) );
+		$content .= $ul( $item[3] );
+		$content .= $h( esc_html__( 'What you get', 'gp-industry' ) );
+		$content .= $h( esc_html__( 'Dedicated account manager', 'gp-industry' ), 3 ) . $p( esc_html__( 'One owner for service quality, escalations and monthly reviews.', 'gp-industry' ) );
+		$content .= $h( esc_html__( 'Transparent pricing', 'gp-industry' ), 3 ) . $p( esc_html__( 'Clear per-head or per-site costing with no hidden charges.', 'gp-industry' ) );
+		$content .= $h( esc_html__( 'Compliance you can prove', 'gp-industry' ), 3 ) . $p( esc_html__( 'Audit-ready documentation shared every month.', 'gp-industry' ) );
 		$content .= gpi_pattern_specs();
 		$pid = gpi_demo_page(
 			array(
@@ -460,14 +471,14 @@ function gpi_import_demo_pages() {
 		);
 		gpi_demo_featured( $pid, $item[1], $i );
 	}
-	gpi_demo_featured( $products, esc_html__( 'Products', 'gp-industry' ), 4 );
+	gpi_demo_featured( $products, esc_html__( 'Solutions', 'gp-industry' ), 4 );
 
 	/* Services + children */
 	$services = gpi_demo_page(
 		array(
 			'post_title'   => esc_html__( 'Services', 'gp-industry' ),
 			'post_name'    => 'services',
-			'post_excerpt' => esc_html__( 'From design and prototyping to production, maintenance and supply.', 'gp-industry' ),
+			'post_excerpt' => esc_html__( 'Staffing, compliance, housekeeping and security — delivered with accountability.', 'gp-industry' ),
 			'post_content' => '',
 			'menu_order'   => 30,
 		),
@@ -475,17 +486,17 @@ function gpi_import_demo_pages() {
 		$result
 	);
 	$service_items = array(
-		array( 'contract-manufacturing', esc_html__( 'Contract Manufacturing', 'gp-industry' ), esc_html__( 'End-to-end production from prototyping to high-volume runs.', 'gp-industry' ) ),
-		array( 'maintenance-repair', esc_html__( 'Maintenance & Repair', 'gp-industry' ), esc_html__( 'Preventive maintenance, breakdown support and spare parts supply.', 'gp-industry' ) ),
-		array( 'design-engineering', esc_html__( 'Design & Engineering', 'gp-industry' ), esc_html__( 'CAD/CAM design, reverse engineering and DFM consultation.', 'gp-industry' ) ),
+		array( 'hr-staffing-payroll', esc_html__( 'HR Staffing & Payroll Management', 'gp-industry' ), esc_html__( 'Trained, vetted personnel and manager-level staff from our in-house National Resource Cell, with 100% statutory payroll.', 'gp-industry' ), array( esc_html__( 'Sourcing, screening and induction', 'gp-industry' ), esc_html__( 'Statutory payroll with PF & ESIC', 'gp-industry' ), esc_html__( 'Attendance and leave management', 'gp-industry' ), esc_html__( 'Monthly MIS and compliance reports', 'gp-industry' ) ) ),
+		array( 'housekeeping-hygiene', esc_html__( 'Housekeeping & Hygiene', 'gp-industry' ), esc_html__( 'Mechanised cleaning, pest control, waste management and hygiene audits for offices, plants and hospitals.', 'gp-industry' ), array( esc_html__( 'Trained housekeeping staff with supervisors', 'gp-industry' ), esc_html__( 'Mechanised equipment and eco-friendly consumables', 'gp-industry' ), esc_html__( 'Daily checklists and hygiene audits', 'gp-industry' ), esc_html__( 'Pest control and waste management', 'gp-industry' ) ) ),
+		array( 'security-services', esc_html__( 'Security Services', 'gp-industry' ), esc_html__( 'PSARA-compliant guards, supervisors and access control for corporate, industrial and residential sites.', 'gp-industry' ), array( esc_html__( 'Verified and trained security personnel', 'gp-industry' ), esc_html__( 'Access control and visitor management', 'gp-industry' ), esc_html__( '24×7 supervision and patrolling', 'gp-industry' ), esc_html__( 'Incident reporting and escalation', 'gp-industry' ) ) ),
 	);
 	foreach ( $service_items as $i => $item ) {
 		$content  = $p( $item[2] );
-		$content .= $ul( array( esc_html__( 'Dedicated project engineer', 'gp-industry' ), esc_html__( 'In-process quality inspection', 'gp-industry' ), esc_html__( 'Transparent pricing & lead times', 'gp-industry' ), esc_html__( 'Documentation and after-delivery support', 'gp-industry' ) ) );
-		$content .= $h( esc_html__( 'What is included', 'gp-industry' ) );
-		$content .= $h( esc_html__( 'Consultation', 'gp-industry' ), 3 ) . $p( esc_html__( 'We review your drawings and requirements and propose the best approach.', 'gp-industry' ) );
-		$content .= $h( esc_html__( 'Execution', 'gp-industry' ), 3 ) . $p( esc_html__( 'Skilled teams deliver the work with in-process quality checks.', 'gp-industry' ) );
-		$content .= $h( esc_html__( 'Support', 'gp-industry' ), 3 ) . $p( esc_html__( 'Documentation, training and after-delivery support.', 'gp-industry' ) );
+		$content .= $ul( $item[3] );
+		$content .= $h( esc_html__( 'How it works', 'gp-industry' ) );
+		$content .= $h( esc_html__( 'Assessment', 'gp-industry' ), 3 ) . $p( esc_html__( 'We visit your site, understand shifts, headcount and risks, and define SLAs.', 'gp-industry' ) );
+		$content .= $h( esc_html__( 'Deployment', 'gp-industry' ), 3 ) . $p( esc_html__( 'Verified, trained staff mobilised with a supervisor and clear checklists.', 'gp-industry' ) );
+		$content .= $h( esc_html__( 'Review', 'gp-industry' ), 3 ) . $p( esc_html__( 'Monthly reports, audits and a dedicated manager for continuous improvement.', 'gp-industry' ) );
 		$content .= gpi_pattern_faq();
 		$sid = gpi_demo_page(
 			array(
@@ -501,13 +512,14 @@ function gpi_import_demo_pages() {
 		);
 		gpi_demo_featured( $sid, $item[1], $i + 1 );
 	}
+	gpi_demo_featured( $services, esc_html__( 'Services', 'gp-industry' ), 5 );
 
-	/* Courses + children */
+	/* Training + children */
 	$courses = gpi_demo_page(
 		array(
 			'post_title'   => esc_html__( 'Training', 'gp-industry' ),
 			'post_name'    => 'training',
-			'post_excerpt' => esc_html__( 'Industry-accredited training programs for technicians and engineers.', 'gp-industry' ),
+			'post_excerpt' => esc_html__( 'Induction, skill and compliance training programs for your workforce.', 'gp-industry' ),
 			'post_content' => '',
 			'menu_order'   => 55,
 		),
@@ -515,9 +527,9 @@ function gpi_import_demo_pages() {
 		$result
 	);
 	$course_items = array(
-		array( 'plc-scada-automation', esc_html__( 'Industrial Automation & PLC/SCADA', 'gp-industry' ), esc_html__( 'Hands-on training on Siemens and Allen-Bradley PLCs, HMI interfacing and live plant automation.', 'gp-industry' ) ),
-		array( 'cnc-cad-cam', esc_html__( 'CNC Machining & CAD/CAM', 'gp-industry' ), esc_html__( 'SolidWorks, AutoCAD 3D modelling, G-code programming and precision CNC operation.', 'gp-industry' ) ),
-		array( 'industrial-safety-quality', esc_html__( 'Industrial Safety & Quality Inspection', 'gp-industry' ), esc_html__( 'Occupational safety, ISO standards, Six Sigma quality control and compliance certification.', 'gp-industry' ) ),
+		array( 'workplace-safety-compliance', esc_html__( 'Workplace Safety & Compliance', 'gp-industry' ), esc_html__( 'Fire safety, first aid, POSH awareness and statutory compliance essentials for staff and supervisors.', 'gp-industry' ) ),
+		array( 'housekeeping-hospitality-skills', esc_html__( 'Housekeeping & Hospitality Skills', 'gp-industry' ), esc_html__( 'Professional cleaning methods, equipment handling, hygiene standards and guest etiquette.', 'gp-industry' ) ),
+		array( 'supervisor-development', esc_html__( 'Supervisor Development Program', 'gp-industry' ), esc_html__( 'Team leadership, shift planning, reporting and client communication for site supervisors.', 'gp-industry' ) ),
 	);
 	foreach ( $course_items as $i => $item ) {
 		$cid = gpi_demo_page(
@@ -534,19 +546,21 @@ function gpi_import_demo_pages() {
 		);
 		gpi_demo_featured( $cid, $item[1], $i + 2 );
 	}
+	gpi_demo_featured( $courses, esc_html__( 'Training', 'gp-industry' ), 2 );
 
-	/* "Why choose us" — shows the auto-layout engine on plain content */
+	/* Why choose us — auto-layout demo */
 	$why  = $p( esc_html__( 'Our advantages', 'gp-industry' ) );
-	$why .= $h( esc_html__( 'Why manufacturers choose GP-Industry', 'gp-industry' ) );
+	/* translators: %s: company name */
+	$why .= $h( sprintf( esc_html__( 'Why businesses choose %s', 'gp-industry' ), $company ) );
 	$why .= $p( esc_html__( 'This page is written as plain headings and paragraphs — the "Designed Sections (Auto)" template turns them into sections, cards and checklists automatically.', 'gp-industry' ) );
 	$why .= $p( esc_html__( 'Core strengths', 'gp-industry' ) );
-	$why .= $h( esc_html__( 'Certified Quality', 'gp-industry' ), 3 ) . $p( esc_html__( 'ISO 9001:2015 processes with 100% inspection before dispatch.', 'gp-industry' ) );
-	$why .= $h( esc_html__( 'Advanced Machinery', 'gp-industry' ), 3 ) . $p( esc_html__( 'CNC, automated lines and modern tooling for precision at scale.', 'gp-industry' ) );
-	$why .= $h( esc_html__( 'On-time Delivery', 'gp-industry' ), 3 ) . $p( esc_html__( 'Robust logistics and inventory planning keep your production moving.', 'gp-industry' ) );
+	$why .= $h( esc_html__( 'Vetted Workforce', 'gp-industry' ), 3 ) . $p( esc_html__( 'Background-verified, trained and supervised staff from our own resource cell.', 'gp-industry' ) );
+	$why .= $h( esc_html__( '100% Compliance', 'gp-industry' ), 3 ) . $p( esc_html__( 'PF, ESIC, labour law and payroll compliance handled end-to-end.', 'gp-industry' ) );
+	$why .= $h( esc_html__( 'Rapid Deployment', 'gp-industry' ), 3 ) . $p( esc_html__( 'Teams mobilised within days with on-site supervision from day one.', 'gp-industry' ) );
 	$why .= $h( esc_html__( 'Our commitments', 'gp-industry' ) );
-	$why .= $p( esc_html__( 'Every project, large or small, gets the same attention to tolerances, documentation and deadlines.', 'gp-industry' ) );
-	$why .= $ul( array( esc_html__( 'Quotation within 24 hours', 'gp-industry' ), esc_html__( 'Material test certificates', 'gp-industry' ), esc_html__( 'Export packing & documentation', 'gp-industry' ), esc_html__( 'Dedicated account manager', 'gp-industry' ) ) );
-	$why .= '<!-- wp:quote --><blockquote class="wp-block-quote"><!-- wp:paragraph --><p>' . esc_html__( 'Quality is never an accident; it is always the result of intelligent effort.', 'gp-industry' ) . '</p><!-- /wp:paragraph --><cite>John Ruskin</cite></blockquote><!-- /wp:quote -->';
+	$why .= $p( esc_html__( 'Every client, large or small, gets the same attention to service quality, documentation and response time.', 'gp-industry' ) );
+	$why .= $ul( array( esc_html__( 'Proposal within 24 hours', 'gp-industry' ), esc_html__( 'Replacement guarantee within 48 hours', 'gp-industry' ), esc_html__( 'Monthly MIS and compliance reports', 'gp-industry' ), esc_html__( 'Dedicated account manager', 'gp-industry' ) ) );
+	$why .= '<!-- wp:quote --><blockquote class="wp-block-quote"><!-- wp:paragraph --><p>' . esc_html__( 'Take care of your people and your people will take care of your business.', 'gp-industry' ) . '</p><!-- /wp:paragraph --><cite>' . esc_html__( 'Our founding principle', 'gp-industry' ) . '</cite></blockquote><!-- /wp:quote -->';
 	$why_id = gpi_demo_page(
 		array(
 			'post_title'   => esc_html__( 'Why Choose Us', 'gp-industry' ),
@@ -560,44 +574,47 @@ function gpi_import_demo_pages() {
 	);
 	gpi_demo_featured( $why_id, esc_html__( 'Why Choose Us', 'gp-industry' ), 3 );
 
-	/* Industries, Projects, Contact, News */
+	/* Industries, Case studies, Contact, Insights */
 	$industries = gpi_demo_page(
 		array(
 			'post_title'   => esc_html__( 'Industries', 'gp-industry' ),
 			'post_name'    => 'industries',
-			'post_excerpt' => esc_html__( 'Proven supply experience across regulated and high-volume sectors.', 'gp-industry' ),
+			'post_excerpt' => esc_html__( 'Proven experience across corporate, industrial and service sectors.', 'gp-industry' ),
 			'post_content' => gpi_pattern_industries() . "\n" . gpi_pattern_stats() . "\n" . gpi_pattern_testimonials(),
 			'menu_order'   => 40,
 		),
 		'page-templates/auto-design.php',
 		$result
 	);
+	gpi_demo_featured( $industries, esc_html__( 'Industries', 'gp-industry' ), 0 );
 	$projects = gpi_demo_page(
 		array(
-			'post_title'   => esc_html__( 'Projects', 'gp-industry' ),
-			'post_name'    => 'projects',
-			'post_excerpt' => esc_html__( 'A selection of recent work from our plant floor.', 'gp-industry' ),
+			'post_title'   => esc_html__( 'Case Studies', 'gp-industry' ),
+			'post_name'    => 'case-studies',
+			'post_excerpt' => esc_html__( 'A selection of recent engagements and results.', 'gp-industry' ),
 			'post_content' => gpi_pattern_projects( $img ) . "\n" . gpi_pattern_certifications(),
 			'menu_order'   => 50,
 		),
 		'page-templates/auto-design.php',
 		$result
 	);
+	gpi_demo_featured( $projects, esc_html__( 'Case Studies', 'gp-industry' ), 3 );
 	$contact = gpi_demo_page(
 		array(
 			'post_title'   => esc_html__( 'Contact', 'gp-industry' ),
 			'post_name'    => 'contact',
-			'post_excerpt' => esc_html__( 'Send us your drawings or requirements — we reply within one business day.', 'gp-industry' ),
-			'post_content' => $p( esc_html__( 'Install a form plugin (Contact Form 7, WPForms, Fluent Forms…) and paste its shortcode or block here to show the quote form in this card.', 'gp-industry' ) ),
+			'post_excerpt' => esc_html__( 'Tell us about your requirement — we reply within one business day.', 'gp-industry' ),
+			'post_content' => '',
 			'menu_order'   => 60,
 		),
 		'page-templates/contact.php',
 		$result
 	);
+	gpi_demo_featured( $contact, esc_html__( 'Contact', 'gp-industry' ), 1 );
 	$news = gpi_demo_page(
 		array(
-			'post_title'   => esc_html__( 'News', 'gp-industry' ),
-			'post_name'    => 'news',
+			'post_title'   => esc_html__( 'Insights', 'gp-industry' ),
+			'post_name'    => 'insights',
 			'post_content' => '',
 			'menu_order'   => 70,
 		),
@@ -616,7 +633,7 @@ function gpi_import_demo_pages() {
 
 	/* Demo images for Customizer-driven sections (only when nothing is set yet) */
 	if ( ! gpi_get_option( 'hero_bg_1', '' ) ) {
-		foreach ( array( 1 => esc_html__( 'Precision Manufacturing', 'gp-industry' ), 2 => esc_html__( 'Modern Plant Floor', 'gp-industry' ), 3 => esc_html__( 'Quality Assurance', 'gp-industry' ) ) as $n => $label ) {
+		foreach ( array( 1 => esc_html__( 'Corporate Consultancy', 'gp-industry' ), 2 => esc_html__( 'Workforce Solutions', 'gp-industry' ), 3 => esc_html__( 'Facility Management', 'gp-industry' ) ) as $n => $label ) {
 			$img = gpi_demo_image( $label, $n + 3, 1920, 1080 );
 			if ( $img ) {
 				set_theme_mod( 'gpi_hero_bg_' . $n, wp_get_attachment_url( $img ) );
@@ -624,15 +641,15 @@ function gpi_import_demo_pages() {
 		}
 	}
 	if ( ! gpi_get_option( 'home_about_image', '' ) ) {
-		$img = gpi_demo_image( esc_html__( 'Our Facility', 'gp-industry' ), 1, 1200, 1000 );
+		$img = gpi_demo_image( esc_html__( 'Our Team', 'gp-industry' ), 1, 1200, 1000 );
 		if ( $img ) {
 			set_theme_mod( 'gpi_home_about_image', wp_get_attachment_url( $img ) );
 		}
 	}
 	if ( ! gpi_get_option( 'contact_phone', '' ) ) {
-		set_theme_mod( 'gpi_contact_address', "GP-Industry Pvt. Ltd.\nPlot 42, MIDC Industrial Area\nPune, Maharashtra 411018" );
+		set_theme_mod( 'gpi_contact_address', $company . "\n" . "3rd Floor, Corporate Park, Sector 62\nNoida, Uttar Pradesh 201301" );
 		set_theme_mod( 'gpi_contact_phone', '+91 98765 43210' );
-		set_theme_mod( 'gpi_contact_email', 'sales@example.com' );
+		set_theme_mod( 'gpi_contact_email', 'info@example.com' );
 		set_theme_mod( 'gpi_contact_hours', "Mon – Sat: 9:00 – 18:00\nSunday: Closed" );
 	}
 

@@ -16,11 +16,11 @@ get_header();
 			if ( is_home() && ! is_front_page() ) {
 				single_post_title();
 			} else {
-				esc_html_e( 'News & Updates', 'gp-industry' );
+				esc_html_e( 'Insights & Updates', 'gp-industry' );
 			}
 			?>
 		</h1>
-		<p class="page-hero-text"><?php esc_html_e( 'Company news, project highlights and industry insights.', 'gp-industry' ); ?></p>
+		<p class="page-hero-text"><?php esc_html_e( 'Compliance updates, workforce insights and company news.', 'gp-industry' ); ?></p>
 	</div>
 </section>
 

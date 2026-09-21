@@ -9,13 +9,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$gpi_badge    = gpi_get_option( 'hero_badge', esc_html__( 'ISO 9001:2015 Certified Manufacturer', 'gp-industry' ) );
-$gpi_title    = gpi_get_option( 'hero_title', 'Engineering excellence for <span>every industry</span>' );
-$gpi_subtitle = gpi_get_option( 'hero_subtitle', esc_html__( 'Precision manufacturing, industrial solutions and reliable supply — delivered on time, every time. Trusted by leading companies for over two decades.', 'gp-industry' ) );
-$gpi_btn1     = gpi_get_option( 'hero_btn1_text', esc_html__( 'Request a Quote', 'gp-industry' ) );
-$gpi_btn1_url = gpi_get_option( 'hero_btn1_url', '#contact' );
-$gpi_btn2     = gpi_get_option( 'hero_btn2_text', esc_html__( 'Our Products', 'gp-industry' ) );
-$gpi_btn2_url = gpi_get_option( 'hero_btn2_url', '#products' );
+$gpi_badge    = gpi_get_option( 'hero_badge' );
+$gpi_title    = gpi_get_option( 'hero_title' );
+$gpi_subtitle = gpi_get_option( 'hero_subtitle' );
+$gpi_btn1     = gpi_get_option( 'hero_btn1_text' );
+$gpi_btn1_url = gpi_get_option( 'hero_btn1_url' );
+$gpi_btn2     = gpi_get_option( 'hero_btn2_text' );
+$gpi_btn2_url = gpi_get_option( 'hero_btn2_url' );
 $gpi_image    = gpi_get_option( 'hero_image', '' );
 
 $gpi_slides = array();

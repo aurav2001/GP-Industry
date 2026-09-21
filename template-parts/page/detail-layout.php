@@ -15,7 +15,7 @@ $args = wp_parse_args(
 	isset( $args ) ? $args : array(),
 	array(
 		'nav_title_fallback' => esc_html__( 'Services', 'gp-industry' ),
-		'quote_button'       => esc_html__( 'Request a Quote', 'gp-industry' ),
+		'quote_button'       => esc_html__( 'Request a Proposal', 'gp-industry' ),
 	)
 );
 
@@ -60,7 +60,7 @@ $gpi_parent_id = wp_get_post_parent_id( get_the_ID() );
 				<?php get_template_part( 'template-parts/page/contact-card', null, array( 'compact' => true ) ); ?>
 
 				<?php if ( $args['quote_button'] ) : ?>
-					<a class="btn btn-primary btn-block btn-lg" href="<?php echo esc_url( gpi_get_option( 'header_cta_url', '#contact' ) ); ?>"><?php gpi_the_icon( 'file', 18 ); ?><?php echo esc_html( $args['quote_button'] ); ?></a>
+					<a class="btn btn-primary btn-block btn-lg" href="<?php echo esc_url( gpi_get_option( 'header_cta_url' ) ); ?>"><?php gpi_the_icon( 'file', 18 ); ?><?php echo esc_html( $args['quote_button'] ); ?></a>
 				<?php endif; ?>
 			</div>
 		</aside>

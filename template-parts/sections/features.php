@@ -31,9 +31,9 @@ if ( empty( $gpi_features ) ) {
 	<div class="nova-container">
 		<?php
 		gpi_section_heading(
-			gpi_get_option( 'features_eyebrow', esc_html__( 'Why choose us', 'gp-industry' ) ),
-			gpi_get_option( 'features_title', esc_html__( 'Built on quality, safety and reliability', 'gp-industry' ) ),
-			gpi_get_option( 'features_text', esc_html__( 'From raw material to finished product, every step is controlled, tested and certified.', 'gp-industry' ) )
+			gpi_get_option( 'features_eyebrow' ),
+			gpi_get_option( 'features_title' ),
+			gpi_get_option( 'features_text' )
 		);
 		?>
 
