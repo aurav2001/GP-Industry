@@ -21,25 +21,18 @@ if ( $gpi_copyright ) {
 <div class="footer-bottom">
 	<div class="footer-copyright"><?php echo wp_kses_post( $gpi_copyright ); ?></div>
 
-	<?php if ( has_nav_menu( 'footer-menu' ) ) : ?>
-		<nav class="footer-bottom-nav" aria-label="<?php esc_attr_e( 'Footer menu', 'gp-industry' ); ?>">
-			<?php
-			wp_nav_menu(
-				array(
-					'theme_location' => 'footer-menu',
-					'menu_class'     => 'footer-bottom-menu',
-					'container'      => false,
-					'depth'          => 1,
-				)
-			);
-			?>
-		</nav>
-	<?php endif; ?>
+	<div class="footer-bottom-links">
+		<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><?php esc_html_e( 'Quality Assurance', 'gp-industry' ); ?></a>
+		<span class="footer-bottom-sep" aria-hidden="true">•</span>
+		<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><?php esc_html_e( 'Terms & Specifications', 'gp-industry' ); ?></a>
+		<span class="footer-bottom-sep" aria-hidden="true">•</span>
+		<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><?php esc_html_e( 'ISO Compliance', 'gp-industry' ); ?></a>
+	</div>
 
 	<div class="footer-credit">
-		<?php
-		/* translators: %s: heart icon */
-		printf( esc_html__( 'Built with %s on WordPress', 'gp-industry' ), gpi_icon( 'heart', 14, 'heart-icon' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		?>
+		<span class="footer-badge-tag">
+			<span class="badge-dot" aria-hidden="true"></span>
+			<?php esc_html_e( 'Industry 4.0 Standard', 'gp-industry' ); ?>
+		</span>
 	</div>
 </div>
