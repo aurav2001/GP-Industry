@@ -60,7 +60,16 @@ $gpi_icons = gpi_auto_icons();
 		if ( preg_match( '/<ul[^>]*>(.*?)<\/ul>/is', $gpi_child->post_content, $gpi_m ) && preg_match_all( '/<li[^>]*>(.*?)<\/li>/is', $gpi_m[1], $gpi_li ) ) {
 			$gpi_bullets = array_slice( array_map( 'wp_strip_all_tags', $gpi_li[1] ), 0, 4 );
 		}
-		$gpi_thumb = get_the_post_thumbnail( $gpi_child->ID, 'nova-wide', array( 'loading' => 'lazy' ) );
+		$thumb_id   = get_post_thumbnail_id( $gpi_child->ID );
+		$thumb_post = $thumb_id ? get_post( $thumb_id ) : null;
+		$is_synth   = $thumb_post && ( false !== strpos( $thumb_post->post_name, 'gpi-demo-' ) || false !== strpos( (string) $thumb_post->guid, 'gpi-demo-' ) );
+		$gpi_thumb  = ( ! $is_synth && has_post_thumbnail( $gpi_child->ID ) ) ? get_the_post_thumbnail( $gpi_child->ID, 'nova-wide', array( 'loading' => 'lazy' ) ) : '';
+		if ( ! $gpi_thumb && function_exists( 'gpi_get_page_image_url' ) ) {
+			$fallback_src = gpi_get_page_image_url( $gpi_child->ID );
+			if ( $fallback_src ) {
+				$gpi_thumb = '<img src="' . esc_url( $fallback_src ) . '" alt="' . esc_attr( $gpi_child->post_title ) . '" loading="lazy" class="zigzag-image">';
+			}
+		}
 		?>
 		<section id="<?php echo esc_attr( $gpi_child->post_name ); ?>" class="zigzag-item<?php echo $gpi_i % 2 ? ' is-reversed' : ''; ?>">
 			<div class="nova-container zigzag-inner">

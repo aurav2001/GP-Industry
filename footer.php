@@ -41,18 +41,23 @@ $gpi_has_widgets = is_active_sidebar( 'footer-col-1' ) || is_active_sidebar( 'fo
 					<?php endif; ?>
 				<?php endfor; ?>
 
-				<?php if ( ! $gpi_has_widgets && has_nav_menu( 'footer-menu' ) ) : ?>
+				<?php if ( ! $gpi_has_widgets ) : ?>
 					<div class="footer-widget-col">
 						<h4 class="footer-widget-title"><?php esc_html_e( 'Quick Links', 'gp-industry' ); ?></h4>
 						<?php
-						wp_nav_menu(
-							array(
-								'theme_location' => 'footer-menu',
-								'menu_class'     => 'footer-menu',
-								'container'      => false,
-								'depth'          => 1,
-							)
-						);
+						if ( has_nav_menu( 'footer-menu' ) ) {
+							wp_nav_menu(
+								array(
+									'theme_location' => 'footer-menu',
+									'menu_class'     => 'footer-menu',
+									'container'      => false,
+									'depth'          => 1,
+									'fallback_cb'    => 'gpi_footer_nav_fallback',
+								)
+							);
+						} else {
+							gpi_footer_nav_fallback();
+						}
 						?>
 					</div>
 				<?php endif; ?>

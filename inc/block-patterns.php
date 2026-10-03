@@ -23,25 +23,34 @@ function gpi_register_block_patterns() {
 		array( 'label' => esc_html__( 'GP-Industry Sections', 'gp-industry' ) )
 	);
 
-	$img    = esc_url( GPI_THEME_URI . '/assets/images/placeholder.svg' );
-	$avatar = esc_url( GPI_THEME_URI . '/assets/images/avatar.svg' );
+	$img_hero        = esc_url( GPI_THEME_URI . '/assets/images/hero-industrial.jpg' );
+	$img_machinery   = esc_url( GPI_THEME_URI . '/assets/images/heavy-machinery.jpg' );
+	$img_precision   = esc_url( GPI_THEME_URI . '/assets/images/precision-components.jpg' );
+	$img_automation  = esc_url( GPI_THEME_URI . '/assets/images/industrial-automation.jpg' );
+	$img_fabrication = esc_url( GPI_THEME_URI . '/assets/images/custom-fabrication.jpg' );
+	$img_maintenance = esc_url( GPI_THEME_URI . '/assets/images/plant-maintenance.jpg' );
+	$img_cad         = esc_url( GPI_THEME_URI . '/assets/images/engineering-cad.jpg' );
+	$img_sectors     = esc_url( GPI_THEME_URI . '/assets/images/industries-sectors.jpg' );
+	$img_projects    = esc_url( GPI_THEME_URI . '/assets/images/case-studies-projects.jpg' );
+	$img_facility    = esc_url( GPI_THEME_URI . '/assets/images/about-facility.jpg' );
+	$avatar          = esc_url( GPI_THEME_URI . '/assets/images/avatar.svg' );
 
 	$patterns = array(
-		'hero'           => array( esc_html__( 'Hero: consultancy headline', 'gp-industry' ), gpi_pattern_hero( $img ) ),
-		'products'       => array( esc_html__( 'Solutions Grid (3 cards)', 'gp-industry' ), gpi_pattern_products( $img ) ),
-		'services'       => array( esc_html__( 'Services Grid (3 cards)', 'gp-industry' ), gpi_pattern_services() ),
-		'industries'     => array( esc_html__( 'Industries We Serve', 'gp-industry' ), gpi_pattern_industries() ),
-		'process'        => array( esc_html__( 'Our Process (4 steps)', 'gp-industry' ), gpi_pattern_process() ),
-		'features'       => array( esc_html__( 'Why Choose Us: image + checklist', 'gp-industry' ), gpi_pattern_features( $img ) ),
-		'stats'          => array( esc_html__( 'Stats row', 'gp-industry' ), gpi_pattern_stats() ),
-		'certifications' => array( esc_html__( 'Certifications & Clients', 'gp-industry' ), gpi_pattern_certifications() ),
-		'specs'          => array( esc_html__( 'Engagement Details table', 'gp-industry' ), gpi_pattern_specs() ),
-		'projects'       => array( esc_html__( 'Case Studies Gallery', 'gp-industry' ), gpi_pattern_projects( $img ) ),
-		'testimonials'   => array( esc_html__( 'Client Testimonials', 'gp-industry' ), gpi_pattern_testimonials() ),
-		'team'           => array( esc_html__( 'Leadership Team', 'gp-industry' ), gpi_pattern_team( $avatar ) ),
-		'faq'            => array( esc_html__( 'FAQ accordion', 'gp-industry' ), gpi_pattern_faq() ),
-		'cta'            => array( esc_html__( 'Request a Proposal banner', 'gp-industry' ), gpi_pattern_cta() ),
-		'quote'          => array( esc_html__( 'Request a Proposal: info + form', 'gp-industry' ), gpi_pattern_quote() ),
+		'hero'           => array( esc_html__( 'Hero: Industrial Headline', 'gp-industry' ), gpi_pattern_hero( $img_hero ) ),
+		'products'       => array( esc_html__( 'Engineered Equipment Grid (3 cards)', 'gp-industry' ), gpi_pattern_products( $img_machinery, $img_precision, $img_automation ) ),
+		'services'       => array( esc_html__( 'Industrial Capabilities Grid', 'gp-industry' ), gpi_pattern_services() ),
+		'industries'     => array( esc_html__( 'Sectors We Serve', 'gp-industry' ), gpi_pattern_industries() ),
+		'process'        => array( esc_html__( 'Manufacturing Workflow (4 stages)', 'gp-industry' ), gpi_pattern_process() ),
+		'features'       => array( esc_html__( 'Infrastructure & Precision: facility image + metrics', 'gp-industry' ), gpi_pattern_features( $img_facility ) ),
+		'stats'          => array( esc_html__( 'Manufacturing Metrics row', 'gp-industry' ), gpi_pattern_stats() ),
+		'certifications' => array( esc_html__( 'Industrial Certifications & Enterprise Clients', 'gp-industry' ), gpi_pattern_certifications() ),
+		'specs'          => array( esc_html__( 'Engineering Specifications table', 'gp-industry' ), gpi_pattern_specs() ),
+		'projects'       => array( esc_html__( 'Heavy Engineering Case Studies Gallery', 'gp-industry' ), gpi_pattern_projects() ),
+		'testimonials'   => array( esc_html__( 'Client Reviews & Endorsements', 'gp-industry' ), gpi_pattern_testimonials() ),
+		'team'           => array( esc_html__( 'Engineering Leadership', 'gp-industry' ), gpi_pattern_team( $avatar ) ),
+		'faq'            => array( esc_html__( 'Technical FAQ accordion', 'gp-industry' ), gpi_pattern_faq() ),
+		'cta'            => array( esc_html__( 'Request Quotation (RFQ) banner', 'gp-industry' ), gpi_pattern_cta() ),
+		'quote'          => array( esc_html__( 'RFQ & Engineering Consultation', 'gp-industry' ), gpi_pattern_quote() ),
 	);
 
 	foreach ( $patterns as $slug => $pattern ) {
@@ -139,40 +148,49 @@ function gpi_pattern_card( $icon, $title, $text, $button = '', $class = 'nova-ca
  * @param string $img Image URL.
  * @return string
  */
-function gpi_pattern_hero( $img ) {
+function gpi_pattern_hero( $img = '' ) {
+	if ( ! $img ) {
+		$img = esc_url( GPI_THEME_URI . '/assets/images/hero-industrial.jpg' );
+	}
 	$inner  = '<!-- wp:group {"className":"nova-pattern-hero","layout":{"type":"constrained","contentSize":"860px"}} -->' . "\n";
 	$inner .= '<div class="wp-block-group nova-pattern-hero">';
-	$inner .= '<!-- wp:paragraph {"align":"center","className":"section-eyebrow"} --><p class="has-text-align-center section-eyebrow">' . esc_html__( 'Corporate consultancy · ISO 9001 certified', 'gp-industry' ) . '</p><!-- /wp:paragraph -->' . "\n";
-	$inner .= '<!-- wp:heading {"textAlign":"center","level":1,"className":"hero-title"} --><h1 class="wp-block-heading has-text-align-center hero-title">' . esc_html__( 'Workforce & facility solutions for', 'gp-industry' ) . ' <span>' . esc_html__( 'growing businesses', 'gp-industry' ) . '</span></h1><!-- /wp:heading -->' . "\n";
-	$inner .= '<!-- wp:paragraph {"align":"center","className":"hero-subtitle"} --><p class="has-text-align-center hero-subtitle">' . esc_html__( 'Staffing, payroll, compliance, housekeeping and security — delivered by one accountable partner. Replace this text with your own pitch.', 'gp-industry' ) . '</p><!-- /wp:paragraph -->' . "\n";
-	$inner .= '<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} --><div class="wp-block-buttons">' . gpi_pattern_button( esc_html__( 'Book a Consultation', 'gp-industry' ), 'is-style-nova-gradient' ) . gpi_pattern_button( esc_html__( 'Download Profile', 'gp-industry' ), 'is-style-outline', '#' ) . '</div><!-- /wp:buttons -->' . "\n";
+	$inner .= '<!-- wp:paragraph {"align":"center","className":"section-eyebrow"} --><p class="has-text-align-center section-eyebrow">' . esc_html__( 'Heavy Manufacturing & Precision Engineering · ISO 9001:2015', 'gp-industry' ) . '</p><!-- /wp:paragraph -->' . "\n";
+	$inner .= '<!-- wp:heading {"textAlign":"center","level":1,"className":"hero-title"} --><h1 class="wp-block-heading has-text-align-center hero-title">' . esc_html__( 'Advanced industrial machinery &', 'gp-industry' ) . ' <span>' . esc_html__( 'precision components', 'gp-industry' ) . '</span></h1><!-- /wp:heading -->' . "\n";
+	$inner .= '<!-- wp:paragraph {"align":"center","className":"hero-subtitle"} --><p class="has-text-align-center hero-subtitle">' . esc_html__( '5-Axis CNC milling, heavy structural steel fabrication, automated robotic workcells, and turnkey engineering solutions engineered for mission-critical reliability.', 'gp-industry' ) . '</p><!-- /wp:paragraph -->' . "\n";
+	$inner .= '<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} --><div class="wp-block-buttons">' . gpi_pattern_button( esc_html__( 'Request Quotation (RFQ)', 'gp-industry' ), 'is-style-nova-gradient' ) . gpi_pattern_button( esc_html__( 'Download Capabilities Profile', 'gp-industry' ), 'is-style-outline', '#' ) . '</div><!-- /wp:buttons -->' . "\n";
 	$inner .= '</div><!-- /wp:group -->' . "\n";
-	$inner .= '<!-- wp:image {"sizeSlug":"large","className":"nova-pattern-hero-image"} --><figure class="wp-block-image size-large nova-pattern-hero-image"><img src="' . $img . '" alt=""/></figure><!-- /wp:image -->' . "\n";
+	$inner .= '<!-- wp:image {"sizeSlug":"large","className":"nova-pattern-hero-image"} --><figure class="wp-block-image size-large nova-pattern-hero-image"><img src="' . $img . '" alt="' . esc_attr__( 'Heavy Manufacturing Plant', 'gp-industry' ) . '"/></figure><!-- /wp:image -->' . "\n";
 	return gpi_pattern_section( $inner, 'nova-section-hero' );
 }
 
 /**
  * Products grid with images.
  *
- * @param string $img Image URL.
+ * @param string $img1 Image URL 1.
+ * @param string $img2 Image URL 2.
+ * @param string $img3 Image URL 3.
  * @return string
  */
-function gpi_pattern_products( $img ) {
+function gpi_pattern_products( $img1 = '', $img2 = '', $img3 = '' ) {
+	$img1 = $img1 ? $img1 : esc_url( GPI_THEME_URI . '/assets/images/heavy-machinery.jpg' );
+	$img2 = $img2 ? $img2 : esc_url( GPI_THEME_URI . '/assets/images/precision-components.jpg' );
+	$img3 = $img3 ? $img3 : esc_url( GPI_THEME_URI . '/assets/images/industrial-automation.jpg' );
+
 	$items = array(
-		array( esc_html__( 'Workforce Outsourcing', 'gp-industry' ), esc_html__( 'Verified, trained staff on our payroll with supervision and a replacement guarantee.', 'gp-industry' ) ),
-		array( esc_html__( 'Payroll & Compliance', 'gp-industry' ), esc_html__( 'End-to-end payroll with PF, ESIC, PT and labour-law compliance, audit-ready every month.', 'gp-industry' ) ),
-		array( esc_html__( 'Facility Management', 'gp-industry' ), esc_html__( 'Housekeeping, security, pantry and maintenance under one accountable contract.', 'gp-industry' ) ),
+		array( esc_html__( 'Heavy Industrial Machinery', 'gp-industry' ), esc_html__( 'Hydraulic presses, automated material handling conveyors, industrial crushers, and planetary gearboxes built for heavy duty.', 'gp-industry' ), $img1, '/products/heavy-industrial-machinery/' ),
+		array( esc_html__( 'Precision CNC Components', 'gp-industry' ), esc_html__( 'High-tolerance turned shafts, titanium turbine impellers, and aerospace brackets milled down to ±0.005mm accuracy.', 'gp-industry' ), $img2, '/products/precision-cnc-components/' ),
+		array( esc_html__( 'Industrial Automation Systems', 'gp-industry' ), esc_html__( 'Turnkey multi-axis robotic welding cells, SCADA control consoles, and smart Industry 4.0 monitoring hardware.', 'gp-industry' ), $img3, '/products/industrial-automation/' ),
 	);
 	$cols = '';
 	foreach ( $items as $item ) {
 		$cols .= '<!-- wp:column {"className":"nova-card nova-product-card"} --><div class="wp-block-column nova-card nova-product-card">';
-		$cols .= '<!-- wp:image {"sizeSlug":"large","className":"nova-product-image"} --><figure class="wp-block-image size-large nova-product-image"><img src="' . $img . '" alt=""/></figure><!-- /wp:image -->';
+		$cols .= '<!-- wp:image {"sizeSlug":"large","className":"nova-product-image"} --><figure class="wp-block-image size-large nova-product-image"><img src="' . $item[2] . '" alt="' . esc_attr( $item[0] ) . '"/></figure><!-- /wp:image -->';
 		$cols .= '<!-- wp:heading {"level":3,"className":"nova-card-title"} --><h3 class="wp-block-heading nova-card-title">' . $item[0] . '</h3><!-- /wp:heading -->';
 		$cols .= '<!-- wp:paragraph {"className":"nova-card-text"} --><p class="nova-card-text">' . $item[1] . '</p><!-- /wp:paragraph -->';
-		$cols .= '<!-- wp:buttons --><div class="wp-block-buttons">' . gpi_pattern_button( esc_html__( 'View details', 'gp-industry' ), 'is-style-outline', '#' ) . '</div><!-- /wp:buttons -->';
+		$cols .= '<!-- wp:buttons --><div class="wp-block-buttons">' . gpi_pattern_button( esc_html__( 'View Technical Specs', 'gp-industry' ), 'is-style-outline', $item[3] ) . '</div><!-- /wp:buttons -->';
 		$cols .= '</div><!-- /wp:column -->' . "\n";
 	}
-	$inner  = gpi_pattern_heading( esc_html__( 'Our solutions', 'gp-industry' ), esc_html__( 'Solutions that keep your business running', 'gp-industry' ), esc_html__( 'Duplicate a column to add more solutions.', 'gp-industry' ) );
+	$inner  = gpi_pattern_heading( esc_html__( 'Engineered Equipment', 'gp-industry' ), esc_html__( 'Heavy machinery & precision manufactured systems', 'gp-industry' ), esc_html__( 'High performance, zero-defect engineering manufactured in our 150,000 sq.ft facility.', 'gp-industry' ) );
 	$inner .= '<!-- wp:columns {"className":"nova-cards"} --><div class="wp-block-columns nova-cards">' . "\n" . $cols . '</div><!-- /wp:columns -->' . "\n";
 	return gpi_pattern_section( $inner, 'nova-section-products' );
 }
@@ -183,10 +201,10 @@ function gpi_pattern_products( $img ) {
  * @return string
  */
 function gpi_pattern_services() {
-	$cols  = gpi_pattern_card( '👥', esc_html__( 'HR Staffing & Payroll', 'gp-industry' ), esc_html__( 'Vetted personnel, manager-level staff and 100% statutory payroll.', 'gp-industry' ), esc_html__( 'Learn more', 'gp-industry' ) );
-	$cols .= gpi_pattern_card( '🧹', esc_html__( 'Housekeeping & Hygiene', 'gp-industry' ), esc_html__( 'Mechanised cleaning, pest control and hygiene audits.', 'gp-industry' ), esc_html__( 'Learn more', 'gp-industry' ) );
-	$cols .= gpi_pattern_card( '🛡️', esc_html__( 'Security Services', 'gp-industry' ), esc_html__( 'PSARA-compliant guards, supervisors and access control.', 'gp-industry' ), esc_html__( 'Learn more', 'gp-industry' ) );
-	$inner  = gpi_pattern_heading( esc_html__( 'Our services', 'gp-industry' ), esc_html__( 'Services you can rely on', 'gp-industry' ) );
+	$cols  = gpi_pattern_card( '⚙️', esc_html__( 'Custom Metal Fabrication', 'gp-industry' ), esc_html__( 'Heavy plate rolling, fiber laser cutting up to 30mm, and ASME-coded robotic and SAW welding.', 'gp-industry' ), esc_html__( 'Explore Fabrication', 'gp-industry' ) );
+	$cols .= gpi_pattern_card( '🔧', esc_html__( 'Plant Maintenance & Overhaul', 'gp-industry' ), esc_html__( 'Turbine and compressor overhauls, dynamic rotor balancing, and 24/7 planned shutdown management.', 'gp-industry' ), esc_html__( 'Explore Maintenance', 'gp-industry' ) );
+	$cols .= gpi_pattern_card( '📐', esc_html__( 'Engineering & Prototyping', 'gp-industry' ), esc_html__( '3D CAD/CAM modeling, Finite Element Analysis (FEA) stress simulation, and rapid functional prototyping.', 'gp-industry' ), esc_html__( 'Explore Prototyping', 'gp-industry' ) );
+	$inner  = gpi_pattern_heading( esc_html__( 'Our Capabilities', 'gp-industry' ), esc_html__( 'Full lifecycle manufacturing & field engineering', 'gp-industry' ) );
 	$inner .= '<!-- wp:columns {"className":"nova-cards"} --><div class="wp-block-columns nova-cards">' . "\n" . $cols . '</div><!-- /wp:columns -->' . "\n";
 	return gpi_pattern_section( $inner, 'nova-section-services' );
 }
@@ -198,12 +216,12 @@ function gpi_pattern_services() {
  */
 function gpi_pattern_industries() {
 	$rows = array(
-		array( '🏭', esc_html__( 'Manufacturing', 'gp-industry' ), esc_html__( 'Plant manpower, housekeeping and security.', 'gp-industry' ) ),
-		array( '🏢', esc_html__( 'Corporate & IT', 'gp-industry' ), esc_html__( 'Facility management and support staff.', 'gp-industry' ) ),
-		array( '🏥', esc_html__( 'Healthcare', 'gp-industry' ), esc_html__( 'Hygiene, housekeeping and patient support.', 'gp-industry' ) ),
-		array( '🏨', esc_html__( 'Hospitality & Retail', 'gp-industry' ), esc_html__( 'Front-office, housekeeping and security teams.', 'gp-industry' ) ),
-		array( '🏗️', esc_html__( 'Real Estate & Infra', 'gp-industry' ), esc_html__( 'Site security, maintenance and admin staffing.', 'gp-industry' ) ),
-		array( '🎓', esc_html__( 'Education', 'gp-industry' ), esc_html__( 'Campus facility and support services.', 'gp-industry' ) ),
+		array( '🚗', esc_html__( 'Automotive & Heavy Vehicles', 'gp-industry' ), esc_html__( 'Engine blocks, transmission housings, chassis stamping dies, and robotic welding fixtures.', 'gp-industry' ) ),
+		array( '✈️', esc_html__( 'Aerospace & Defense', 'gp-industry' ), esc_html__( 'High-strength titanium brackets, avionics enclosures, and precision turbine impellers.', 'gp-industry' ) ),
+		array( '⚡', esc_html__( 'Energy & Power Generation', 'gp-industry' ), esc_html__( 'Gas and steam turbine rotors, high-pressure piping, and heat-exchanger assemblies.', 'gp-industry' ) ),
+		array( '🛢️', esc_html__( 'Oil, Gas & Petrochemical', 'gp-industry' ), esc_html__( 'API 6D valves, high-pressure pipeline manifolds, and ASME Section VIII pressure vessels.', 'gp-industry' ) ),
+		array( '🏗️', esc_html__( 'Construction & Mining', 'gp-industry' ), esc_html__( 'High-wear manganese crusher plates, excavator boom fabrication, and heavy drive assemblies.', 'gp-industry' ) ),
+		array( '🚢', esc_html__( 'Marine & Renewable Energy', 'gp-industry' ), esc_html__( 'Wind turbine main hub castings, solar tracker gearing, and forged marine propulsion shafts.', 'gp-industry' ) ),
 	);
 	$cols = '';
 	foreach ( $rows as $i => $row ) {
@@ -211,11 +229,11 @@ function gpi_pattern_industries() {
 			$cols .= '<!-- wp:columns {"className":"nova-cards nova-industries"} --><div class="wp-block-columns nova-cards nova-industries">' . "\n";
 		}
 		$cols .= gpi_pattern_card( $row[0], $row[1], $row[2], '', 'nova-card nova-industry-card' );
-		if ( 2 === $i % 3 ) {
+		if ( 2 === $i % 3 || $i === count( $rows ) - 1 ) {
 			$cols .= '</div><!-- /wp:columns -->' . "\n";
 		}
 	}
-	$inner = gpi_pattern_heading( esc_html__( 'Industries', 'gp-industry' ), esc_html__( 'Industries we serve', 'gp-industry' ), esc_html__( 'Proven experience across corporate, industrial and service sectors.', 'gp-industry' ) ) . $cols;
+	$inner = gpi_pattern_heading( esc_html__( 'Sectors We Serve', 'gp-industry' ), esc_html__( 'Mission-critical manufacturing for global industries', 'gp-industry' ), esc_html__( 'Proven track record of delivering tight-tolerance engineering components to the world’s most demanding sectors.', 'gp-industry' ) ) . $cols;
 	return gpi_pattern_section( $inner, 'nova-section-industries' );
 }
 
@@ -226,10 +244,10 @@ function gpi_pattern_industries() {
  */
 function gpi_pattern_process() {
 	$steps = array(
-		array( esc_html__( 'Consultation', 'gp-industry' ), esc_html__( 'We study your sites, headcount, shifts and compliance needs.', 'gp-industry' ) ),
-		array( esc_html__( 'Proposal', 'gp-industry' ), esc_html__( 'A tailored plan with SLAs, transparent costing and timelines.', 'gp-industry' ) ),
-		array( esc_html__( 'Deployment', 'gp-industry' ), esc_html__( 'Vetted, trained personnel mobilised with on-site supervision.', 'gp-industry' ) ),
-		array( esc_html__( 'Support & Reporting', 'gp-industry' ), esc_html__( 'Dedicated account manager, monthly MIS and compliance audits.', 'gp-industry' ) ),
+		array( esc_html__( 'Engineering & DFM Review', 'gp-industry' ), esc_html__( 'CAD/CAM analysis, material grade selection, FEA stress simulation, and tolerance feasibility.', 'gp-industry' ) ),
+		array( esc_html__( 'Precision Prototyping', 'gp-industry' ), esc_html__( 'Rapid CNC machining or additive fabrication with full CMM inspection reports within 5–7 days.', 'gp-industry' ) ),
+		array( esc_html__( 'Production & Fabrication', 'gp-industry' ), esc_html__( '5-Axis milling, automated robotic welding, heat treatment, and precision surface finishing.', 'gp-industry' ) ),
+		array( esc_html__( 'Quality FAT & Dispatch', 'gp-industry' ), esc_html__( '100% CMM verification, ultrasonic NDT testing, EN 10204 3.1 mill certs, and secure export packing.', 'gp-industry' ) ),
 	);
 	$cols = '';
 	foreach ( $steps as $i => $step ) {
@@ -239,7 +257,7 @@ function gpi_pattern_process() {
 		$cols .= '<!-- wp:paragraph {"className":"nova-step-text"} --><p class="nova-step-text">' . $step[1] . '</p><!-- /wp:paragraph -->';
 		$cols .= '</div><!-- /wp:column -->' . "\n";
 	}
-	$inner  = gpi_pattern_heading( esc_html__( 'How we work', 'gp-industry' ), esc_html__( 'From consultation to deployment in four steps', 'gp-industry' ) );
+	$inner  = gpi_pattern_heading( esc_html__( 'Manufacturing Workflow', 'gp-industry' ), esc_html__( 'From engineering blueprint to finished delivery in four stages', 'gp-industry' ) );
 	$inner .= '<!-- wp:columns {"className":"nova-process"} --><div class="wp-block-columns nova-process">' . "\n" . $cols . '</div><!-- /wp:columns -->' . "\n";
 	return gpi_pattern_section( $inner, 'nova-section-process' );
 }
@@ -250,11 +268,14 @@ function gpi_pattern_process() {
  * @param string $img Image URL.
  * @return string
  */
-function gpi_pattern_features( $img ) {
+function gpi_pattern_features( $img = '' ) {
+	if ( ! $img ) {
+		$img = esc_url( GPI_THEME_URI . '/assets/images/about-facility.jpg' );
+	}
 	$rows = array(
-		array( esc_html__( 'Vetted, trained workforce', 'gp-industry' ), esc_html__( 'Background-verified staff with role-specific induction from our own resource cell.', 'gp-industry' ) ),
-		array( esc_html__( '100% statutory compliance', 'gp-industry' ), esc_html__( 'PF, ESIC, labour law and payroll handled end-to-end, audit-ready every month.', 'gp-industry' ) ),
-		array( esc_html__( 'Pan-India deployment', 'gp-industry' ), esc_html__( 'Local supervisors and a central account manager for consistent service across sites.', 'gp-industry' ) ),
+		array( esc_html__( '150,000 sq.ft Heavy Engineering Facility', 'gp-industry' ), esc_html__( 'Integrated multi-axis CNC machines, 25-tonne overhead cranes, and ASME-certified fabrication bays.', 'gp-industry' ) ),
+		array( esc_html__( 'Sub-Micron Dimensional Precision (±0.005 mm)', 'gp-industry' ), esc_html__( 'Climate-controlled metrology laboratory with automated Zeiss CMM and optical laser scanners.', 'gp-industry' ) ),
+		array( esc_html__( 'Full Traceability & Metallurgical Testing', 'gp-industry' ), esc_html__( '100% heat-number raw material tracking with EN 10204 3.1 certification and non-destructive testing.', 'gp-industry' ) ),
 	);
 	$list = '';
 	foreach ( $rows as $row ) {
@@ -265,13 +286,13 @@ function gpi_pattern_features( $img ) {
 	}
 	$inner  = '<!-- wp:columns {"verticalAlignment":"center","className":"nova-split"} --><div class="wp-block-columns are-vertically-aligned-center nova-split">' . "\n";
 	$inner .= '<!-- wp:column {"verticalAlignment":"center"} --><div class="wp-block-column is-vertically-aligned-center">';
-	$inner .= '<!-- wp:image {"sizeSlug":"large","className":"nova-split-image"} --><figure class="wp-block-image size-large nova-split-image"><img src="' . $img . '" alt=""/></figure><!-- /wp:image -->';
+	$inner .= '<!-- wp:image {"sizeSlug":"large","className":"nova-split-image"} --><figure class="wp-block-image size-large nova-split-image"><img src="' . $img . '" alt="' . esc_attr__( 'Precision Manufacturing Facility', 'gp-industry' ) . '"/></figure><!-- /wp:image -->';
 	$inner .= '</div><!-- /wp:column -->' . "\n";
 	$inner .= '<!-- wp:column {"verticalAlignment":"center"} --><div class="wp-block-column is-vertically-aligned-center">';
 	$inner .= '<!-- wp:paragraph {"className":"section-eyebrow"} --><p class="section-eyebrow">' . esc_html__( 'Why choose us', 'gp-industry' ) . '</p><!-- /wp:paragraph -->';
-	$inner .= '<!-- wp:heading {"className":"section-title"} --><h2 class="wp-block-heading section-title">' . esc_html__( 'A consultancy partner you can depend on', 'gp-industry' ) . '</h2><!-- /wp:heading -->';
+	$inner .= '<!-- wp:heading {"className":"section-title"} --><h2 class="wp-block-heading section-title">' . esc_html__( 'Built for extreme precision and heavy-duty reliability', 'gp-industry' ) . '</h2><!-- /wp:heading -->';
 	$inner .= $list;
-	$inner .= '<!-- wp:buttons --><div class="wp-block-buttons">' . gpi_pattern_button( esc_html__( 'Talk to a consultant', 'gp-industry' ), 'is-style-nova-gradient' ) . '</div><!-- /wp:buttons -->';
+	$inner .= '<!-- wp:buttons --><div class="wp-block-buttons">' . gpi_pattern_button( esc_html__( 'Schedule Plant Tour', 'gp-industry' ), 'is-style-nova-gradient', '/contact/' ) . '</div><!-- /wp:buttons -->';
 	$inner .= '</div><!-- /wp:column -->' . "\n";
 	$inner .= '</div><!-- /wp:columns -->' . "\n";
 	return gpi_pattern_section( $inner, 'nova-section-features' );
@@ -284,10 +305,10 @@ function gpi_pattern_features( $img ) {
  */
 function gpi_pattern_stats() {
 	$stats = array(
-		array( '12+', esc_html__( 'Years of experience', 'gp-industry' ) ),
-		array( '300+', esc_html__( 'Corporate clients', 'gp-industry' ) ),
-		array( '5,000+', esc_html__( 'Personnel deployed', 'gp-industry' ) ),
-		array( '25+', esc_html__( 'Cities served', 'gp-industry' ) ),
+		array( '25+', esc_html__( 'Years in Heavy Industry', 'gp-industry' ) ),
+		array( '150K+', esc_html__( 'Precision Parts Produced', 'gp-industry' ) ),
+		array( '99.8%', esc_html__( 'Tolerance Conformance Rate', 'gp-industry' ) ),
+		array( '40+', esc_html__( 'Countries Exported To', 'gp-industry' ) ),
 	);
 	$cols = '';
 	foreach ( $stats as $stat ) {
@@ -306,24 +327,24 @@ function gpi_pattern_stats() {
  * @return string
  */
 function gpi_pattern_certifications() {
-	$certs = array( 'ISO 9001:2015', 'PSARA Licensed', 'PF & ESIC Registered', 'MSME Registered', 'Contract Labour Act' );
+	$certs = array( 'ISO 9001:2015', 'ASME Section VIII', 'ISO 14001:2015', 'CE Marking', 'EN 1090-2' );
 	$badges = '';
 	foreach ( $certs as $cert ) {
 		$badges .= '<!-- wp:column {"className":"nova-cert"} --><div class="wp-block-column nova-cert">';
-		$badges .= '<!-- wp:paragraph {"align":"center","className":"nova-cert-icon"} --><p class="has-text-align-center nova-cert-icon">🏅</p><!-- /wp:paragraph -->';
+		$badges .= '<!-- wp:paragraph {"align":"center","className":"nova-cert-icon"} --><p class="has-text-align-center nova-cert-icon">🎖️</p><!-- /wp:paragraph -->';
 		$badges .= '<!-- wp:paragraph {"align":"center","className":"nova-cert-name"} --><p class="has-text-align-center nova-cert-name">' . esc_html( $cert ) . '</p><!-- /wp:paragraph -->';
 		$badges .= '</div><!-- /wp:column -->' . "\n";
 	}
-	$clients = array( 'Tata Motors', 'Infosys', 'Apollo Hospitals', 'DLF', 'Marriott', 'L&T' );
+	$clients = array( 'Tata Steel', 'Siemens Energy', 'Larsen & Toubro', 'Bharat Forge', 'Caterpillar', 'Mahindra Heavy' );
 	$logos = '';
 	foreach ( $clients as $client ) {
 		$logos .= '<!-- wp:column {"className":"nova-client"} --><div class="wp-block-column nova-client">';
 		$logos .= '<!-- wp:paragraph {"align":"center","className":"nova-client-name"} --><p class="has-text-align-center nova-client-name">' . esc_html( $client ) . '</p><!-- /wp:paragraph -->';
 		$logos .= '</div><!-- /wp:column -->' . "\n";
 	}
-	$inner  = gpi_pattern_heading( esc_html__( 'Certifications', 'gp-industry' ), esc_html__( 'Certified. Audited. Trusted.', 'gp-industry' ), esc_html__( 'Replace the badge text with your certificates, and the client names with logo images.', 'gp-industry' ) );
+	$inner  = gpi_pattern_heading( esc_html__( 'Certifications & Accreditations', 'gp-industry' ), esc_html__( 'Certified quality conforming to global engineering standards', 'gp-industry' ), esc_html__( 'Rigorous compliance and audited production lines trusted by international tier-1 manufacturers.', 'gp-industry' ) );
 	$inner .= '<!-- wp:columns {"className":"nova-certs"} --><div class="wp-block-columns nova-certs">' . "\n" . $badges . '</div><!-- /wp:columns -->' . "\n";
-	$inner .= '<!-- wp:paragraph {"align":"center","className":"nova-clients-label"} --><p class="has-text-align-center nova-clients-label">' . esc_html__( 'Trusted by leading organisations', 'gp-industry' ) . '</p><!-- /wp:paragraph -->' . "\n";
+	$inner .= '<!-- wp:paragraph {"align":"center","className":"nova-clients-label"} --><p class="has-text-align-center nova-clients-label">' . esc_html__( 'Trusted by global industrial enterprises', 'gp-industry' ) . '</p><!-- /wp:paragraph -->' . "\n";
 	$inner .= '<!-- wp:columns {"className":"nova-clients"} --><div class="wp-block-columns nova-clients">' . "\n" . $logos . '</div><!-- /wp:columns -->' . "\n";
 	return gpi_pattern_section( $inner, 'nova-section-certifications' );
 }
@@ -335,44 +356,45 @@ function gpi_pattern_certifications() {
  */
 function gpi_pattern_specs() {
 	$rows = array(
-		array( esc_html__( 'Engagement model', 'gp-industry' ), esc_html__( 'Monthly retainer or per-head / per-site contract', 'gp-industry' ) ),
-		array( esc_html__( 'Deployment time', 'gp-industry' ), esc_html__( '7–10 working days from sign-off', 'gp-industry' ) ),
-		array( esc_html__( 'Verification', 'gp-industry' ), esc_html__( 'Document, address and police verification for all personnel', 'gp-industry' ) ),
-		array( esc_html__( 'Supervision', 'gp-industry' ), esc_html__( 'On-site supervisor per shift + central account manager', 'gp-industry' ) ),
-		array( esc_html__( 'Compliance', 'gp-industry' ), esc_html__( 'PF, ESIC, PT, LWF and labour licences with monthly audit-ready reports', 'gp-industry' ) ),
-		array( esc_html__( 'Reporting', 'gp-industry' ), esc_html__( 'Monthly MIS: attendance, incidents, compliance calendar', 'gp-industry' ) ),
-		array( esc_html__( 'Replacement guarantee', 'gp-industry' ), esc_html__( 'Within 48 hours for any deployed personnel', 'gp-industry' ) ),
+		array( esc_html__( 'Machining Tolerances', 'gp-industry' ), esc_html__( '±0.005 mm (5 microns) on 5-Axis CNC machining centers', 'gp-industry' ) ),
+		array( esc_html__( 'Material Compatibility', 'gp-industry' ), esc_html__( 'Titanium, Inconel 718, Stainless Steel (304/316/Duplex), Alloy Steel, Forged Aluminum', 'gp-industry' ) ),
+		array( esc_html__( 'Welding Certifications', 'gp-industry' ), esc_html__( 'ASME Section IX, EN ISO 9606, Coded TIG, MIG & Submerged Arc Welding (SAW)', 'gp-industry' ) ),
+		array( esc_html__( 'Non-Destructive Testing (NDT)', 'gp-industry' ), esc_html__( 'Ultrasonic (UT), Magnetic Particle (MPI), Dye Penetrant (DPI), Hydrostatic to 1,000 bar', 'gp-industry' ) ),
+		array( esc_html__( 'Quality Documentation', 'gp-industry' ), esc_html__( 'EN 10204 3.1 Material Test Certificates (MTC), CMM dimensional reports, Heat treatment graphs', 'gp-industry' ) ),
+		array( esc_html__( 'Maximum Machining Envelope', 'gp-industry' ), esc_html__( 'Up to 4,500 mm x 2,800 mm x 1,800 mm (X/Y/Z) with 25-tonne table capacity', 'gp-industry' ) ),
+		array( esc_html__( 'Lead Times', 'gp-industry' ), esc_html__( 'Prototypes: 5–10 business days | Production runs: 3–4 weeks with buffer inventory stock', 'gp-industry' ) ),
 	);
 	$body = '';
 	foreach ( $rows as $r ) {
 		$body .= '<tr><td><strong>' . $r[0] . '</strong></td><td>' . $r[1] . '</td></tr>';
 	}
-	$inner  = '<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">' . esc_html__( 'Engagement details', 'gp-industry' ) . '</h3><!-- /wp:heading -->' . "\n";
+	$inner  = '<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">' . esc_html__( 'Technical Specifications & Quality Parameters', 'gp-industry' ) . '</h3><!-- /wp:heading -->' . "\n";
 	$inner .= '<!-- wp:table {"className":"is-style-stripes nova-specs"} --><figure class="wp-block-table is-style-stripes nova-specs"><table><tbody>' . $body . '</tbody></table></figure><!-- /wp:table -->' . "\n";
-	$inner .= '<!-- wp:buttons --><div class="wp-block-buttons">' . gpi_pattern_button( esc_html__( 'Request a Proposal', 'gp-industry' ), 'is-style-nova-gradient' ) . gpi_pattern_button( esc_html__( 'Download brochure (PDF)', 'gp-industry' ), 'is-style-outline', '#' ) . '</div><!-- /wp:buttons -->' . "\n";
+	$inner .= '<!-- wp:buttons --><div class="wp-block-buttons">' . gpi_pattern_button( esc_html__( 'Request a Quotation (RFQ)', 'gp-industry' ), 'is-style-nova-gradient', '/contact/' ) . gpi_pattern_button( esc_html__( 'Download Technical Specs (PDF)', 'gp-industry' ), 'is-style-outline', '#' ) . '</div><!-- /wp:buttons -->' . "\n";
 	return '<!-- wp:group {"className":"nova-section nova-section-specs","layout":{"type":"constrained","contentSize":"860px"}} --><div class="wp-block-group nova-section nova-section-specs">' . "\n" . $inner . '</div><!-- /wp:group -->';
 }
 
 /**
  * Projects gallery.
  *
- * @param string $img Image URL.
+ * @param array|null $imgs Image URLs array.
  * @return string
  */
-function gpi_pattern_projects( $img ) {
+function gpi_pattern_projects( $imgs = null ) {
 	$projects = array(
-		esc_html__( 'Facility management — IT park, Noida', 'gp-industry' ),
-		esc_html__( '400-guard security rollout — auto plant', 'gp-industry' ),
-		esc_html__( 'Payroll & compliance for 1,200 staff', 'gp-industry' ),
-		esc_html__( 'Hospital housekeeping & hygiene program', 'gp-industry' ),
-		esc_html__( 'Retail chain manpower — 25 cities', 'gp-industry' ),
-		esc_html__( 'Campus facility services — university', 'gp-industry' ),
+		array( esc_html__( '1,200 MW Power Plant Turbine Overhaul & High-Pressure Piping Skid', 'gp-industry' ), esc_url( GPI_THEME_URI . '/assets/images/case-studies-projects.jpg' ) ),
+		array( esc_html__( 'Aerospace 5-Axis Titanium Impeller Machining — Batch of 500 Units', 'gp-industry' ), esc_url( GPI_THEME_URI . '/assets/images/precision-components.jpg' ) ),
+		array( esc_html__( 'Heavy Structural Steel Box Girders & SAW Welding for Metro Rail Viaduct', 'gp-industry' ), esc_url( GPI_THEME_URI . '/assets/images/custom-fabrication.jpg' ) ),
+		array( esc_html__( 'Automated Robotic MIG Welding Workcell for Heavy Automotive Chassis Line', 'gp-industry' ), esc_url( GPI_THEME_URI . '/assets/images/industrial-automation.jpg' ) ),
+		array( esc_html__( '1,500-Tonne Hydraulic Stamping Press Manufacturing & Turnkey Commissioning', 'gp-industry' ), esc_url( GPI_THEME_URI . '/assets/images/heavy-machinery.jpg' ) ),
+		array( esc_html__( 'Offshore Oil & Gas Separation Vessel with ASME ' . 'U' . ' Code Stamp', 'gp-industry' ), esc_url( GPI_THEME_URI . '/assets/images/plant-maintenance.jpg' ) ),
 	);
+
 	$items = '';
 	foreach ( $projects as $p ) {
-		$items .= '<!-- wp:image {"sizeSlug":"large","className":"nova-project"} --><figure class="wp-block-image size-large nova-project"><img src="' . $img . '" alt=""/><figcaption class="wp-element-caption">' . $p . '</figcaption></figure><!-- /wp:image -->' . "\n";
+		$items .= '<!-- wp:image {"sizeSlug":"large","className":"nova-project"} --><figure class="wp-block-image size-large nova-project"><img src="' . $p[1] . '" alt="' . esc_attr( $p[0] ) . '"/><figcaption class="wp-element-caption">' . $p[0] . '</figcaption></figure><!-- /wp:image -->' . "\n";
 	}
-	$inner  = gpi_pattern_heading( esc_html__( 'Case studies', 'gp-industry' ), esc_html__( 'Recent engagements and results', 'gp-industry' ), esc_html__( 'Click an image to replace it with your own photo.', 'gp-industry' ) );
+	$inner  = gpi_pattern_heading( esc_html__( 'Case Studies & Deliveries', 'gp-industry' ), esc_html__( 'Proven execution across heavy industrial projects', 'gp-industry' ), esc_html__( 'Browse our recent turnkey manufacturing, CNC machining, and structural fabrication achievements.', 'gp-industry' ) );
 	$inner .= '<!-- wp:gallery {"columns":3,"linkTo":"none","className":"nova-projects"} --><figure class="wp-block-gallery has-nested-images columns-3 is-cropped nova-projects">' . "\n" . $items . '</figure><!-- /wp:gallery -->' . "\n";
 	return gpi_pattern_section( $inner, 'nova-section-projects' );
 }
@@ -384,9 +406,9 @@ function gpi_pattern_projects( $img ) {
  */
 function gpi_pattern_testimonials() {
 	$quotes = array(
-		array( esc_html__( '“They took over our payroll and compliance completely — zero notices, zero headaches, and our HR team finally has time for people.”', 'gp-industry' ), 'Ramesh Iyer', esc_html__( 'Head of HR, AutoTech Ltd', 'gp-industry' ) ),
-		array( esc_html__( '“Housekeeping and security at three of our plants are now handled by one accountable partner. The monthly reports make audits effortless.”', 'gp-industry' ), 'Sneha Kulkarni', esc_html__( 'Admin Manager, Vertex Energy', 'gp-industry' ) ),
-		array( esc_html__( '“Rapid deployment and honest communication. Exactly what you want from a consultancy.”', 'gp-industry' ), 'Priya Nair', esc_html__( 'Operations Director, Orbit Hospitals', 'gp-industry' ) ),
+		array( esc_html__( '“The dimensional accuracy of the machined turbine housings exceeded our tightest tolerances. Zero defects across a 2,000-unit batch.”', 'gp-industry' ), 'Rajesh Sharma', esc_html__( 'VP of Operations, Bharat Heavy Power', 'gp-industry' ) ),
+		array( esc_html__( '“Their custom steel fabrication for our stamping line was delivered two weeks ahead of schedule. Exceptional weld quality and full NDT records.”', 'gp-industry' ), 'Marcus Vance', esc_html__( 'Director of Engineering, Precision AutoCorp', 'gp-industry' ) ),
+		array( esc_html__( '“Reliable partner for complex alloy machining. Their metallurgical traceability and CMM documentation make audit compliance effortless.”', 'gp-industry' ), 'David Miller', esc_html__( 'Supply Chain Head, AeroDynamics Global', 'gp-industry' ) ),
 	);
 	$cols = '';
 	foreach ( $quotes as $q ) {
@@ -396,7 +418,7 @@ function gpi_pattern_testimonials() {
 		$cols .= '<!-- wp:paragraph {"className":"nova-testimonial-author"} --><p class="nova-testimonial-author"><strong>' . esc_html( $q[1] ) . '</strong><br>' . $q[2] . '</p><!-- /wp:paragraph -->';
 		$cols .= '</div><!-- /wp:column -->' . "\n";
 	}
-	$inner  = gpi_pattern_heading( esc_html__( 'Testimonials', 'gp-industry' ), esc_html__( 'What our clients say', 'gp-industry' ) );
+	$inner  = gpi_pattern_heading( esc_html__( 'Client Endorsements', 'gp-industry' ), esc_html__( 'Trusted by engineering directors and plant managers worldwide', 'gp-industry' ) );
 	$inner .= '<!-- wp:columns {"className":"nova-testimonials"} --><div class="wp-block-columns nova-testimonials">' . "\n" . $cols . '</div><!-- /wp:columns -->' . "\n";
 	return gpi_pattern_section( $inner, 'nova-section-testimonials' );
 }

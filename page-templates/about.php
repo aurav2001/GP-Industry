@@ -19,7 +19,7 @@ while ( have_posts() ) :
 		null,
 		array(
 			'eyebrow' => esc_html__( 'Our company', 'gp-industry' ),
-			'align'   => has_post_thumbnail() ? 'left' : 'center',
+			'align'   => 'left',
 			'image'   => true,
 		)
 	);

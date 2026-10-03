@@ -25,40 +25,40 @@ function gpi_home_defaults( $company = '' ) {
 		// About / intro.
 		/* translators: %s: company name */
 		'home_about_eyebrow' => sprintf( esc_html__( 'About %s', 'gp-industry' ), $company ),
-		'home_about_title'   => esc_html__( 'A consultancy built on people, process and accountability', 'gp-industry' ),
+		'home_about_title'   => esc_html__( 'Advanced manufacturing infrastructure and precision engineering excellence', 'gp-industry' ),
 		/* translators: %s: company name */
-		'home_about_text'    => sprintf( esc_html__( '%s helps organisations run smoothly — from recruiting and managing trained personnel to keeping every statutory obligation in order and every facility spotless and secure. We combine a dedicated in-house resource cell with rigorous compliance practice so our clients get reliable service without the management overhead.', 'gp-industry' ), $company ),
-		'home_about_list'    => "In-house National Resource Cell for sourcing & induction\n100% statutory payroll, PF & ESIC compliance\nPan-India deployment with local supervision\nMonthly MIS and compliance reporting",
-		'home_about_btn'     => esc_html__( 'More about us', 'gp-industry' ),
+		'home_about_text'    => sprintf( esc_html__( '%s is an industry-leading manufacturing and engineering corporation delivering high-precision components, heavy industrial machinery, and turnkey structural fabrication. With over 25 years of engineering heritage and state-of-the-art facilities, we provide reliable, high-tolerance manufacturing solutions for global industrial leaders.', 'gp-industry' ), $company ),
+		'home_about_list'    => "150,000 sq.ft heavy engineering & CNC machining facility\n5-Axis precision CNC milling with tolerances down to ±0.005mm\nISO 9001:2015, ISO 14001 & ASME Section VIII certified\nIn-house CMM coordinate measuring, NDT & metallurgical lab",
+		'home_about_btn'     => esc_html__( 'Explore Our Capabilities', 'gp-industry' ),
 		'home_about_url'     => '/about-us/',
-		'home_about_image'   => '',
-		'home_about_badge'   => esc_html__( '12+ Years', 'gp-industry' ),
-		'home_about_badge_2' => esc_html__( 'of consultancy experience', 'gp-industry' ),
+		'home_about_image'   => GPI_THEME_URI . '/assets/images/about-facility.jpg',
+		'home_about_badge'   => esc_html__( '25+ Years', 'gp-industry' ),
+		'home_about_badge_2' => esc_html__( 'of manufacturing excellence', 'gp-industry' ),
 		// Products / solutions.
-		'home_products_eyebrow' => esc_html__( 'Our services', 'gp-industry' ),
-		'home_products_title'   => esc_html__( 'Solutions that keep your business running', 'gp-industry' ),
+		'home_products_eyebrow' => esc_html__( 'Engineered Equipment', 'gp-industry' ),
+		'home_products_title'   => esc_html__( 'High-performance machinery & precision components', 'gp-industry' ),
 		'home_products_page'    => 0,
 		'home_products_count'   => 6,
 		// Industries.
-		'home_industries_eyebrow' => esc_html__( 'Industries', 'gp-industry' ),
-		'home_industries_title'   => esc_html__( 'Industries we serve', 'gp-industry' ),
-		'home_industries_text'    => esc_html__( 'Proven experience across corporate, industrial and service sectors.', 'gp-industry' ),
-		'home_industries_items'   => "factory | Manufacturing & Industrial | Plant manpower, housekeeping and security\nlayers | IT & Corporate Offices | Facility management and support staff\nheart | Healthcare | Hygiene, housekeeping and patient-support staff\nglobe | Hospitality & Retail | Front-office, housekeeping and security teams\nhardhat | Real Estate & Infrastructure | Site security, maintenance and admin staffing\naward | Education & Institutions | Campus facility and support services",
+		'home_industries_eyebrow' => esc_html__( 'Sectors We Serve', 'gp-industry' ),
+		'home_industries_title'   => esc_html__( 'Mission-critical manufacturing for global industries', 'gp-industry' ),
+		'home_industries_text'    => esc_html__( 'Delivering precision components and structural systems across demanding industrial sectors.', 'gp-industry' ),
+		'home_industries_items'   => "factory | Automotive & Heavy Vehicles | Engine blocks, transmission housings, chassis assemblies & stamping dies\nglobe | Aerospace & Defense | High-strength titanium brackets, avionics enclosures & turbine components\nbolt | Energy & Power Generation | Gas turbine rotors, high-pressure flanges & boiler heat-exchanger assemblies\nlayers | Oil, Gas & Petrochemical | API 6D valves, high-pressure pipeline skids & refinery pressure vessels\ntruck | Heavy Construction & Mining | Crusher wear plates, excavator boom fabrication & material conveyor drives\nleaf | Renewable Energy & Marine | Wind turbine hub castings, solar tracker gearing & marine propulsion shafts",
 		// Process.
-		'home_process_eyebrow' => esc_html__( 'How we work', 'gp-industry' ),
-		'home_process_title'   => esc_html__( 'From consultation to deployment in four steps', 'gp-industry' ),
-		'home_process_items'   => "Consultation | We study your sites, headcount, shifts and compliance needs.\nProposal | A tailored plan with SLAs, transparent costing and timelines.\nDeployment | Vetted, trained personnel mobilised with on-site supervision.\nSupport & Reporting | Dedicated account manager, monthly MIS and compliance audits.",
+		'home_process_eyebrow' => esc_html__( 'Manufacturing Workflow', 'gp-industry' ),
+		'home_process_title'   => esc_html__( 'From engineering blueprint to finished delivery in four stages', 'gp-industry' ),
+		'home_process_items'   => "Engineering & DFM Review | CAD/CAM model analysis, material selection, FEA stress simulation and cost optimization.\nPrecision Prototyping | Rapid CNC machining or 3D metal printing prototype with full dimensional inspection.\nProduction & Fabrication | Multi-axis CNC milling, robotic welding, heat treatment, and precision surface finishing.\nQuality Testing & Delivery | CMM inspection, ultrasonic/hydrostatic testing, mill test certificates, and secure export packing.",
 		// Testimonials.
-		'home_testimonials_eyebrow' => esc_html__( 'Testimonials', 'gp-industry' ),
-		'home_testimonials_title'   => esc_html__( 'What our clients say', 'gp-industry' ),
-		'home_testimonials_items'   => "They took over our payroll and compliance completely — zero notices, zero headaches, and our HR team finally has time for people. | Ramesh Iyer | Head of HR, AutoTech Ltd\nHousekeeping and security at three of our plants are now handled by one accountable partner. The monthly reports make audits effortless. | Sneha Kulkarni | Admin Manager, Vertex Energy\nRapid deployment and honest communication. Exactly what you want from a consultancy. | Priya Nair | Operations Director, Orbit Hospitals",
+		'home_testimonials_eyebrow' => esc_html__( 'Client Reviews', 'gp-industry' ),
+		'home_testimonials_title'   => esc_html__( 'Trusted by engineering directors and plant managers', 'gp-industry' ),
+		'home_testimonials_items'   => "The dimensional accuracy of the machined turbine housings exceeded our tightest tolerances. Zero defects across a 2,000-unit batch. | Rajesh Sharma | VP of Operations, Bharat Heavy Power\nTheir custom steel fabrication for our stamping line was delivered two weeks ahead of schedule. Exceptional weld quality and full NDT reports. | Marcus Vance | Director of Engineering, Precision AutoCorp\nReliable partner for complex alloy machining. Their metallurgical traceability and CMM documentation make audit compliance effortless. | David Miller | Supply Chain Head, AeroDynamics Global",
 		// Clients.
-		'home_clients_title' => esc_html__( 'Trusted by leading organisations', 'gp-industry' ),
-		'home_clients_names' => "Tata Motors\nInfosys\nApollo Hospitals\nDLF\nMarriott\nL&T",
+		'home_clients_title' => esc_html__( 'Trusted by leading industrial enterprises', 'gp-industry' ),
+		'home_clients_names' => "Tata Steel\nSiemens Energy\nLarsen & Toubro\nBharat Forge\nMahindra Heavy\nCaterpillar",
 		// FAQ.
-		'home_faq_eyebrow' => esc_html__( 'FAQ', 'gp-industry' ),
-		'home_faq_title'   => esc_html__( 'Frequently asked questions', 'gp-industry' ),
-		'home_faq_items'   => "How quickly can staff be deployed? | Most engagements go live within 7–10 working days, including sourcing, verification and induction.\nAre your personnel background-verified? | Yes. Every candidate goes through document, address and police verification plus role-specific training before deployment.\nWho handles PF, ESIC and payroll compliance? | We do. Statutory registrations, monthly filings and challans are managed end-to-end with audit-ready records shared every month.\nCan you cover multiple cities or sites? | Yes. We deploy across 25+ cities with local supervisors and a central account manager for consistent service.",
+		'home_faq_eyebrow' => esc_html__( 'Technical FAQ', 'gp-industry' ),
+		'home_faq_title'   => esc_html__( 'Frequently asked engineering questions', 'gp-industry' ),
+		'home_faq_items'   => "What machining tolerances can you achieve? | We routinely achieve tolerances down to ±0.005 mm (5 microns) on our temperature-controlled 5-axis CNC machining centers.\nWhat materials do you work with? | We machine and fabricate carbon steel, stainless steel (304, 316, duplex), titanium alloys, Inconel, aluminum, brass, and high-tensile structural steel.\nDo you provide material test certificates (MTC)? | Yes. Every batch is accompanied by EN 10204 3.1 material test certificates, heat treatment charts, CMM reports, and NDT inspection records.\nWhat is your typical lead time for custom fabrication? | Standard prototypes ship in 5–10 business days. Production batch runs typically ship within 3–4 weeks depending on material availability and tooling.",
 	);
 }
 

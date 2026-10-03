@@ -6960,3 +6960,31 @@ a.contact-value:hover {
 		border-radius: var(--radius-lg);
 	}
 }
+
+/* Page Figure & Industrial Photo Displays */
+.gpi-page-figure {
+	margin: var(--spacing-xl, 2rem) 0;
+	border-radius: var(--radius-lg, 12px);
+	overflow: hidden;
+	border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
+	box-shadow: var(--shadow-md, 0 10px 25px -5px rgba(0, 0, 0, 0.25));
+}
+
+.gpi-page-figure img {
+	width: 100%;
+	height: auto;
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+	display: block;
+}
+
+.gpi-page-figure figcaption {
+	padding: 0.75rem 1.25rem;
+	font-size: 0.875rem;
+	color: var(--text-muted, #94a3b8);
+	background: var(--bg-surface-elevated, #1a2234);
+	border-top: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
+	font-style: italic;
+	text-align: center;
+}
+

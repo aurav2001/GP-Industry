@@ -142,10 +142,26 @@ if ( ! function_exists( 'gpi_post_thumbnail' ) ) :
 		}
 		echo '<div class="post-thumbnail-wrap">';
 		echo '<a class="post-thumbnail" href="' . esc_url( get_permalink() ) . '" aria-hidden="true" tabindex="-1">';
+		$has_real_thumb = false;
 		if ( has_post_thumbnail() ) {
+			$thumb_id   = get_post_thumbnail_id();
+			$thumb_post = $thumb_id ? get_post( $thumb_id ) : null;
+			$thumb_name = $thumb_post ? $thumb_post->post_name : '';
+			$thumb_src  = wp_get_attachment_image_url( $thumb_id, 'full' );
+			if ( false === strpos( $thumb_name, 'gpi-demo-' ) && false === strpos( (string) $thumb_src, 'gpi-demo-' ) ) {
+				$has_real_thumb = true;
+			}
+		}
+
+		if ( $has_real_thumb ) {
 			the_post_thumbnail( $size, array( 'loading' => 'lazy', 'alt' => the_title_attribute( array( 'echo' => false ) ) ) );
 		} else {
-			echo '<span class="thumb-placeholder">' . gpi_icon( 'sparkles', 36 ) . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			$card_img = function_exists( 'gpi_get_page_image_url' ) ? gpi_get_page_image_url( get_the_ID() ) : '';
+			if ( $card_img ) {
+				echo '<img src="' . esc_url( $card_img ) . '" alt="' . the_title_attribute( array( 'echo' => false ) ) . '" loading="lazy" class="post-thumbnail-img">';
+			} else {
+				echo '<span class="thumb-placeholder">' . gpi_icon( 'sparkles', 36 ) . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			}
 		}
 		echo '</a>';
 		if ( is_sticky() && ! is_paged() ) {

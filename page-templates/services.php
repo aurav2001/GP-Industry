@@ -22,6 +22,8 @@ while ( have_posts() ) :
 		null,
 		array(
 			'eyebrow' => esc_html__( 'What we do', 'gp-industry' ),
+			'align'   => 'left',
+			'image'   => true,
 		)
 	);
 	?>

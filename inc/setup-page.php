@@ -68,13 +68,33 @@ function gpi_repair_page_templates() {
 }
 
 /**
- * Repair templates automatically when the theme is activated.
+ * Automatically set up demo content and GP-Industry menu on theme activation.
  */
 function gpi_on_theme_activation() {
-	gpi_repair_page_templates();
+	gpi_auto_setup_theme_content();
 	set_transient( 'gpi_show_setup_notice', 1, WEEK_IN_SECONDS );
 }
 add_action( 'after_switch_theme', 'gpi_on_theme_activation' );
+
+/**
+ * Ensure theme content and menu are initialized even if theme was activated before update.
+ */
+function gpi_maybe_auto_setup() {
+	if ( ! get_option( 'gpi_auto_setup_completed_v7' ) ) {
+		gpi_auto_setup_theme_content();
+		update_option( 'gpi_auto_setup_completed_v7', 1 );
+	}
+}
+add_action( 'init', 'gpi_maybe_auto_setup' );
+
+/**
+ * Main auto setup function.
+ */
+function gpi_auto_setup_theme_content() {
+	gpi_repair_page_templates();
+	gpi_cleanup_synthetic_images();
+	gpi_import_demo_pages();
+}
 
 /**
  * Admin menu entry.
@@ -215,99 +235,186 @@ function gpi_setup_page_render() {
  * @param int    $h     Height.
  * @return int
  */
-function gpi_demo_image( $label, $seed = 0, $w = 1600, $h = 1000 ) {
-	if ( ! function_exists( 'imagecreatetruecolor' ) ) {
-		return 0;
-	}
+/**
+ * Remove legacy GD-generated synthetic placeholder attachments and ensure all pages
+ * have real high-resolution bundled industrial photography.
+ */
+function gpi_cleanup_synthetic_images() {
+	global $wpdb;
 
-	$slug     = sanitize_title( 'gpi-demo-' . $label );
-	$existing = get_posts( array( 'post_type' => 'attachment', 'name' => $slug, 'posts_per_page' => 1, 'fields' => 'ids', 'post_status' => 'inherit' ) );
-	if ( $existing ) {
-		return (int) $existing[0];
-	}
-
-	$palettes = array(
-		array( array( 99, 102, 241 ), array( 236, 72, 153 ) ),
-		array( array( 6, 182, 212 ), array( 99, 102, 241 ) ),
-		array( array( 245, 158, 11 ), array( 236, 72, 153 ) ),
-		array( array( 16, 185, 129 ), array( 6, 182, 212 ) ),
-		array( array( 139, 92, 246 ), array( 59, 130, 246 ) ),
-		array( array( 244, 63, 94 ), array( 251, 146, 60 ) ),
+	// 1. Delete all attachments created with gpi-demo- slug or filename
+	$synthetic_ids = $wpdb->get_col(
+		"SELECT ID FROM {$wpdb->posts} WHERE post_type = 'attachment' AND (post_name LIKE 'gpi-demo-%' OR guid LIKE '%gpi-demo-%')"
 	);
-	list( $c1, $c2 ) = $palettes[ $seed % count( $palettes ) ];
 
-	$im = imagecreatetruecolor( $w, $h );
-	for ( $x = 0; $x < $w; $x += 4 ) {
-		$t   = $x / $w;
-		$col = imagecolorallocate( $im, (int) ( $c1[0] + ( $c2[0] - $c1[0] ) * $t ), (int) ( $c1[1] + ( $c2[1] - $c1[1] ) * $t ), (int) ( $c1[2] + ( $c2[2] - $c1[2] ) * $t ) );
-		imagefilledrectangle( $im, $x, 0, $x + 4, $h, $col );
+	if ( ! empty( $synthetic_ids ) ) {
+		if ( ! function_exists( 'wp_delete_attachment' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/image.php';
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+			require_once ABSPATH . 'wp-admin/includes/media.php';
+		}
+
+		foreach ( $synthetic_ids as $att_id ) {
+			wp_delete_attachment( (int) $att_id, true );
+		}
 	}
-	// Dark vignette band at the bottom + subtle grid.
-	$dark = imagecolorallocatealpha( $im, 5, 8, 18, 70 );
-	imagefilledrectangle( $im, 0, (int) ( $h * 0.62 ), $w, $h, $dark );
-	$line = imagecolorallocatealpha( $im, 255, 255, 255, 110 );
-	for ( $x = 0; $x < $w; $x += 80 ) {
-		imageline( $im, $x, 0, $x, $h, $line );
-	}
-	for ( $y = 0; $y < $h; $y += 80 ) {
-		imageline( $im, 0, $y, $w, $y, $line );
-	}
-	// Circles / "machinery" shapes.
-	$ring = imagecolorallocatealpha( $im, 255, 255, 255, 95 );
-	imagesetthickness( $im, 6 );
-	imageellipse( $im, (int) ( $w * 0.72 ), (int) ( $h * 0.38 ), (int) ( $h * 0.7 ), (int) ( $h * 0.7 ), $ring );
-	imageellipse( $im, (int) ( $w * 0.72 ), (int) ( $h * 0.38 ), (int) ( $h * 0.45 ), (int) ( $h * 0.45 ), $ring );
-	imageellipse( $im, (int) ( $w * 0.72 ), (int) ( $h * 0.38 ), (int) ( $h * 0.2 ), (int) ( $h * 0.2 ), $ring );
 
-	// Label (built-in font scaled up = pixel look, still readable).
-	$white = imagecolorallocate( $im, 255, 255, 255 );
-	$scale = max( 3, (int) round( $w / 400 ) );
-	$fw    = imagefontwidth( 5 ) * strlen( $label );
-	$tmp   = imagecreatetruecolor( $fw + 4, imagefontheight( 5 ) + 4 );
-	imagealphablending( $tmp, false );
-	imagesavealpha( $tmp, true );
-	imagefill( $tmp, 0, 0, imagecolorallocatealpha( $tmp, 0, 0, 0, 127 ) );
-	imagestring( $tmp, 5, 2, 2, $label, imagecolorallocate( $tmp, 255, 255, 255 ) );
-	imagecopyresized( $im, $tmp, (int) ( $w * 0.06 ), (int) ( $h * 0.78 ), 0, 0, ( $fw + 4 ) * $scale, ( imagefontheight( 5 ) + 4 ) * $scale, $fw + 4, imagefontheight( 5 ) + 4 );
-	imagedestroy( $tmp );
-	imagefilledrectangle( $im, (int) ( $w * 0.06 ), (int) ( $h * 0.74 ), (int) ( $w * 0.06 ) + 90, (int) ( $h * 0.74 ) + 8, $white );
-
-	$upload = wp_upload_dir();
-	$file   = trailingslashit( $upload['path'] ) . $slug . '.jpg';
-	imagejpeg( $im, $file, 82 );
-	imagedestroy( $im );
-
-	$id = wp_insert_attachment(
-		array(
-			'post_mime_type' => 'image/jpeg',
-			'post_title'     => $label,
-			'post_name'      => $slug,
-			'post_status'    => 'inherit',
-		),
-		$file
+	// 2. Map of page slugs to bundled photo filenames
+	$page_image_map = array(
+		'home'                             => 'hero-industrial.jpg',
+		'about-us'                         => 'about-facility.jpg',
+		'about'                            => 'about-facility.jpg',
+		'products'                         => 'heavy-machinery.jpg',
+		'heavy-industrial-machinery'       => 'heavy-machinery.jpg',
+		'precision-cnc-components'         => 'precision-components.jpg',
+		'industrial-automation'            => 'industrial-automation.jpg',
+		'workforce-outsourcing'            => 'workforce-outsourcing.jpg',
+		'payroll-statutory-compliance'     => 'payroll-compliance.jpg',
+		'payroll-compliance'               => 'payroll-compliance.jpg',
+		'integrated-facility-management'   => 'facility-management.jpg',
+		'facility-management'              => 'facility-management.jpg',
+		'services'                         => 'custom-fabrication.jpg',
+		'custom-fabrication'               => 'custom-fabrication.jpg',
+		'plant-maintenance'                => 'plant-maintenance.jpg',
+		'engineering-prototyping'          => 'engineering-cad.jpg',
+		'industries'                       => 'industries-sectors.jpg',
+		'case-studies'                     => 'case-studies-projects.jpg',
+		'projects'                         => 'case-studies-projects.jpg',
+		'contact'                          => 'contact-facility.jpg',
+		'contact-us'                       => 'contact-facility.jpg',
 	);
-	if ( ! $id || is_wp_error( $id ) ) {
-		return 0;
+
+	// 3. For each mapped slug, find matching pages and ensure their featured image is set to the real photo
+	foreach ( $page_image_map as $slug => $img_file ) {
+		$found_pages = get_posts(
+			array(
+				'post_type'      => 'page',
+				'name'           => $slug,
+				'post_status'    => 'any',
+				'posts_per_page' => 5,
+				'fields'         => 'ids',
+			)
+		);
+		foreach ( $found_pages as $pid ) {
+			$current_thumb = get_post_thumbnail_id( $pid );
+			$needs_update  = false;
+			if ( ! $current_thumb ) {
+				$needs_update = true;
+			} else {
+				$att = get_post( $current_thumb );
+				if ( ! $att || false !== strpos( $att->post_name, 'gpi-demo-' ) || false !== strpos( (string) $att->guid, 'gpi-demo-' ) ) {
+					$needs_update = true;
+				}
+			}
+			if ( $needs_update ) {
+				gpi_demo_featured( $pid, get_the_title( $pid ), $img_file );
+			}
+		}
 	}
-	require_once ABSPATH . 'wp-admin/includes/image.php';
-	wp_update_attachment_metadata( $id, wp_generate_attachment_metadata( $id, $file ) );
-	return (int) $id;
 }
 
 /**
- * Attach a generated demo image as featured image (only if the page has none).
+ * Legacy GD image generator disabled in favor of real high-res photography.
  *
- * @param int    $page_id Page ID.
- * @param string $label   Image label.
- * @param int    $seed    Palette seed.
+ * @param string $label Text label.
+ * @param int    $seed  Seed.
+ * @param int    $w     Width.
+ * @param int    $h     Height.
+ * @return int 0
  */
-function gpi_demo_featured( $page_id, $label, $seed = 0 ) {
-	if ( ! $page_id || has_post_thumbnail( $page_id ) ) {
+function gpi_demo_image( $label, $seed = 0, $w = 1600, $h = 1000 ) {
+	return 0;
+}
+
+/**
+ * Attach a bundled industrial demo image as featured image.
+ *
+ * @param int    $page_id    Page ID.
+ * @param string $label      Image label.
+ * @param string $image_file Bundled filename in assets/images/ (e.g. 'about-facility.jpg').
+ */
+function gpi_demo_featured( $page_id, $label, $image_file = '' ) {
+	if ( ! $page_id ) {
 		return;
 	}
-	$img = gpi_demo_image( $label, $seed );
-	if ( $img ) {
-		set_post_thumbnail( $page_id, $img );
+
+	if ( ! $image_file ) {
+		$lbl_lower = strtolower( $label );
+		$keyword_map = array(
+			'workforce'   => 'workforce-outsourcing.jpg',
+			'outsourcing' => 'workforce-outsourcing.jpg',
+			'payroll'     => 'payroll-compliance.jpg',
+			'statutory'   => 'payroll-compliance.jpg',
+			'compliance'  => 'payroll-compliance.jpg',
+			'facility'    => 'facility-management.jpg',
+			'machin'      => 'heavy-machinery.jpg',
+			'cnc'         => 'precision-components.jpg',
+			'precision'   => 'precision-components.jpg',
+			'auto'        => 'industrial-automation.jpg',
+			'robot'       => 'industrial-automation.jpg',
+			'fabricat'    => 'custom-fabrication.jpg',
+			'weld'        => 'custom-fabrication.jpg',
+			'maint'       => 'plant-maintenance.jpg',
+			'cad'         => 'engineering-cad.jpg',
+			'industr'     => 'industries-sectors.jpg',
+			'project'     => 'case-studies-projects.jpg',
+			'contact'     => 'contact-facility.jpg',
+			'about'       => 'about-facility.jpg',
+		);
+		foreach ( $keyword_map as $key => $file ) {
+			if ( false !== strpos( $lbl_lower, $key ) ) {
+				$image_file = $file;
+				break;
+			}
+		}
+		if ( ! $image_file ) {
+			$image_file = 'heavy-machinery.jpg';
+		}
+	}
+
+	if ( $image_file && file_exists( GPI_THEME_DIR . '/assets/images/' . $image_file ) ) {
+		$slug     = sanitize_title( 'gpi-asset-' . pathinfo( $image_file, PATHINFO_FILENAME ) );
+		$existing = get_posts(
+			array(
+				'post_type'      => 'attachment',
+				'name'           => $slug,
+				'posts_per_page' => 1,
+				'fields'         => 'ids',
+				'post_status'    => 'inherit',
+			)
+		);
+
+		if ( ! empty( $existing ) ) {
+			set_post_thumbnail( $page_id, (int) $existing[0] );
+			return;
+		}
+
+		$upload = wp_upload_dir();
+		$target = trailingslashit( $upload['path'] ) . $image_file;
+		copy( GPI_THEME_DIR . '/assets/images/' . $image_file, $target );
+
+		if ( file_exists( $target ) ) {
+			$filetype      = wp_check_filetype( basename( $target ), null );
+			$attachment_id = wp_insert_attachment(
+				array(
+					'guid'           => trailingslashit( $upload['url'] ) . basename( $target ),
+					'post_mime_type' => $filetype['type'] ? $filetype['type'] : 'image/jpeg',
+					'post_title'     => $label ? $label : pathinfo( $image_file, PATHINFO_FILENAME ),
+					'post_name'      => $slug,
+					'post_status'    => 'inherit',
+				),
+				$target,
+				$page_id
+			);
+
+			if ( ! is_wp_error( $attachment_id ) && $attachment_id > 0 ) {
+				require_once ABSPATH . 'wp-admin/includes/image.php';
+				$attach_data = wp_generate_attachment_metadata( $attachment_id, $target );
+				wp_update_attachment_metadata( $attachment_id, $attach_data );
+				set_post_thumbnail( $page_id, $attachment_id );
+				return;
+			}
+		}
 	}
 }
 
@@ -335,6 +442,19 @@ function gpi_demo_page( $args, $template, &$result ) {
 		$existing = $found ? $found[0] : null;
 	}
 	if ( $existing ) {
+		if ( ! empty( $args['post_content'] ) || ! empty( $args['post_excerpt'] ) ) {
+			wp_update_post(
+				array(
+					'ID'           => $existing->ID,
+					'post_title'   => $args['post_title'],
+					'post_content' => $args['post_content'],
+					'post_excerpt' => isset( $args['post_excerpt'] ) ? $args['post_excerpt'] : '',
+				)
+			);
+		}
+		if ( $template ) {
+			update_post_meta( $existing->ID, '_wp_page_template', $template );
+		}
 		$result['skipped']++;
 		return $existing->ID;
 	}
@@ -367,7 +487,6 @@ function gpi_demo_page( $args, $template, &$result ) {
  */
 function gpi_import_demo_pages() {
 	$result = array( 'created' => 0, 'skipped' => 0 );
-	$img    = esc_url( GPI_THEME_URI . '/assets/images/placeholder.svg' );
 	$avatar = esc_url( GPI_THEME_URI . '/assets/images/avatar.svg' );
 
 	$p = function ( $text ) {
@@ -382,6 +501,15 @@ function gpi_import_demo_pages() {
 			$o .= '<!-- wp:list-item --><li>' . $i . '</li><!-- /wp:list-item -->';
 		}
 		return $o . '</ul><!-- /wp:list -->' . "\n";
+	};
+	$fig = function ( $img_name, $caption = '' ) {
+		$src = esc_url( GPI_THEME_URI . '/assets/images/' . $img_name );
+		$out = '<!-- wp:image {"sizeSlug":"large","className":"gpi-page-figure"} --><figure class="wp-block-image size-large gpi-page-figure"><img src="' . $src . '" alt="' . esc_attr( $caption ) . '" loading="lazy"/>';
+		if ( $caption ) {
+			$out .= '<figcaption class="wp-element-caption">' . esc_html( $caption ) . '</figcaption>';
+		}
+		$out .= '</figure><!-- /wp:image -->' . "\n";
+		return $out;
 	};
 
 	$company = get_bloginfo( 'name' );
@@ -398,64 +526,106 @@ function gpi_import_demo_pages() {
 	);
 
 	/* About */
-	$about_content  = $p( esc_html__( 'Who we are', 'gp-industry' ) );
-	/* translators: %s: company name */
-	$about_content .= $h( sprintf( esc_html__( '%s — your partner for people, compliance and facilities', 'gp-industry' ), $company ) );
-	/* translators: %s: company name */
-	$about_content .= $p( sprintf( esc_html__( '%s is a corporate consultancy that helps organisations run smoothly. We recruit, train and manage personnel, keep every statutory obligation in order, and operate facilities that are clean, safe and secure — so our clients can focus on their core business. Edit this text with your own story.', 'gp-industry' ), $company ) );
-	$about_content .= $p( esc_html__( 'Our approach is simple: understand the client’s sites, shifts and risks first; design a solution around them; then deliver it with dedicated supervision, transparent reporting and complete accountability.', 'gp-industry' ) );
-	$about_content .= $p( esc_html__( 'Corporate Solutions', 'gp-industry' ) );
-	$about_content .= $h( esc_html__( 'Comprehensive facilities & staffing ecosystem', 'gp-industry' ) );
-	$about_content .= $p( esc_html__( 'Tailored corporate services designed to accelerate business productivity, guarantee 100% statutory compliance and ensure robust operational security.', 'gp-industry' ) );
-	$about_content .= $p( esc_html__( 'Workforce Solutions', 'gp-industry' ) );
-	$about_content .= $h( esc_html__( 'HR Staffing & Payroll Management', 'gp-industry' ), 3 ) . $p( esc_html__( 'Trained and vetted personnel, manager-level staff, a dedicated in-house Resource Cell and 100% statutory payroll.', 'gp-industry' ) );
-	$about_content .= $h( esc_html__( 'Statutory Compliance', 'gp-industry' ), 3 ) . $p( esc_html__( 'PF, ESIC, professional tax, labour licences and monthly filings — audit-ready, every month.', 'gp-industry' ) );
-	$about_content .= $h( esc_html__( 'Manpower Outsourcing', 'gp-industry' ), 3 ) . $p( esc_html__( 'Skilled, semi-skilled and support staff deployed on your payroll or ours, with on-site supervision.', 'gp-industry' ) );
-	$about_content .= $p( esc_html__( 'Facility Solutions', 'gp-industry' ) );
-	$about_content .= $h( esc_html__( 'Housekeeping & Hygiene', 'gp-industry' ), 3 ) . $p( esc_html__( 'Mechanised cleaning, pest control and waste management for offices, plants and hospitals.', 'gp-industry' ) );
-	$about_content .= $h( esc_html__( 'Security Services', 'gp-industry' ), 3 ) . $p( esc_html__( 'Trained guards, supervisors and access control aligned with PSARA requirements.', 'gp-industry' ) );
-	$about_content .= $h( esc_html__( 'Facility Management', 'gp-industry' ), 3 ) . $p( esc_html__( 'Front-office, pantry, technical maintenance and vendor management under one contract.', 'gp-industry' ) );
-	$about_content .= $h( esc_html__( 'Our credentials', 'gp-industry' ) );
-	$about_content .= $ul( array( esc_html__( 'ISO 9001:2015 certified quality management', 'gp-industry' ), esc_html__( 'PSARA licensed security operations', 'gp-industry' ), esc_html__( 'Registered under Contract Labour, PF and ESIC acts', 'gp-industry' ), esc_html__( 'MSME and Startup India recognised', 'gp-industry' ) ) );
+	$about_content  = $p( esc_html__( 'Industrial Heritage & Advanced Infrastructure', 'gp-industry' ) );
+	$about_content .= $h( sprintf( esc_html__( '%s — Precision Manufacturing & Heavy Engineering', 'gp-industry' ), $company ) );
+	$about_content .= $p( sprintf( esc_html__( '%s is an ISO 9001:2015 and ASME-certified heavy manufacturing powerhouse. Operating across a 150,000 sq.ft state-of-the-art facility, we specialize in high-precision 5-axis CNC machining, structural steel fabrication, industrial automation, and turnkey engineering solutions.', 'gp-industry' ), $company ) );
+	$about_content .= $fig( 'about-facility.jpg', sprintf( esc_html__( '%s 150,000 sq.ft precision manufacturing plant and heavy assembly bays', 'gp-industry' ), $company ) );
+	$about_content .= $p( esc_html__( 'Our engineering philosophy merges decades of manufacturing craftsmanship with Industry 4.0 automation. We achieve extreme tolerances down to ±0.005mm, full metallurgical traceability, and zero-defect quality across demanding automotive, aerospace, defense, energy, and heavy infrastructure sectors.', 'gp-industry' ) );
+	$about_content .= $p( esc_html__( 'Manufacturing Capabilities', 'gp-industry' ) );
+	$about_content .= $h( esc_html__( 'State-of-the-art industrial production infrastructure', 'gp-industry' ) );
+	$about_content .= $p( esc_html__( 'Integrated facilities designed to handle projects from prototype engineering to high-volume production with total reliability.', 'gp-industry' ) );
+	$about_content .= $p( esc_html__( 'Machining & Fabrication', 'gp-industry' ) );
+	$about_content .= $h( esc_html__( '5-Axis Precision CNC Machining', 'gp-industry' ), 3 ) . $p( esc_html__( 'Multi-axis high-speed CNC milling and turning centers delivering micron-level tolerances on titanium, Inconel, duplex, and alloy steels.', 'gp-industry' ) );
+	$about_content .= $h( esc_html__( 'Heavy Structural Steel Fabrication', 'gp-industry' ), 3 ) . $p( esc_html__( 'Heavy plate rolling, high-precision fiber laser cutting up to 30mm, and ASME-coded robotic and submerged arc welding.', 'gp-industry' ) );
+	$about_content .= $h( esc_html__( 'Turnkey Industrial Automation', 'gp-industry' ), 3 ) . $p( esc_html__( 'Robotic welding cells, material handling conveyor systems, and custom PLC control consoles for smart factories.', 'gp-industry' ) );
+	$about_content .= $fig( 'precision-components.jpg', esc_html__( 'High-tolerance aerospace and defense precision machined components', 'gp-industry' ) );
+	$about_content .= $p( esc_html__( 'Quality Assurance', 'gp-industry' ) );
+	$about_content .= $h( esc_html__( 'CMM Metrology & Metallurgical Lab', 'gp-industry' ), 3 ) . $p( esc_html__( 'Temperature-controlled inspection room equipped with coordinate measuring machines (CMM) and surface roughness testers.', 'gp-industry' ) );
+	$about_content .= $h( esc_html__( 'Non-Destructive Testing (NDT)', 'gp-industry' ), 3 ) . $p( esc_html__( 'ASNT Level II certified ultrasonic, magnetic particle, dye penetrant, and hydrostatic pressure testing.', 'gp-industry' ) );
+	$about_content .= $h( esc_html__( 'Material Traceability & Compliance', 'gp-industry' ), 3 ) . $p( esc_html__( '100% heat-number traceability with EN 10204 3.1 chemical and mechanical inspection certificates.', 'gp-industry' ) );
+	$about_content .= $h( esc_html__( 'Industry Certifications & Accreditations', 'gp-industry' ) );
+	$about_content .= $ul( array(
+		esc_html__( 'ISO 9001:2015 certified Quality Management System', 'gp-industry' ),
+		esc_html__( 'ISO 14001:2015 certified Environmental Management', 'gp-industry' ),
+		esc_html__( 'ASME Section VIII Div 1 & Div 2 Code Stamp certified', 'gp-industry' ),
+		esc_html__( 'CE marking & EN 1090 structural steel execution compliance', 'gp-industry' ),
+	) );
 	$about_content .= gpi_pattern_process() . "\n" . gpi_pattern_team( $avatar ) . "\n" . gpi_pattern_faq();
 
 	$about = gpi_demo_page(
 		array(
 			'post_title'   => esc_html__( 'About Us', 'gp-industry' ),
 			'post_name'    => 'about-us',
-			'post_excerpt' => esc_html__( 'Corporate staffing, compliance and facility consultancy you can rely on.', 'gp-industry' ),
+			'post_excerpt' => esc_html__( 'Leading precision CNC machining, heavy industrial fabrication, and turnkey engineering solutions.', 'gp-industry' ),
 			'post_content' => $about_content,
 			'menu_order'   => 10,
 		),
 		'page-templates/about.php',
 		$result
 	);
-	gpi_demo_featured( $about, esc_html__( 'About Us', 'gp-industry' ), 1 );
+	gpi_demo_featured( $about, esc_html__( 'About Us', 'gp-industry' ), 'about-facility.jpg' );
 
-	/* Solutions (Products template) + children */
+	/* Products (Products template) + 3 children */
 	$products = gpi_demo_page(
 		array(
-			'post_title'   => esc_html__( 'Solutions', 'gp-industry' ),
-			'post_name'    => 'solutions',
-			'post_excerpt' => esc_html__( 'Packaged solutions for workforce, compliance and facility needs.', 'gp-industry' ),
-			'post_content' => '',
+			'post_title'   => esc_html__( 'Products', 'gp-industry' ),
+			'post_name'    => 'products',
+			'post_excerpt' => esc_html__( 'High-performance heavy industrial machinery, precision CNC components, and automation systems.', 'gp-industry' ),
+			'post_content' => $fig( 'heavy-machinery.jpg', esc_html__( 'High-performance heavy machinery and precision manufactured systems', 'gp-industry' ) ),
 			'menu_order'   => 20,
 		),
 		'page-templates/products.php',
 		$result
 	);
+	gpi_demo_featured( $products, esc_html__( 'Products', 'gp-industry' ), 'heavy-machinery.jpg' );
+
 	$product_items = array(
-		array( 'workforce-outsourcing', esc_html__( 'Workforce Outsourcing', 'gp-industry' ), esc_html__( 'Skilled and support staff on our payroll — recruited, verified, trained and supervised for you.', 'gp-industry' ), array( esc_html__( 'Background & police verification', 'gp-industry' ), esc_html__( 'Role-specific induction and training', 'gp-industry' ), esc_html__( 'Replacement guarantee within 48 hours', 'gp-industry' ), esc_html__( 'Attendance & MIS reporting', 'gp-industry' ) ) ),
-		array( 'payroll-compliance', esc_html__( 'Payroll & Statutory Compliance', 'gp-industry' ), esc_html__( 'End-to-end payroll processing with PF, ESIC, PT, LWF and labour-law compliance.', 'gp-industry' ), array( esc_html__( 'Monthly payroll and payslips', 'gp-industry' ), esc_html__( 'PF / ESIC registrations and challans', 'gp-industry' ), esc_html__( 'Labour licence and register maintenance', 'gp-industry' ), esc_html__( 'Audit support and compliance calendar', 'gp-industry' ) ) ),
-		array( 'integrated-facility-management', esc_html__( 'Integrated Facility Management', 'gp-industry' ), esc_html__( 'Housekeeping, security, pantry, front-office and maintenance under a single accountable contract.', 'gp-industry' ), array( esc_html__( 'Mechanised housekeeping & hygiene', 'gp-industry' ), esc_html__( 'PSARA-compliant security', 'gp-industry' ), esc_html__( 'Technical & soft services', 'gp-industry' ), esc_html__( 'Single point of contact & SLAs', 'gp-industry' ) ) ),
+		array(
+			'heavy-industrial-machinery',
+			esc_html__( 'Heavy Industrial Machinery', 'gp-industry' ),
+			esc_html__( 'High-capacity hydraulic stamping presses, automated material handling conveyors, industrial crushers, and heavy planetary gearboxes built for extreme duty.', 'gp-industry' ),
+			array(
+				esc_html__( '50 to 2,000-tonne hydraulic press load capacities', 'gp-industry' ),
+				esc_html__( 'Siemens / Allen-Bradley PLC automated controls', 'gp-industry' ),
+				esc_html__( 'Heavy-duty vibration damped structural steel frame', 'gp-industry' ),
+				esc_html__( '24/7 continuous duty cycle with safety interlocks', 'gp-industry' ),
+			),
+			'heavy-machinery.jpg',
+		),
+		array(
+			'precision-cnc-components',
+			esc_html__( 'Precision CNC Components', 'gp-industry' ),
+			esc_html__( 'High-tolerance milled and turned parts in titanium, Inconel, stainless steel, and aerospace-grade aluminum for mission-critical assemblies.', 'gp-industry' ),
+			array(
+				esc_html__( 'Tolerances down to ±0.005 mm (5 microns)', 'gp-industry' ),
+				esc_html__( '5-Axis simultaneous CNC milling & live-tool turning', 'gp-industry' ),
+				esc_html__( 'Full CMM dimensional inspection and surface reports', 'gp-industry' ),
+				esc_html__( 'Complete EN 10204 3.1 material test certificates', 'gp-industry' ),
+			),
+			'precision-components.jpg',
+		),
+		array(
+			'industrial-automation',
+			esc_html__( 'Industrial Automation Systems', 'gp-industry' ),
+			esc_html__( 'Turnkey robotic welding cells, pick-and-place automation, SCADA integration, and Industry 4.0 smart factory monitoring.', 'gp-industry' ),
+			array(
+				esc_html__( 'Fanuc & ABB robotic integration for welding and assembly', 'gp-industry' ),
+				esc_html__( 'Custom PLC control panels with safety relay systems', 'gp-industry' ),
+				esc_html__( 'Real-time telemetry and predictive maintenance sensors', 'gp-industry' ),
+				esc_html__( 'Modular skid design for rapid factory deployment', 'gp-industry' ),
+			),
+			'industrial-automation.jpg',
+		),
 	);
+	$product_child_ids = array();
 	foreach ( $product_items as $i => $item ) {
-		$content  = $p( $item[2] );
+		$content  = $fig( $item[4], $item[1] );
+		$content .= $p( $item[2] );
 		$content .= $ul( $item[3] );
-		$content .= $h( esc_html__( 'What you get', 'gp-industry' ) );
-		$content .= $h( esc_html__( 'Dedicated account manager', 'gp-industry' ), 3 ) . $p( esc_html__( 'One owner for service quality, escalations and monthly reviews.', 'gp-industry' ) );
-		$content .= $h( esc_html__( 'Transparent pricing', 'gp-industry' ), 3 ) . $p( esc_html__( 'Clear per-head or per-site costing with no hidden charges.', 'gp-industry' ) );
-		$content .= $h( esc_html__( 'Compliance you can prove', 'gp-industry' ), 3 ) . $p( esc_html__( 'Audit-ready documentation shared every month.', 'gp-industry' ) );
+		$content .= $h( esc_html__( 'Technical Specifications', 'gp-industry' ) );
+		$content .= $h( esc_html__( 'Engineering Quality Guarantee', 'gp-industry' ), 3 ) . $p( esc_html__( 'Every manufactured unit passes 100% factory acceptance testing (FAT) before shipment.', 'gp-industry' ) );
+		$content .= $h( esc_html__( 'Material Certification', 'gp-industry' ), 3 ) . $p( esc_html__( 'Supplied with EN 10204 3.1 mill test certificates, ultrasonic NDT reports, and dimensional logs.', 'gp-industry' ) );
+		$content .= $h( esc_html__( 'Turnkey Support', 'gp-industry' ), 3 ) . $p( esc_html__( 'On-site installation, commissioning, operator training, and annual maintenance contracts (AMC).', 'gp-industry' ) );
 		$content .= gpi_pattern_specs();
 		$pid = gpi_demo_page(
 			array(
@@ -469,34 +639,89 @@ function gpi_import_demo_pages() {
 			'page-templates/product-single.php',
 			$result
 		);
-		gpi_demo_featured( $pid, $item[1], $i );
+		if ( $pid ) {
+			$product_child_ids[] = $pid;
+		}
+		gpi_demo_featured( $pid, $item[1], $item[4] );
 	}
-	gpi_demo_featured( $products, esc_html__( 'Solutions', 'gp-industry' ), 4 );
+	gpi_demo_featured( $products, esc_html__( 'Products', 'gp-industry' ), 'heavy-machinery.jpg' );
 
-	/* Services + children */
+	// If legacy demo child pages exist from older import, give them authentic photography
+	$legacy_cards = array(
+		'workforce-outsourcing'          => array( 'Workforce Outsourcing', 'workforce-outsourcing.jpg' ),
+		'payroll-statutory-compliance'   => array( 'Payroll & Statutory Compliance', 'payroll-compliance.jpg' ),
+		'payroll-compliance'             => array( 'Payroll & Statutory Compliance', 'payroll-compliance.jpg' ),
+		'integrated-facility-management' => array( 'Integrated Facility Management', 'facility-management.jpg' ),
+		'facility-management'            => array( 'Integrated Facility Management', 'facility-management.jpg' ),
+	);
+	foreach ( $legacy_cards as $l_slug => $l_info ) {
+		$l_pages = get_posts( array( 'post_type' => 'page', 'name' => $l_slug, 'post_status' => 'any', 'posts_per_page' => 1, 'fields' => 'ids' ) );
+		if ( ! empty( $l_pages ) ) {
+			gpi_demo_featured( $l_pages[0], $l_info[0], $l_info[1] );
+		}
+	}
+
+	/* Services + 3 children */
 	$services = gpi_demo_page(
 		array(
 			'post_title'   => esc_html__( 'Services', 'gp-industry' ),
 			'post_name'    => 'services',
-			'post_excerpt' => esc_html__( 'Staffing, compliance, housekeeping and security — delivered with accountability.', 'gp-industry' ),
-			'post_content' => '',
+			'post_excerpt' => esc_html__( 'Custom metal fabrication, plant maintenance, dynamic balancing, and turnkey engineering design.', 'gp-industry' ),
+			'post_content' => $fig( 'custom-fabrication.jpg', esc_html__( 'Turnkey custom structural metal fabrication and field engineering', 'gp-industry' ) ),
 			'menu_order'   => 30,
 		),
 		'page-templates/services.php',
 		$result
 	);
+	gpi_demo_featured( $services, esc_html__( 'Services', 'gp-industry' ), 'custom-fabrication.jpg' );
+
 	$service_items = array(
-		array( 'hr-staffing-payroll', esc_html__( 'HR Staffing & Payroll Management', 'gp-industry' ), esc_html__( 'Trained, vetted personnel and manager-level staff from our in-house National Resource Cell, with 100% statutory payroll.', 'gp-industry' ), array( esc_html__( 'Sourcing, screening and induction', 'gp-industry' ), esc_html__( 'Statutory payroll with PF & ESIC', 'gp-industry' ), esc_html__( 'Attendance and leave management', 'gp-industry' ), esc_html__( 'Monthly MIS and compliance reports', 'gp-industry' ) ) ),
-		array( 'housekeeping-hygiene', esc_html__( 'Housekeeping & Hygiene', 'gp-industry' ), esc_html__( 'Mechanised cleaning, pest control, waste management and hygiene audits for offices, plants and hospitals.', 'gp-industry' ), array( esc_html__( 'Trained housekeeping staff with supervisors', 'gp-industry' ), esc_html__( 'Mechanised equipment and eco-friendly consumables', 'gp-industry' ), esc_html__( 'Daily checklists and hygiene audits', 'gp-industry' ), esc_html__( 'Pest control and waste management', 'gp-industry' ) ) ),
-		array( 'security-services', esc_html__( 'Security Services', 'gp-industry' ), esc_html__( 'PSARA-compliant guards, supervisors and access control for corporate, industrial and residential sites.', 'gp-industry' ), array( esc_html__( 'Verified and trained security personnel', 'gp-industry' ), esc_html__( 'Access control and visitor management', 'gp-industry' ), esc_html__( '24×7 supervision and patrolling', 'gp-industry' ), esc_html__( 'Incident reporting and escalation', 'gp-industry' ) ) ),
+		array(
+			'custom-fabrication',
+			esc_html__( 'Custom Metal Fabrication', 'gp-industry' ),
+			esc_html__( 'Structural steel fabrication, heavy plate rolling, fiber laser cutting up to 30mm, and ASME-coded robotic and manual welding.', 'gp-industry' ),
+			array(
+				esc_html__( 'High-precision 12kW fiber laser cutting and beveling', 'gp-industry' ),
+				esc_html__( 'Coded TIG, MIG, and Submerged Arc Welding (SAW)', 'gp-industry' ),
+				esc_html__( 'Heavy pressure vessel and storage tank fabrication', 'gp-industry' ),
+				esc_html__( 'In-house grit blasting and epoxy industrial coatings', 'gp-industry' ),
+			),
+			'custom-fabrication.jpg',
+		),
+		array(
+			'plant-maintenance',
+			esc_html__( 'Plant Maintenance & Overhaul', 'gp-industry' ),
+			esc_html__( 'Comprehensive preventive maintenance, turbine and compressor overhauls, laser shaft alignment, and 24/7 shutdown response.', 'gp-industry' ),
+			array(
+				esc_html__( 'On-site dynamic rotor balancing and vibration analysis', 'gp-industry' ),
+				esc_html__( 'Laser optical alignment for gearboxes and drivetrains', 'gp-industry' ),
+				esc_html__( 'Planned plant shutdown and turnaround management', 'gp-industry' ),
+				esc_html__( '24/7 emergency repair and on-site line boring', 'gp-industry' ),
+			),
+			'plant-maintenance.jpg',
+		),
+		array(
+			'engineering-prototyping',
+			esc_html__( 'Engineering & Prototyping', 'gp-industry' ),
+			esc_html__( 'CAD/CAM modeling, Finite Element Analysis (FEA) stress simulation, Design for Manufacturability (DFM), and rapid metal prototyping.', 'gp-industry' ),
+			array(
+				esc_html__( 'SolidWorks & CATIA parametric 3D CAD modeling', 'gp-industry' ),
+				esc_html__( 'FEA structural, thermal, and fatigue simulations', 'gp-industry' ),
+				esc_html__( 'Rapid functional metal prototyping within 5-7 days', 'gp-industry' ),
+				esc_html__( 'Cost optimization and material substitution studies', 'gp-industry' ),
+			),
+			'engineering-cad.jpg',
+		),
 	);
+	$service_child_ids = array();
 	foreach ( $service_items as $i => $item ) {
-		$content  = $p( $item[2] );
+		$content  = $fig( $item[4], $item[1] );
+		$content .= $p( $item[2] );
 		$content .= $ul( $item[3] );
-		$content .= $h( esc_html__( 'How it works', 'gp-industry' ) );
-		$content .= $h( esc_html__( 'Assessment', 'gp-industry' ), 3 ) . $p( esc_html__( 'We visit your site, understand shifts, headcount and risks, and define SLAs.', 'gp-industry' ) );
-		$content .= $h( esc_html__( 'Deployment', 'gp-industry' ), 3 ) . $p( esc_html__( 'Verified, trained staff mobilised with a supervisor and clear checklists.', 'gp-industry' ) );
-		$content .= $h( esc_html__( 'Review', 'gp-industry' ), 3 ) . $p( esc_html__( 'Monthly reports, audits and a dedicated manager for continuous improvement.', 'gp-industry' ) );
+		$content .= $h( esc_html__( 'Our Engineering Process', 'gp-industry' ) );
+		$content .= $h( esc_html__( 'Technical Review & DFM', 'gp-industry' ), 3 ) . $p( esc_html__( 'We analyze CAD drawings, material properties, and operational parameters to optimize for durability and cost.', 'gp-industry' ) );
+		$content .= $h( esc_html__( 'Precision Execution', 'gp-industry' ), 3 ) . $p( esc_html__( 'Manufactured using calibrated CNC equipment with in-process dimensional verifications.', 'gp-industry' ) );
+		$content .= $h( esc_html__( 'Inspection & Documentation', 'gp-industry' ), 3 ) . $p( esc_html__( 'Full dimensional inspection reports, material test certificates, and on-site testing.', 'gp-industry' ) );
 		$content .= gpi_pattern_faq();
 		$sid = gpi_demo_page(
 			array(
@@ -510,107 +735,53 @@ function gpi_import_demo_pages() {
 			'page-templates/service-single.php',
 			$result
 		);
-		gpi_demo_featured( $sid, $item[1], $i + 1 );
+		if ( $sid ) {
+			$service_child_ids[] = $sid;
+		}
+		gpi_demo_featured( $sid, $item[1], $item[4] );
 	}
-	gpi_demo_featured( $services, esc_html__( 'Services', 'gp-industry' ), 5 );
+	gpi_demo_featured( $services, esc_html__( 'Services', 'gp-industry' ), 'custom-fabrication.jpg' );
 
-	/* Training + children */
-	$courses = gpi_demo_page(
-		array(
-			'post_title'   => esc_html__( 'Training', 'gp-industry' ),
-			'post_name'    => 'training',
-			'post_excerpt' => esc_html__( 'Induction, skill and compliance training programs for your workforce.', 'gp-industry' ),
-			'post_content' => '',
-			'menu_order'   => 55,
-		),
-		'page-templates/courses.php',
-		$result
-	);
-	$course_items = array(
-		array( 'workplace-safety-compliance', esc_html__( 'Workplace Safety & Compliance', 'gp-industry' ), esc_html__( 'Fire safety, first aid, POSH awareness and statutory compliance essentials for staff and supervisors.', 'gp-industry' ) ),
-		array( 'housekeeping-hospitality-skills', esc_html__( 'Housekeeping & Hospitality Skills', 'gp-industry' ), esc_html__( 'Professional cleaning methods, equipment handling, hygiene standards and guest etiquette.', 'gp-industry' ) ),
-		array( 'supervisor-development', esc_html__( 'Supervisor Development Program', 'gp-industry' ), esc_html__( 'Team leadership, shift planning, reporting and client communication for site supervisors.', 'gp-industry' ) ),
-	);
-	foreach ( $course_items as $i => $item ) {
-		$cid = gpi_demo_page(
-			array(
-				'post_title'   => $item[1],
-				'post_name'    => $item[0],
-				'post_excerpt' => $item[2],
-				'post_content' => '',
-				'post_parent'  => $courses,
-				'menu_order'   => $i + 1,
-			),
-			'page-templates/course-single.php',
-			$result
-		);
-		gpi_demo_featured( $cid, $item[1], $i + 2 );
-	}
-	gpi_demo_featured( $courses, esc_html__( 'Training', 'gp-industry' ), 2 );
-
-	/* Why choose us — auto-layout demo */
-	$why  = $p( esc_html__( 'Our advantages', 'gp-industry' ) );
-	/* translators: %s: company name */
-	$why .= $h( sprintf( esc_html__( 'Why businesses choose %s', 'gp-industry' ), $company ) );
-	$why .= $p( esc_html__( 'This page is written as plain headings and paragraphs — the "Designed Sections (Auto)" template turns them into sections, cards and checklists automatically.', 'gp-industry' ) );
-	$why .= $p( esc_html__( 'Core strengths', 'gp-industry' ) );
-	$why .= $h( esc_html__( 'Vetted Workforce', 'gp-industry' ), 3 ) . $p( esc_html__( 'Background-verified, trained and supervised staff from our own resource cell.', 'gp-industry' ) );
-	$why .= $h( esc_html__( '100% Compliance', 'gp-industry' ), 3 ) . $p( esc_html__( 'PF, ESIC, labour law and payroll compliance handled end-to-end.', 'gp-industry' ) );
-	$why .= $h( esc_html__( 'Rapid Deployment', 'gp-industry' ), 3 ) . $p( esc_html__( 'Teams mobilised within days with on-site supervision from day one.', 'gp-industry' ) );
-	$why .= $h( esc_html__( 'Our commitments', 'gp-industry' ) );
-	$why .= $p( esc_html__( 'Every client, large or small, gets the same attention to service quality, documentation and response time.', 'gp-industry' ) );
-	$why .= $ul( array( esc_html__( 'Proposal within 24 hours', 'gp-industry' ), esc_html__( 'Replacement guarantee within 48 hours', 'gp-industry' ), esc_html__( 'Monthly MIS and compliance reports', 'gp-industry' ), esc_html__( 'Dedicated account manager', 'gp-industry' ) ) );
-	$why .= '<!-- wp:quote --><blockquote class="wp-block-quote"><!-- wp:paragraph --><p>' . esc_html__( 'Take care of your people and your people will take care of your business.', 'gp-industry' ) . '</p><!-- /wp:paragraph --><cite>' . esc_html__( 'Our founding principle', 'gp-industry' ) . '</cite></blockquote><!-- /wp:quote -->';
-	$why_id = gpi_demo_page(
-		array(
-			'post_title'   => esc_html__( 'Why Choose Us', 'gp-industry' ),
-			'post_name'    => 'why-choose-us',
-			'post_excerpt' => esc_html__( 'Plain content, automatically designed.', 'gp-industry' ),
-			'post_content' => $why,
-			'menu_order'   => 15,
-		),
-		'page-templates/auto-design.php',
-		$result
-	);
-	gpi_demo_featured( $why_id, esc_html__( 'Why Choose Us', 'gp-industry' ), 3 );
-
-	/* Industries, Case studies, Contact, Insights */
+	/* Industries, Projects (Case studies), Contact */
 	$industries = gpi_demo_page(
 		array(
 			'post_title'   => esc_html__( 'Industries', 'gp-industry' ),
 			'post_name'    => 'industries',
-			'post_excerpt' => esc_html__( 'Proven experience across corporate, industrial and service sectors.', 'gp-industry' ),
-			'post_content' => gpi_pattern_industries() . "\n" . gpi_pattern_stats() . "\n" . gpi_pattern_testimonials(),
+			'post_excerpt' => esc_html__( 'Critical manufacturing and engineering solutions across automotive, aerospace, energy, and heavy infrastructure.', 'gp-industry' ),
+			'post_content' => $fig( 'industries-sectors.jpg', esc_html__( 'Global Industrial Sectors: Power, Infrastructure, Automotive & Aerospace', 'gp-industry' ) ) . gpi_pattern_industries() . "\n" . gpi_pattern_stats() . "\n" . gpi_pattern_testimonials(),
 			'menu_order'   => 40,
 		),
 		'page-templates/auto-design.php',
 		$result
 	);
-	gpi_demo_featured( $industries, esc_html__( 'Industries', 'gp-industry' ), 0 );
+	gpi_demo_featured( $industries, esc_html__( 'Industries', 'gp-industry' ), 'industries-sectors.jpg' );
+
 	$projects = gpi_demo_page(
 		array(
-			'post_title'   => esc_html__( 'Case Studies', 'gp-industry' ),
+			'post_title'   => esc_html__( 'Projects', 'gp-industry' ),
 			'post_name'    => 'case-studies',
-			'post_excerpt' => esc_html__( 'A selection of recent engagements and results.', 'gp-industry' ),
-			'post_content' => gpi_pattern_projects( $img ) . "\n" . gpi_pattern_certifications(),
+			'post_excerpt' => esc_html__( 'A portfolio of recent heavy manufacturing, CNC machining, and turnkey engineering projects.', 'gp-industry' ),
+			'post_content' => gpi_pattern_projects() . "\n" . gpi_pattern_certifications(),
 			'menu_order'   => 50,
 		),
 		'page-templates/auto-design.php',
 		$result
 	);
-	gpi_demo_featured( $projects, esc_html__( 'Case Studies', 'gp-industry' ), 3 );
+	gpi_demo_featured( $projects, esc_html__( 'Projects', 'gp-industry' ), 'case-studies-projects.jpg' );
+
 	$contact = gpi_demo_page(
 		array(
 			'post_title'   => esc_html__( 'Contact', 'gp-industry' ),
 			'post_name'    => 'contact',
-			'post_excerpt' => esc_html__( 'Tell us about your requirement — we reply within one business day.', 'gp-industry' ),
-			'post_content' => '',
+			'post_excerpt' => esc_html__( 'Submit your CAD drawings or technical requirements for quotation and engineering feasibility.', 'gp-industry' ),
+			'post_content' => $fig( 'contact-facility.jpg', esc_html__( 'Global Manufacturing Facility & Corporate Campus', 'gp-industry' ) ),
 			'menu_order'   => 60,
 		),
 		'page-templates/contact.php',
 		$result
 	);
-	gpi_demo_featured( $contact, esc_html__( 'Contact', 'gp-industry' ), 1 );
+	gpi_demo_featured( $contact, esc_html__( 'Contact', 'gp-industry' ), 'contact-facility.jpg' );
+
 	$news = gpi_demo_page(
 		array(
 			'post_title'   => esc_html__( 'Insights', 'gp-industry' ),
@@ -631,70 +802,262 @@ function gpi_import_demo_pages() {
 		update_option( 'page_for_posts', $news );
 	}
 
-	/* Demo images for Customizer-driven sections (only when nothing is set yet) */
-	if ( ! gpi_get_option( 'hero_bg_1', '' ) ) {
-		foreach ( array( 1 => esc_html__( 'Corporate Consultancy', 'gp-industry' ), 2 => esc_html__( 'Workforce Solutions', 'gp-industry' ), 3 => esc_html__( 'Facility Management', 'gp-industry' ) ) as $n => $label ) {
-			$img = gpi_demo_image( $label, $n + 3, 1920, 1080 );
-			if ( $img ) {
-				set_theme_mod( 'gpi_hero_bg_' . $n, wp_get_attachment_url( $img ) );
-			}
-		}
-	}
-	if ( ! gpi_get_option( 'home_about_image', '' ) ) {
-		$img = gpi_demo_image( esc_html__( 'Our Team', 'gp-industry' ), 1, 1200, 1000 );
-		if ( $img ) {
-			set_theme_mod( 'gpi_home_about_image', wp_get_attachment_url( $img ) );
-		}
-	}
-	if ( ! gpi_get_option( 'contact_phone', '' ) ) {
-		set_theme_mod( 'gpi_contact_address', $company . "\n" . "3rd Floor, Corporate Park, Sector 62\nNoida, Uttar Pradesh 201301" );
-		set_theme_mod( 'gpi_contact_phone', '+91 98765 43210' );
-		set_theme_mod( 'gpi_contact_email', 'info@example.com' );
-		set_theme_mod( 'gpi_contact_hours', "Mon – Sat: 9:00 – 18:00\nSunday: Closed" );
+	/* Demo images for Customizer-driven sections */
+	set_theme_mod( 'gpi_hero_bg_1', esc_url( GPI_THEME_URI . '/assets/images/hero-industrial.jpg' ) );
+	set_theme_mod( 'gpi_hero_bg_2', esc_url( GPI_THEME_URI . '/assets/images/heavy-machinery.jpg' ) );
+	set_theme_mod( 'gpi_hero_bg_3', esc_url( GPI_THEME_URI . '/assets/images/industrial-automation.jpg' ) );
+	set_theme_mod( 'gpi_home_about_image', esc_url( GPI_THEME_URI . '/assets/images/about-facility.jpg' ) );
+	if ( ! gpi_get_option( 'contact_phone', '' ) || '+91 98765 43210' === gpi_get_option( 'contact_phone' ) ) {
+		set_theme_mod( 'gpi_contact_address', $company . " Manufacturing Plant\nPlot 42, Heavy Industrial Zone, Phase II\nGreater Noida, Uttar Pradesh 201306" );
+		set_theme_mod( 'gpi_contact_phone', '+91 (120) 456-7890' );
+		set_theme_mod( 'gpi_contact_email', 'rfq@gp-industry.com' );
+		set_theme_mod( 'gpi_contact_hours', "Mon – Sat: 08:00 – 19:00\nSunday: Plant Maintenance Only" );
 	}
 
-	/* Primary menu: create one, or add the demo pages to the existing one */
-	$menu_pages = array( $home, $about, $why_id, $products, $services, $industries, $projects, $courses, $news, $contact );
-	$locations  = get_theme_mod( 'nav_menu_locations', array() );
-	$menu_id    = ! empty( $locations['primary-menu'] ) ? (int) $locations['primary-menu'] : 0;
-	if ( ! $menu_id || ! wp_get_nav_menu_object( $menu_id ) ) {
-		$menu_id = wp_create_nav_menu( esc_html__( 'Primary Menu', 'gp-industry' ) );
-		if ( is_wp_error( $menu_id ) ) {
-			$menu_id = 0;
-		} else {
-			$locations['primary-menu'] = $menu_id;
-			if ( empty( $locations['footer-menu'] ) ) {
-				$locations['footer-menu'] = $menu_id;
-			}
-			set_theme_mod( 'nav_menu_locations', $locations );
-		}
-	}
-	if ( $menu_id ) {
-		$in_menu = array();
-		foreach ( (array) wp_get_nav_menu_items( $menu_id ) as $mi ) {
-			if ( 'page' === $mi->object ) {
-				$in_menu[] = (int) $mi->object_id;
-			}
-		}
-		$order = count( $in_menu ) + 1;
-		foreach ( $menu_pages as $page_id ) {
-			if ( ! $page_id || in_array( (int) $page_id, $in_menu, true ) ) {
-				continue;
-			}
-			wp_update_nav_menu_item(
-				$menu_id,
-				0,
-				array(
-					'menu-item-title'     => get_the_title( $page_id ),
-					'menu-item-object'    => 'page',
-					'menu-item-object-id' => $page_id,
-					'menu-item-type'      => 'post_type',
-					'menu-item-status'    => 'publish',
-					'menu-item-position'  => $order++,
-				)
-			);
-		}
-	}
+	/* Primary menu: create/assign the dedicated GP-Industry hierarchical menu */
+	$pages_data = array(
+		'home'              => $home,
+		'about'             => $about,
+		'products'          => $products,
+		'solution_children' => $product_child_ids,
+		'services'          => $services,
+		'service_children'  => $service_child_ids,
+		'industries'        => $industries,
+		'case_studies'      => $projects,
+		'contact'           => $contact,
+	);
+	gpi_setup_primary_menu( $pages_data );
 
 	return $result;
+}
+
+/**
+ * Helper to resolve a page ID by slug/path.
+ *
+ * @param string $slug Page slug or path.
+ * @return int
+ */
+function gpi_get_page_id_by_slug( $slug ) {
+	$page = get_page_by_path( $slug, OBJECT, 'page' );
+	if ( $page && isset( $page->ID ) ) {
+		return (int) $page->ID;
+	}
+	$parts = explode( '/', trim( $slug, '/' ) );
+	$last  = end( $parts );
+	$posts = get_posts(
+		array(
+			'post_type'      => 'page',
+			'name'           => $last,
+			'posts_per_page' => 1,
+			'fields'         => 'ids',
+			'post_status'    => 'any',
+		)
+	);
+	return ! empty( $posts ) ? (int) $posts[0] : 0;
+}
+
+/**
+ * Create or reset the dedicated GP-Industry Primary Menu with full hierarchical structure.
+ *
+ * @param array $pages Array of page IDs mapped by key.
+ * @return int Menu term ID.
+ */
+function gpi_setup_primary_menu( $pages = array() ) {
+	$menu_name = esc_html__( 'GP-Industry Primary Menu', 'gp-industry' );
+	$menu_obj  = wp_get_nav_menu_object( $menu_name );
+
+	if ( ! $menu_obj ) {
+		$menu_id = wp_create_nav_menu( $menu_name );
+	} else {
+		$menu_id = $menu_obj->term_id;
+	}
+
+	if ( is_wp_error( $menu_id ) || ! $menu_id ) {
+		return 0;
+	}
+
+	// Force-assign this GP-Industry menu to theme locations
+	$locations                 = get_theme_mod( 'nav_menu_locations', array() );
+	$locations['primary-menu'] = $menu_id;
+	$locations['footer-menu']  = $menu_id;
+	set_theme_mod( 'nav_menu_locations', $locations );
+
+	// Resolve page IDs
+	$home_id       = ! empty( $pages['home'] ) ? $pages['home'] : gpi_get_page_id_by_slug( 'home' );
+	$about_id      = ! empty( $pages['about'] ) ? $pages['about'] : gpi_get_page_id_by_slug( 'about-us' );
+	$products_id   = ! empty( $pages['products'] ) ? $pages['products'] : gpi_get_page_id_by_slug( 'products' );
+	$services_id   = ! empty( $pages['services'] ) ? $pages['services'] : gpi_get_page_id_by_slug( 'services' );
+	$industries_id = ! empty( $pages['industries'] ) ? $pages['industries'] : gpi_get_page_id_by_slug( 'industries' );
+	$projects_id   = ! empty( $pages['case_studies'] ) ? $pages['case_studies'] : gpi_get_page_id_by_slug( 'case-studies' );
+	$contact_id    = ! empty( $pages['contact'] ) ? $pages['contact'] : gpi_get_page_id_by_slug( 'contact' );
+
+	// Clear previous items to avoid duplicate or obsolete links
+	$existing_items = wp_get_nav_menu_items( $menu_id );
+	if ( ! empty( $existing_items ) ) {
+		foreach ( $existing_items as $item ) {
+			wp_delete_post( $item->ID, true );
+		}
+	}
+
+	$order = 1;
+
+	// 1. Home
+	if ( $home_id ) {
+		wp_update_nav_menu_item(
+			$menu_id,
+			0,
+			array(
+				'menu-item-title'     => esc_html__( 'Home', 'gp-industry' ),
+				'menu-item-object'    => 'page',
+				'menu-item-object-id' => $home_id,
+				'menu-item-type'      => 'post_type',
+				'menu-item-status'    => 'publish',
+				'menu-item-position'  => $order++,
+			)
+		);
+	}
+
+	// 2. About Us
+	if ( $about_id ) {
+		wp_update_nav_menu_item(
+			$menu_id,
+			0,
+			array(
+				'menu-item-title'     => esc_html__( 'About Us', 'gp-industry' ),
+				'menu-item-object'    => 'page',
+				'menu-item-object-id' => $about_id,
+				'menu-item-type'      => 'post_type',
+				'menu-item-status'    => 'publish',
+				'menu-item-position'  => $order++,
+			)
+		);
+	}
+
+	// 3. Products (with child dropdown)
+	if ( $products_id ) {
+		$prod_menu_id = wp_update_nav_menu_item(
+			$menu_id,
+			0,
+			array(
+				'menu-item-title'     => esc_html__( 'Products', 'gp-industry' ),
+				'menu-item-object'    => 'page',
+				'menu-item-object-id' => $products_id,
+				'menu-item-type'      => 'post_type',
+				'menu-item-status'    => 'publish',
+				'menu-item-position'  => $order++,
+			)
+		);
+
+		$prod_children = ! empty( $pages['solution_children'] ) ? $pages['solution_children'] : array(
+			gpi_get_page_id_by_slug( 'products/heavy-industrial-machinery' ),
+			gpi_get_page_id_by_slug( 'products/precision-cnc-components' ),
+			gpi_get_page_id_by_slug( 'products/industrial-automation' ),
+		);
+		foreach ( $prod_children as $cid ) {
+			if ( $cid ) {
+				wp_update_nav_menu_item(
+					$menu_id,
+					0,
+					array(
+						'menu-item-title'     => get_the_title( $cid ),
+						'menu-item-object'    => 'page',
+						'menu-item-object-id' => $cid,
+						'menu-item-parent-id' => $prod_menu_id,
+						'menu-item-type'      => 'post_type',
+						'menu-item-status'    => 'publish',
+						'menu-item-position'  => $order++,
+					)
+				);
+			}
+		}
+	}
+
+	// 4. Services (with child dropdown)
+	if ( $services_id ) {
+		$srv_menu_id = wp_update_nav_menu_item(
+			$menu_id,
+			0,
+			array(
+				'menu-item-title'     => esc_html__( 'Services', 'gp-industry' ),
+				'menu-item-object'    => 'page',
+				'menu-item-object-id' => $services_id,
+				'menu-item-type'      => 'post_type',
+				'menu-item-status'    => 'publish',
+				'menu-item-position'  => $order++,
+			)
+		);
+
+		$srv_children = ! empty( $pages['service_children'] ) ? $pages['service_children'] : array(
+			gpi_get_page_id_by_slug( 'services/custom-fabrication' ),
+			gpi_get_page_id_by_slug( 'services/plant-maintenance' ),
+			gpi_get_page_id_by_slug( 'services/engineering-prototyping' ),
+		);
+		foreach ( $srv_children as $cid ) {
+			if ( $cid ) {
+				wp_update_nav_menu_item(
+					$menu_id,
+					0,
+					array(
+						'menu-item-title'     => get_the_title( $cid ),
+						'menu-item-object'    => 'page',
+						'menu-item-object-id' => $cid,
+						'menu-item-parent-id' => $srv_menu_id,
+						'menu-item-type'      => 'post_type',
+						'menu-item-status'    => 'publish',
+						'menu-item-position'  => $order++,
+					)
+				);
+			}
+		}
+	}
+
+	// 5. Industries
+	if ( $industries_id ) {
+		wp_update_nav_menu_item(
+			$menu_id,
+			0,
+			array(
+				'menu-item-title'     => esc_html__( 'Industries', 'gp-industry' ),
+				'menu-item-object'    => 'page',
+				'menu-item-object-id' => $industries_id,
+				'menu-item-type'      => 'post_type',
+				'menu-item-status'    => 'publish',
+				'menu-item-position'  => $order++,
+			)
+		);
+	}
+
+	// 6. Projects
+	if ( $projects_id ) {
+		wp_update_nav_menu_item(
+			$menu_id,
+			0,
+			array(
+				'menu-item-title'     => esc_html__( 'Projects', 'gp-industry' ),
+				'menu-item-object'    => 'page',
+				'menu-item-object-id' => $projects_id,
+				'menu-item-type'      => 'post_type',
+				'menu-item-status'    => 'publish',
+				'menu-item-position'  => $order++,
+			)
+		);
+	}
+
+	// 7. Contact
+	if ( $contact_id ) {
+		wp_update_nav_menu_item(
+			$menu_id,
+			0,
+			array(
+				'menu-item-title'     => esc_html__( 'Contact', 'gp-industry' ),
+				'menu-item-object'    => 'page',
+				'menu-item-object-id' => $contact_id,
+				'menu-item-type'      => 'post_type',
+				'menu-item-status'    => 'publish',
+				'menu-item-position'  => $order++,
+			)
+		);
+	}
+
+	return $menu_id;
 }

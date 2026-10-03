@@ -18,7 +18,7 @@ while ( have_posts() ) :
 		'template-parts/page/page-hero',
 		null,
 		array(
-			'align' => has_post_thumbnail() ? 'left' : 'center',
+			'align' => 'left',
 			'image' => true,
 		)
 	);

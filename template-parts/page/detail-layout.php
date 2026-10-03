@@ -25,8 +25,22 @@ $gpi_parent_id = wp_get_post_parent_id( get_the_ID() );
 <div class="nova-container">
 	<div class="service-layout">
 		<div class="service-main">
-			<?php if ( has_post_thumbnail() ) : ?>
-				<figure class="service-featured"><?php the_post_thumbnail( 'nova-wide' ); ?></figure>
+			<?php
+			$detail_thumb_id   = get_post_thumbnail_id( get_the_ID() );
+			$detail_thumb_post = $detail_thumb_id ? get_post( $detail_thumb_id ) : null;
+			$detail_is_synth   = $detail_thumb_post && ( false !== strpos( $detail_thumb_post->post_name, 'gpi-demo-' ) || false !== strpos( (string) $detail_thumb_post->guid, 'gpi-demo-' ) );
+			$gpi_detail_img    = '';
+			if ( ! $detail_is_synth && has_post_thumbnail() ) {
+				$gpi_detail_img = get_the_post_thumbnail( get_the_ID(), 'nova-wide' );
+			} else {
+				$fallback_src = function_exists( 'gpi_get_page_image_url' ) ? gpi_get_page_image_url( get_the_ID() ) : '';
+				if ( $fallback_src ) {
+					$gpi_detail_img = '<img src="' . esc_url( $fallback_src ) . '" alt="' . the_title_attribute( array( 'echo' => false ) ) . '" class="service-featured-img">';
+				}
+			}
+			if ( $gpi_detail_img ) :
+			?>
+				<figure class="service-featured"><?php echo $gpi_detail_img; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></figure>
 			<?php endif; ?>
 
 			<div class="auto-layout-narrow">

@@ -37,34 +37,30 @@ $gpi_cta_url  = gpi_get_option( 'header_cta_url' );
 			</div>
 
 			<?php
+			$gpi_rendered = false;
 			if ( has_nav_menu( 'primary-menu' ) ) {
-				wp_nav_menu(
-					array(
-						'theme_location' => 'primary-menu',
-						'menu_id'        => 'primary-menu',
-						'menu_class'     => 'nav-menu',
-						'container'      => false,
-						'depth'          => 3,
-					)
-				);
-			} else {
-				?>
-				<ul id="primary-menu" class="nav-menu">
-					<li class="menu-item<?php echo is_front_page() ? ' current-menu-item' : ''; ?>"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'gp-industry' ); ?></a></li>
-					<?php
-					wp_list_pages(
-						array(
-							'title_li' => '',
-							'depth'    => 1,
-							'number'   => 5,
-						)
-					);
-					?>
-					<?php if ( is_user_logged_in() && current_user_can( 'edit_theme_options' ) ) : ?>
-						<li class="menu-item"><a href="<?php echo esc_url( admin_url( 'nav-menus.php' ) ); ?>"><?php esc_html_e( 'Add a menu', 'gp-industry' ); ?></a></li>
-					<?php endif; ?>
-				</ul>
-				<?php
+				$gpi_locations = get_nav_menu_locations();
+				$gpi_menu_id   = ! empty( $gpi_locations['primary-menu'] ) ? (int) $gpi_locations['primary-menu'] : 0;
+				if ( $gpi_menu_id ) {
+					$gpi_items = wp_get_nav_menu_items( $gpi_menu_id );
+					if ( ! empty( $gpi_items ) ) {
+						$gpi_rendered = true;
+						wp_nav_menu(
+							array(
+								'theme_location' => 'primary-menu',
+								'menu_id'        => 'primary-menu',
+								'menu_class'     => 'nav-menu',
+								'container'      => false,
+								'depth'          => 3,
+								'fallback_cb'    => 'gpi_primary_nav_fallback',
+							)
+						);
+					}
+				}
+			}
+
+			if ( ! $gpi_rendered ) {
+				gpi_primary_nav_fallback();
 			}
 			?>
 

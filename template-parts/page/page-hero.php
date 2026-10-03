@@ -22,7 +22,20 @@ $args = wp_parse_args(
 	)
 );
 
-$gpi_split = $args['image'] && has_post_thumbnail();
+$gpi_hero_img = '';
+$hero_thumb_id = get_post_thumbnail_id( get_the_ID() );
+$hero_thumb_post = $hero_thumb_id ? get_post( $hero_thumb_id ) : null;
+$hero_is_synth = $hero_thumb_post && ( false !== strpos( $hero_thumb_post->post_name, 'gpi-demo-' ) || false !== strpos( (string) $hero_thumb_post->guid, 'gpi-demo-' ) );
+if ( ! $hero_is_synth && has_post_thumbnail() ) {
+	$gpi_hero_img = get_the_post_thumbnail( get_the_ID(), 'nova-wide', array( 'loading' => 'eager' ) );
+} else {
+	$img_url = function_exists( 'gpi_get_page_image_url' ) ? gpi_get_page_image_url( get_the_ID() ) : '';
+	if ( $img_url ) {
+		$gpi_hero_img = '<img src="' . esc_url( $img_url ) . '" alt="' . the_title_attribute( array( 'echo' => false ) ) . '" loading="eager">';
+	}
+}
+
+$gpi_split = (bool) ( $args['image'] && $gpi_hero_img );
 ?>
 
 <section class="page-hero page-hero-template<?php echo $gpi_split ? ' page-hero-split' : ''; ?> align-<?php echo esc_attr( $args['align'] ); ?>">
@@ -42,7 +55,7 @@ $gpi_split = $args['image'] && has_post_thumbnail();
 		<?php if ( $gpi_split ) : ?>
 			<div class="page-hero-media" data-reveal data-reveal-delay="150">
 				<div class="hero-media-frame">
-					<?php the_post_thumbnail( 'nova-wide', array( 'loading' => 'eager' ) ); ?>
+					<?php echo $gpi_hero_img; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</div>
 			</div>
 		<?php endif; ?>

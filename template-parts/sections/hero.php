@@ -26,6 +26,13 @@ if ( gpi_get_option( 'hero_slider_enable', true ) ) {
 			$gpi_slides[] = $gpi_slide;
 		}
 	}
+	if ( empty( $gpi_slides ) ) {
+		$gpi_slides = array(
+			GPI_THEME_URI . '/assets/images/hero-industrial.jpg',
+			GPI_THEME_URI . '/assets/images/heavy-machinery.jpg',
+			GPI_THEME_URI . '/assets/images/industrial-automation.jpg',
+		);
+	}
 }
 $gpi_has_slider = ! empty( $gpi_slides );
 $gpi_overlay    = min( 90, absint( gpi_get_option( 'hero_slider_overlay', 60 ) ) ) / 100;

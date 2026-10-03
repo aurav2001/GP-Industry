@@ -19,6 +19,8 @@ while ( have_posts() ) :
 		null,
 		array(
 			'eyebrow' => esc_html__( 'Get in touch', 'gp-industry' ),
+			'align'   => 'left',
+			'image'   => true,
 		)
 	);
 

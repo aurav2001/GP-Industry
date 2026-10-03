@@ -47,13 +47,7 @@ if ( $gpi_children->have_posts() ) :
 					?>
 					<a class="service-card" href="<?php the_permalink(); ?>" data-reveal data-reveal-delay="<?php echo esc_attr( $gpi_i * 70 ); ?>">
 						<div class="service-card-media">
-							<?php
-							if ( has_post_thumbnail() ) {
-								the_post_thumbnail( 'nova-card', array( 'loading' => 'lazy' ) );
-							} else {
-								echo '<span class="service-card-icon">' . gpi_icon( $args['icon'], 26 ) . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-							}
-							?>
+							<?php gpi_the_card_media( get_the_ID(), 'nova-card', $args['icon'] ); ?>
 						</div>
 						<div class="service-card-body">
 							<h3 class="service-card-title"><?php the_title(); ?></h3>

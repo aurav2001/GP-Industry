@@ -13,7 +13,15 @@ get_header();
 while ( have_posts() ) :
 	the_post();
 
-	get_template_part( 'template-parts/page/page-hero', null, array( 'eyebrow' => esc_html__( 'Our solutions', 'gp-industry' ) ) );
+	get_template_part(
+		'template-parts/page/page-hero',
+		null,
+		array(
+			'eyebrow' => esc_html__( 'Our solutions', 'gp-industry' ),
+			'align'   => 'left',
+			'image'   => true,
+		)
+	);
 	?>
 
 	<article id="post-<?php the_ID(); ?>" <?php post_class( 'template-page template-products' ); ?>>
