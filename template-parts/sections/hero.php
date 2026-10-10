@@ -16,14 +16,14 @@ $gpi_btn1     = gpi_get_option( 'hero_btn1_text' );
 $gpi_btn1_url = gpi_get_option( 'hero_btn1_url' );
 $gpi_btn2     = gpi_get_option( 'hero_btn2_text' );
 $gpi_btn2_url = gpi_get_option( 'hero_btn2_url' );
-$gpi_image    = gpi_get_option( 'hero_image', '' );
+$gpi_image    = gpi_protocol_adaptive_url( gpi_get_option( 'hero_image', '' ) );
 
 $gpi_slides = array();
 if ( gpi_get_option( 'hero_slider_enable', true ) ) {
 	for ( $gpi_i = 1; $gpi_i <= 5; $gpi_i++ ) {
 		$gpi_slide = gpi_get_option( "hero_bg_{$gpi_i}", '' );
 		if ( $gpi_slide ) {
-			$gpi_slides[] = $gpi_slide;
+			$gpi_slides[] = gpi_protocol_adaptive_url( $gpi_slide );
 		}
 	}
 	if ( empty( $gpi_slides ) ) {
@@ -76,7 +76,7 @@ if ( $gpi_has_slider ) {
 
 	<div class="nova-container hero-inner">
 		<?php if ( $gpi_badge ) : ?>
-			<div class="hero-badge" data-reveal><?php gpi_the_icon( 'sparkles', 14 ); ?><span class="hero-badge-text"><?php echo esc_html( $gpi_badge ); ?></span></div>
+			<div class="hero-badge" data-reveal><?php gpi_the_icon( 'award', 14 ); ?><span class="hero-badge-text"><?php echo esc_html( $gpi_badge ); ?></span></div>
 		<?php endif; ?>
 
 		<h1 class="hero-title" data-reveal data-reveal-delay="100"><?php echo wp_kses( $gpi_title, gpi_hero_allowed_html() ); ?></h1>

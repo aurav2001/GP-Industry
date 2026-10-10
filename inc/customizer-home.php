@@ -25,40 +25,40 @@ function gpi_home_defaults( $company = '' ) {
 		// About / intro.
 		/* translators: %s: company name */
 		'home_about_eyebrow' => sprintf( esc_html__( 'About %s', 'gp-industry' ), $company ),
-		'home_about_title'   => esc_html__( 'Advanced manufacturing infrastructure and precision engineering excellence', 'gp-industry' ),
+		'home_about_title'   => esc_html__( 'Recruit Quality Resources, Nurture & Retain — Strategic Workforce & Facility Solutions', 'gp-industry' ),
 		/* translators: %s: company name */
-		'home_about_text'    => sprintf( esc_html__( '%s is an industry-leading manufacturing and engineering corporation delivering high-precision components, heavy industrial machinery, and turnkey structural fabrication. With over 25 years of engineering heritage and state-of-the-art facilities, we provide reliable, high-tolerance manufacturing solutions for global industrial leaders.', 'gp-industry' ), $company ),
-		'home_about_list'    => "150,000 sq.ft heavy engineering & CNC machining facility\n5-Axis precision CNC milling with tolerances down to ±0.005mm\nISO 9001:2015, ISO 14001 & ASME Section VIII certified\nIn-house CMM coordinate measuring, NDT & metallurgical lab",
-		'home_about_btn'     => esc_html__( 'Explore Our Capabilities', 'gp-industry' ),
-		'home_about_url'     => '/about-us/',
+		'home_about_text'    => sprintf( esc_html__( '%s delivers integrated workforce solutions, strategic facilities management, and 100%% statutory payroll compliance. Backed by over a decade of operational excellence, our human-centric approach combines deep market intelligence, verified candidate networks, and structured SOP training to create measurable enterprise value.', 'gp-industry' ), $company ),
+		'home_about_list'    => "10+ Years of corporate excellence & 100+ man-years of talent leadership\n100% Statutory Compliance Guarantee: PF, ESI, EPFO & monthly ECR filing\nStrategic Integrated Facilities Management (IFM) & mechanized maintenance\nLogistics & Warehouse Operations: certified forklift & BOPT workforce pods\nProprietary 4,000,000+ pre-screened talent database across 15+ verticals\nPan-India deployment network with 24/7/365 rapid-response support",
+		'home_about_btn'     => esc_html__( 'Explore Our Services', 'gp-industry' ),
+		'home_about_url'     => '/services/',
 		'home_about_image'   => GPI_THEME_URI . '/assets/images/about-facility.jpg',
-		'home_about_badge'   => esc_html__( '25+ Years', 'gp-industry' ),
-		'home_about_badge_2' => esc_html__( 'of manufacturing excellence', 'gp-industry' ),
+		'home_about_badge'   => esc_html__( '10+ Years', 'gp-industry' ),
+		'home_about_badge_2' => esc_html__( 'of corporate excellence since 2014', 'gp-industry' ),
 		// Products / solutions.
-		'home_products_eyebrow' => esc_html__( 'Engineered Equipment', 'gp-industry' ),
-		'home_products_title'   => esc_html__( 'High-performance machinery & precision components', 'gp-industry' ),
+		'home_products_eyebrow' => esc_html__( 'Core Solutions', 'gp-industry' ),
+		'home_products_title'   => esc_html__( 'Strategic workforce, staffing & facilities management models', 'gp-industry' ),
 		'home_products_page'    => 0,
 		'home_products_count'   => 6,
 		// Industries.
-		'home_industries_eyebrow' => esc_html__( 'Sectors We Serve', 'gp-industry' ),
-		'home_industries_title'   => esc_html__( 'Mission-critical manufacturing for global industries', 'gp-industry' ),
-		'home_industries_text'    => esc_html__( 'Delivering precision components and structural systems across demanding industrial sectors.', 'gp-industry' ),
-		'home_industries_items'   => "factory | Automotive & Heavy Vehicles | Engine blocks, transmission housings, chassis assemblies & stamping dies\nglobe | Aerospace & Defense | High-strength titanium brackets, avionics enclosures & turbine components\nbolt | Energy & Power Generation | Gas turbine rotors, high-pressure flanges & boiler heat-exchanger assemblies\nlayers | Oil, Gas & Petrochemical | API 6D valves, high-pressure pipeline skids & refinery pressure vessels\ntruck | Heavy Construction & Mining | Crusher wear plates, excavator boom fabrication & material conveyor drives\nleaf | Renewable Energy & Marine | Wind turbine hub castings, solar tracker gearing & marine propulsion shafts",
+		'home_industries_eyebrow' => esc_html__( 'Industry Expertise', 'gp-industry' ),
+		'home_industries_title'   => esc_html__( 'Pan-India cross-sector support across critical industries', 'gp-industry' ),
+		'home_industries_text'    => esc_html__( 'We combine domain understanding, compliance rigour, and specialized candidate networks to manage end-to-end workforce operations across key sectors.', 'gp-industry' ),
+		'home_industries_items'   => "truck | Logistics & Warehousing | Forklift operators, BOPT handlers, inventory controllers & warehouse managers\nbuilding-columns | Corporate Offices & BFSI | Integrated facility managers, executive assistants, accountants & payroll analysts\nfactory | Manufacturing & Industrial Plants | Shift engineers, machine technicians, safety officers & plant maintenance\nheart-pulse | Healthcare & Pharmaceuticals | Hospital housekeeping, biomedical attendants, lab technicians & front-desk\nmicrochip | Information Technology & Telecom | Tech support, network engineers, facilities coordinators & helpdesk\ncart-shopping | Retail & E-Commerce | Hub operations, dispatch supervisors, pickers & customer support executives\nshield | Security & Surveillance | Security guards, control room monitors, fire safety marshals & access controllers\nlayers | Real Estate & Infrastructure | MEP technicians, HVAC chiller operators, DG set handlers & caretakers",
 		// Process.
-		'home_process_eyebrow' => esc_html__( 'Manufacturing Workflow', 'gp-industry' ),
-		'home_process_title'   => esc_html__( 'From engineering blueprint to finished delivery in four stages', 'gp-industry' ),
-		'home_process_items'   => "Engineering & DFM Review | CAD/CAM model analysis, material selection, FEA stress simulation and cost optimization.\nPrecision Prototyping | Rapid CNC machining or 3D metal printing prototype with full dimensional inspection.\nProduction & Fabrication | Multi-axis CNC milling, robotic welding, heat treatment, and precision surface finishing.\nQuality Testing & Delivery | CMM inspection, ultrasonic/hydrostatic testing, mill test certificates, and secure export packing.",
+		'home_process_eyebrow' => esc_html__( 'Our Methodology', 'gp-industry' ),
+		'home_process_title'   => esc_html__( 'A structured, high-precision hiring & deployment lifecycle', 'gp-industry' ),
+		'home_process_items'   => "Role Calibration & Market Mapping | In-depth alignment on competencies, headcount budgets, compensation benchmarking, and talent availability mapping.\nRigorous Vetting & Background Verification | Multi-tier functional assessment, police verification, past work track record and KYC compliance check.\n2-Week Pre-Deployment Soft-Skills Induction | Mandatory training on client workplace SOPs, professional grooming, safety protocols and job role essentials.\n100% Compliant Payroll & SLA Governance | Automated biometric attendance, error-free monthly salary disbursement, timely PF/ESI ECR filings and 24/7 client desk.",
 		// Testimonials.
-		'home_testimonials_eyebrow' => esc_html__( 'Client Reviews', 'gp-industry' ),
-		'home_testimonials_title'   => esc_html__( 'Trusted by engineering directors and plant managers', 'gp-industry' ),
-		'home_testimonials_items'   => "The dimensional accuracy of the machined turbine housings exceeded our tightest tolerances. Zero defects across a 2,000-unit batch. | Rajesh Sharma | VP of Operations, Bharat Heavy Power\nTheir custom steel fabrication for our stamping line was delivered two weeks ahead of schedule. Exceptional weld quality and full NDT reports. | Marcus Vance | Director of Engineering, Precision AutoCorp\nReliable partner for complex alloy machining. Their metallurgical traceability and CMM documentation make audit compliance effortless. | David Miller | Supply Chain Head, AeroDynamics Global",
+		'home_testimonials_eyebrow' => esc_html__( 'Client Endorsements', 'gp-industry' ),
+		'home_testimonials_title'   => esc_html__( 'Trusted by business leaders, HR directors, and operations heads', 'gp-industry' ),
+		'home_testimonials_items'   => "Varunya transformed our warehouse and logistics staffing. Deploying 80+ certified equipment operators with 100% on-time attendance has boosted our dispatch speed significantly. | Rajesh Sharma | VP of Operations\nTheir payroll outsourcing and PF/ESI compliance management is completely dispute-free. Our monthly audits have been seamless for over 2 years. | Marcus Vance | Head of Human Resources\nThe integrated facilities management team maintains our 250,000 sq.ft corporate campus to five-star standards with bio-friendly mechanized upkeep. | David Miller | Director of Corporate Infrastructure",
 		// Clients.
-		'home_clients_title' => esc_html__( 'Trusted by leading industrial enterprises', 'gp-industry' ),
-		'home_clients_names' => "Tata Steel\nSiemens Energy\nLarsen & Toubro\nBharat Forge\nMahindra Heavy\nCaterpillar",
+		'home_clients_title' => esc_html__( 'Enterprise partners who trust our workforce & facility expertise', 'gp-industry' ),
+		'home_clients_names' => "Blinkit\nDelhivery\nMother Dairy\nSRF Limited\nJindal Steel & Power\nTata Advanced Systems\nImperial Auto\nHero MotoCorp",
 		// FAQ.
-		'home_faq_eyebrow' => esc_html__( 'Technical FAQ', 'gp-industry' ),
-		'home_faq_title'   => esc_html__( 'Frequently asked engineering questions', 'gp-industry' ),
-		'home_faq_items'   => "What machining tolerances can you achieve? | We routinely achieve tolerances down to ±0.005 mm (5 microns) on our temperature-controlled 5-axis CNC machining centers.\nWhat materials do you work with? | We machine and fabricate carbon steel, stainless steel (304, 316, duplex), titanium alloys, Inconel, aluminum, brass, and high-tensile structural steel.\nDo you provide material test certificates (MTC)? | Yes. Every batch is accompanied by EN 10204 3.1 material test certificates, heat treatment charts, CMM reports, and NDT inspection records.\nWhat is your typical lead time for custom fabrication? | Standard prototypes ship in 5–10 business days. Production batch runs typically ship within 3–4 weeks depending on material availability and tooling.",
+		'home_faq_eyebrow' => esc_html__( 'Consulting FAQ', 'gp-industry' ),
+		'home_faq_title'   => esc_html__( 'Frequently asked workforce & facilities management questions', 'gp-industry' ),
+		'home_faq_items'   => "What workforce and consulting services do you offer? | We specialize in Strategic HR Staffing, 100% Statutory Payroll Compliance (PF/ESI/EPFO), Integrated Facilities Management (IFM), Logistics & Warehouse Operations, Executive Search, and IT Staff Augmentation.\nHow do you ensure 100% statutory compliance? | We manage end-to-end EPFO, ESIC, Professional Tax, Labour Welfare Fund and Gratuity. Monthly ECR challans and bank disbursement proofs are provided directly to client audit teams with zero deviation.\nWhat is your candidate induction and training process? | Every selected resource undergoes our proprietary National Resource Cell induction, including workplace SOPs, professional hygiene, POSH guidelines, and role-specific safety standards before day one.\nWhat geographic locations do you cover? | We operate across Delhi NCR, Uttar Pradesh, Haryana, Uttarakhand, and provide Pan-India workforce deployment through dedicated regional resource cells.",
 	);
 }
 

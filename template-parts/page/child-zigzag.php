@@ -39,11 +39,18 @@ $gpi_icons = gpi_auto_icons();
 <!-- At a glance: quick icon navigation -->
 <section class="glance-section">
 	<div class="nova-container">
-		<div class="glance-grid" data-reveal>
+		<div class="glance-header" data-reveal>
+			<span class="glance-kicker"><?php gpi_the_icon( 'sliders', 14 ); ?><?php esc_html_e( 'Our Core Capabilities', 'gp-industry' ); ?></span>
+			<h2 class="glance-heading"><?php esc_html_e( 'Engineered Industrial Services', 'gp-industry' ); ?></h2>
+		</div>
+		<div class="glance-grid" data-reveal data-reveal-delay="100">
 			<?php foreach ( $gpi_children as $gpi_i => $gpi_child ) : ?>
 				<a class="glance-item" href="#<?php echo esc_attr( $gpi_child->post_name ); ?>">
 					<span class="glance-icon"><?php gpi_the_icon( $gpi_icons[ $gpi_i % count( $gpi_icons ) ], 20 ); ?></span>
-					<span class="glance-title"><?php echo esc_html( $gpi_child->post_title ); ?></span>
+					<div class="glance-text">
+						<span class="glance-index"><?php echo esc_html( sprintf( '%02d', $gpi_i + 1 ) ); ?></span>
+						<span class="glance-title"><?php echo esc_html( $gpi_child->post_title ); ?></span>
+					</div>
 					<?php gpi_the_icon( 'arrow-right', 14, 'glance-arrow' ); ?>
 				</a>
 			<?php endforeach; ?>
@@ -83,12 +90,21 @@ $gpi_icons = gpi_auto_icons();
 								<span class="zigzag-placeholder-lines"><span></span><span></span><span></span></span>
 							</div>
 						<?php endif; ?>
+						<div class="zigzag-media-badge">
+							<span class="badge-dot"></span>
+							<span class="badge-label"><?php esc_html_e( 'Industrial Grade &bull; ISO Certified', 'gp-industry' ); ?></span>
+						</div>
 					</div>
-					<span class="zigzag-number" aria-hidden="true"><?php echo esc_html( sprintf( '%02d', $gpi_i + 1 ) ); ?></span>
+					<div class="zigzag-number-pill">
+						<span class="number-val"><?php echo esc_html( sprintf( '%02d', $gpi_i + 1 ) ); ?></span>
+						<span class="number-tag"><?php esc_html_e( 'Service', 'gp-industry' ); ?></span>
+					</div>
 				</div>
 
 				<div class="zigzag-content" data-reveal data-reveal-delay="120">
-					<span class="section-eyebrow"><?php echo esc_html( sprintf( /* translators: %s: number */ __( 'Service %s', 'gp-industry' ), sprintf( '%02d', $gpi_i + 1 ) ) ); ?></span>
+					<div class="zigzag-header-meta">
+						<span class="section-eyebrow"><?php echo esc_html( sprintf( /* translators: %s: number */ __( 'Engineering Capability %s', 'gp-industry' ), sprintf( '%02d', $gpi_i + 1 ) ) ); ?></span>
+					</div>
 					<h2 class="zigzag-title"><?php echo esc_html( $gpi_child->post_title ); ?></h2>
 					<?php if ( $gpi_excerpt ) : ?>
 						<p class="zigzag-text"><?php echo esc_html( $gpi_excerpt ); ?></p>
@@ -97,14 +113,39 @@ $gpi_icons = gpi_auto_icons();
 					<?php if ( $gpi_bullets ) : ?>
 						<ul class="zigzag-list">
 							<?php foreach ( $gpi_bullets as $gpi_b ) : ?>
-								<li><span class="zigzag-check"><?php gpi_the_icon( 'check', 12 ); ?></span><?php echo esc_html( $gpi_b ); ?></li>
+								<li class="zigzag-list-item">
+									<span class="zigzag-check"><?php gpi_the_icon( 'check-circle', 16 ); ?></span>
+									<span class="item-text"><?php echo esc_html( $gpi_b ); ?></span>
+								</li>
 							<?php endforeach; ?>
 						</ul>
 					<?php endif; ?>
 
+					<!-- Quick Service Specs Bar -->
+					<div class="zigzag-spec-mini">
+						<div class="spec-mini-item">
+							<span class="spec-mini-title"><?php esc_html_e( 'Execution', 'gp-industry' ); ?></span>
+							<strong class="spec-mini-val"><?php esc_html_e( 'In-House &amp; On-Site', 'gp-industry' ); ?></strong>
+						</div>
+						<div class="spec-mini-item">
+							<span class="spec-mini-title"><?php esc_html_e( 'Standards', 'gp-industry' ); ?></span>
+							<strong class="spec-mini-val"><?php esc_html_e( 'ASME / ISO 9001', 'gp-industry' ); ?></strong>
+						</div>
+						<div class="spec-mini-item">
+							<span class="spec-mini-title"><?php esc_html_e( 'Turnaround', 'gp-industry' ); ?></span>
+							<strong class="spec-mini-val"><?php esc_html_e( '24h Feasibility', 'gp-industry' ); ?></strong>
+						</div>
+					</div>
+
 					<div class="zigzag-actions">
-						<a class="btn btn-primary" href="<?php echo esc_url( get_permalink( $gpi_child ) ); ?>"><?php echo esc_html( $args['link_text'] ); ?><?php gpi_the_icon( 'arrow-right', 16 ); ?></a>
-						<a class="btn btn-ghost" href="<?php echo esc_url( gpi_get_option( 'header_cta_url' ) ); ?>"><?php esc_html_e( 'Request a proposal', 'gp-industry' ); ?></a>
+						<a class="btn btn-primary" href="<?php echo esc_url( get_permalink( $gpi_child ) ); ?>">
+							<span><?php echo esc_html( $args['link_text'] ); ?></span>
+							<?php gpi_the_icon( 'arrow-right', 16 ); ?>
+						</a>
+						<a class="btn btn-ghost" href="<?php echo esc_url( gpi_get_option( 'header_cta_url' ) ); ?>">
+							<?php gpi_the_icon( 'file', 16 ); ?>
+							<span><?php esc_html_e( 'Request RFQ', 'gp-industry' ); ?></span>
+						</a>
 					</div>
 				</div>
 			</div>

@@ -341,4 +341,17 @@
 		window.scrollTo({ top: top, behavior: reduceMotion ? 'auto' : 'smooth' });
 		if (history.pushState) { history.pushState(null, '', '#' + id); }
 	});
+
+	/* ------------------------------------------------------------------
+	 * ViewTransition & Unhandled Promise safety guard
+	 * ---------------------------------------------------------------- */
+	window.addEventListener('unhandledrejection', function (e) {
+		if (e && e.reason) {
+			var msg = (e.reason.message || e.reason.name || String(e.reason)).toLowerCase();
+			if (msg.indexOf('transition was aborted') !== -1 || msg.indexOf('viewtransition') !== -1 || e.reason.name === 'InvalidStateError') {
+				e.preventDefault();
+			}
+		}
+	});
 })();
+

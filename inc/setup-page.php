@@ -21,8 +21,14 @@ function gpi_map_old_template( $old, $title = '' ) {
 	if ( false !== strpos( $hint, 'contact' ) ) {
 		return 'page-templates/contact.php';
 	}
+	if ( false !== strpos( $hint, 'product-single' ) || false !== strpos( $hint, 'precision' ) || false !== strpos( $hint, 'cnc' ) || false !== strpos( $hint, 'machinery' ) || false !== strpos( $hint, 'automation' ) ) {
+		return 'page-templates/product-single.php';
+	}
 	if ( false !== strpos( $hint, 'product' ) ) {
 		return 'page-templates/products.php';
+	}
+	if ( false !== strpos( $hint, 'service-single' ) || false !== strpos( $hint, 'fabrication' ) || false !== strpos( $hint, 'maintenance' ) || false !== strpos( $hint, 'prototyping' ) || false !== strpos( $hint, 'workforce' ) || false !== strpos( $hint, 'payroll' ) || false !== strpos( $hint, 'facility' ) ) {
+		return 'page-templates/service-single.php';
 	}
 	if ( false !== strpos( $hint, 'service' ) ) {
 		return 'page-templates/services.php';
@@ -526,44 +532,40 @@ function gpi_import_demo_pages() {
 	);
 
 	/* About */
-	$about_content  = $p( esc_html__( 'Industrial Heritage & Advanced Infrastructure', 'gp-industry' ) );
-	$about_content .= $h( sprintf( esc_html__( '%s — Precision Manufacturing & Heavy Engineering', 'gp-industry' ), $company ) );
-	$about_content .= $p( sprintf( esc_html__( '%s is an ISO 9001:2015 and ASME-certified heavy manufacturing powerhouse. Operating across a 150,000 sq.ft state-of-the-art facility, we specialize in high-precision 5-axis CNC machining, structural steel fabrication, industrial automation, and turnkey engineering solutions.', 'gp-industry' ), $company ) );
-	$about_content .= $fig( 'about-facility.jpg', sprintf( esc_html__( '%s 150,000 sq.ft precision manufacturing plant and heavy assembly bays', 'gp-industry' ), $company ) );
-	$about_content .= $p( esc_html__( 'Our engineering philosophy merges decades of manufacturing craftsmanship with Industry 4.0 automation. We achieve extreme tolerances down to ±0.005mm, full metallurgical traceability, and zero-defect quality across demanding automotive, aerospace, defense, energy, and heavy infrastructure sectors.', 'gp-industry' ) );
-	$about_content .= $p( esc_html__( 'Manufacturing Capabilities', 'gp-industry' ) );
-	$about_content .= $h( esc_html__( 'State-of-the-art industrial production infrastructure', 'gp-industry' ) );
-	$about_content .= $p( esc_html__( 'Integrated facilities designed to handle projects from prototype engineering to high-volume production with total reliability.', 'gp-industry' ) );
-	$about_content .= $p( esc_html__( 'Machining & Fabrication', 'gp-industry' ) );
-	$about_content .= $h( esc_html__( '5-Axis Precision CNC Machining', 'gp-industry' ), 3 ) . $p( esc_html__( 'Multi-axis high-speed CNC milling and turning centers delivering micron-level tolerances on titanium, Inconel, duplex, and alloy steels.', 'gp-industry' ) );
-	$about_content .= $h( esc_html__( 'Heavy Structural Steel Fabrication', 'gp-industry' ), 3 ) . $p( esc_html__( 'Heavy plate rolling, high-precision fiber laser cutting up to 30mm, and ASME-coded robotic and submerged arc welding.', 'gp-industry' ) );
-	$about_content .= $h( esc_html__( 'Turnkey Industrial Automation', 'gp-industry' ), 3 ) . $p( esc_html__( 'Robotic welding cells, material handling conveyor systems, and custom PLC control consoles for smart factories.', 'gp-industry' ) );
-	$about_content .= $fig( 'precision-components.jpg', esc_html__( 'High-tolerance aerospace and defense precision machined components', 'gp-industry' ) );
-	$about_content .= $p( esc_html__( 'Quality Assurance', 'gp-industry' ) );
-	$about_content .= $h( esc_html__( 'CMM Metrology & Metallurgical Lab', 'gp-industry' ), 3 ) . $p( esc_html__( 'Temperature-controlled inspection room equipped with coordinate measuring machines (CMM) and surface roughness testers.', 'gp-industry' ) );
-	$about_content .= $h( esc_html__( 'Non-Destructive Testing (NDT)', 'gp-industry' ), 3 ) . $p( esc_html__( 'ASNT Level II certified ultrasonic, magnetic particle, dye penetrant, and hydrostatic pressure testing.', 'gp-industry' ) );
-	$about_content .= $h( esc_html__( 'Material Traceability & Compliance', 'gp-industry' ), 3 ) . $p( esc_html__( '100% heat-number traceability with EN 10204 3.1 chemical and mechanical inspection certificates.', 'gp-industry' ) );
-	$about_content .= $h( esc_html__( 'Industry Certifications & Accreditations', 'gp-industry' ) );
+	$about_content  = $p( esc_html__( 'People-First Hiring & Global HR Consulting', 'gp-industry' ) );
+	$about_content .= $h( sprintf( esc_html__( '%s — Endeavoring to create a stronger and more human workforce', 'gp-industry' ), $company ) );
+	$about_content .= $p( sprintf( esc_html__( '%s helps organisations discover, assess, and engage high-impact professionals who move business forward. Our recruitment approach combines deep market intelligence, sector expertise, and genuine relationship-building so every placement creates measurable long-term value for employers and candidates.', 'gp-industry' ), $company ) );
+	$about_content .= $fig( 'workforce-outsourcing.jpg', sprintf( esc_html__( '%s Global Talent & Consulting Team', 'gp-industry' ), $company ) );
+	$about_content .= $p( esc_html__( 'With over 100+ combined man-years of talent leadership, a proprietary screened database of over 4,000,000+ professionals, and active practices spanning 15+ industry verticals, we empower businesses from high-growth tech firms to multinational corporations.', 'gp-industry' ) );
+	$about_content .= $p( esc_html__( 'Our Talent Solutions Portfolio', 'gp-industry' ) );
+	$about_content .= $h( esc_html__( 'End-to-End Talent Acquisition & Consulting Services', 'gp-industry' ) );
+	$about_content .= $p( esc_html__( 'Responsive, transparent, and industry-focused talent delivery designed to scale with your organization.', 'gp-industry' ) );
+	$about_content .= $h( esc_html__( 'Executive Search', 'gp-industry' ), 3 ) . $p( esc_html__( 'Identifying visionary CXO leaders, managing directors, and senior specialists who guide business transformation and long-term enterprise growth.', 'gp-industry' ) );
+	$about_content .= $h( esc_html__( 'Contingency Search', 'gp-industry' ), 3 ) . $p( esc_html__( 'High-velocity, performance-based recruitment across specialized functional, corporate, and operational roles.', 'gp-industry' ) );
+	$about_content .= $h( esc_html__( 'IT Staff Augmentation', 'gp-industry' ), 3 ) . $p( esc_html__( 'Vetted technology professionals, software developers, cloud architects, and data engineers deployed on flexible contracts.', 'gp-industry' ) );
+	$about_content .= $h( esc_html__( 'RPO Solutions', 'gp-industry' ), 3 ) . $p( esc_html__( 'End-to-end recruitment process outsourcing, candidate screening, compliance management, and dedicated hiring desks.', 'gp-industry' ) );
+	$about_content .= $h( esc_html__( 'Global Recruitment', 'gp-industry' ), 3 ) . $p( esc_html__( 'Cross-border international talent acquisition connecting global employers with specialized professionals across India and international hubs.', 'gp-industry' ) );
+	$about_content .= $h( esc_html__( 'Specialised Hiring Across Core Business Functions', 'gp-industry' ) );
 	$about_content .= $ul( array(
-		esc_html__( 'ISO 9001:2015 certified Quality Management System', 'gp-industry' ),
-		esc_html__( 'ISO 14001:2015 certified Environmental Management', 'gp-industry' ),
-		esc_html__( 'ASME Section VIII Div 1 & Div 2 Code Stamp certified', 'gp-industry' ),
-		esc_html__( 'CE marking & EN 1090 structural steel execution compliance', 'gp-industry' ),
+		esc_html__( 'Finance & Accounts: CFOs, financial controllers, tax analysts, audit directors & treasury managers', 'gp-industry' ),
+		esc_html__( 'Sales & Business Development: Revenue leaders, enterprise account executives & regional directors', 'gp-industry' ),
+		esc_html__( 'Supply Chain & Logistics: Procurement heads, inventory controllers, warehouse ops & logistics managers', 'gp-industry' ),
+		esc_html__( 'Human Resources & Compliance: CHROs, HRBPs, talent acquisition leaders & statutory compliance managers', 'gp-industry' ),
 	) );
-	$about_content .= gpi_pattern_process() . "\n" . gpi_pattern_team( $avatar ) . "\n" . gpi_pattern_faq();
+	$about_content .= gpi_pattern_process() . "\n" . gpi_pattern_team( $avatar );
 
 	$about = gpi_demo_page(
 		array(
 			'post_title'   => esc_html__( 'About Us', 'gp-industry' ),
 			'post_name'    => 'about-us',
-			'post_excerpt' => esc_html__( 'Leading precision CNC machining, heavy industrial fabrication, and turnkey engineering solutions.', 'gp-industry' ),
+			'post_excerpt' => esc_html__( 'Talent Destination provides recruitment, staffing, executive search and global HR solutions creating a stronger, more human workforce.', 'gp-industry' ),
 			'post_content' => $about_content,
 			'menu_order'   => 10,
 		),
 		'page-templates/about.php',
 		$result
 	);
-	gpi_demo_featured( $about, esc_html__( 'About Us', 'gp-industry' ), 'about-facility.jpg' );
+	gpi_demo_featured( $about, esc_html__( 'About Us', 'gp-industry' ), 'workforce-outsourcing.jpg' );
 
 	/* Products (Products template) + 3 children */
 	$products = gpi_demo_page(
@@ -666,51 +668,51 @@ function gpi_import_demo_pages() {
 		array(
 			'post_title'   => esc_html__( 'Services', 'gp-industry' ),
 			'post_name'    => 'services',
-			'post_excerpt' => esc_html__( 'Custom metal fabrication, plant maintenance, dynamic balancing, and turnkey engineering design.', 'gp-industry' ),
-			'post_content' => $fig( 'custom-fabrication.jpg', esc_html__( 'Turnkey custom structural metal fabrication and field engineering', 'gp-industry' ) ),
+			'post_excerpt' => esc_html__( 'Executive Search, Contingency Recruitment, IT Staff Augmentation, and global RPO solutions.', 'gp-industry' ),
+			'post_content' => $fig( 'workforce-outsourcing.jpg', esc_html__( 'Comprehensive Talent Acquisition & Global HR Consulting Services', 'gp-industry' ) ),
 			'menu_order'   => 30,
 		),
 		'page-templates/services.php',
 		$result
 	);
-	gpi_demo_featured( $services, esc_html__( 'Services', 'gp-industry' ), 'custom-fabrication.jpg' );
+	gpi_demo_featured( $services, esc_html__( 'Services', 'gp-industry' ), 'workforce-outsourcing.jpg' );
 
 	$service_items = array(
 		array(
-			'custom-fabrication',
-			esc_html__( 'Custom Metal Fabrication', 'gp-industry' ),
-			esc_html__( 'Structural steel fabrication, heavy plate rolling, fiber laser cutting up to 30mm, and ASME-coded robotic and manual welding.', 'gp-industry' ),
+			'executive-search',
+			esc_html__( 'Executive Search', 'gp-industry' ),
+			esc_html__( 'Identifying visionary CXO leaders, managing directors, and senior specialists who guide business transformation and long-term enterprise growth.', 'gp-industry' ),
 			array(
-				esc_html__( 'High-precision 12kW fiber laser cutting and beveling', 'gp-industry' ),
-				esc_html__( 'Coded TIG, MIG, and Submerged Arc Welding (SAW)', 'gp-industry' ),
-				esc_html__( 'Heavy pressure vessel and storage tank fabrication', 'gp-industry' ),
-				esc_html__( 'In-house grit blasting and epoxy industrial coatings', 'gp-industry' ),
+				esc_html__( 'Confidential CXO & Board-level leadership mapping and headhunting', 'gp-industry' ),
+				esc_html__( 'Comprehensive competency, leadership style, and cultural alignment assessment', 'gp-industry' ),
+				esc_html__( 'Compensation benchmarking, structured negotiations, and counter-offer advisory', 'gp-industry' ),
+				esc_html__( 'Post-placement 90-day transition advisory and performance check-ins', 'gp-industry' ),
 			),
-			'custom-fabrication.jpg',
+			'workforce-outsourcing.jpg',
 		),
 		array(
-			'plant-maintenance',
-			esc_html__( 'Plant Maintenance & Overhaul', 'gp-industry' ),
-			esc_html__( 'Comprehensive preventive maintenance, turbine and compressor overhauls, laser shaft alignment, and 24/7 shutdown response.', 'gp-industry' ),
+			'it-staff-augmentation',
+			esc_html__( 'IT Staff Augmentation', 'gp-industry' ),
+			esc_html__( 'On-demand tech professionals, full-stack developers, cloud architects, and QA engineers ready to scale your teams with speed and agility.', 'gp-industry' ),
 			array(
-				esc_html__( 'On-site dynamic rotor balancing and vibration analysis', 'gp-industry' ),
-				esc_html__( 'Laser optical alignment for gearboxes and drivetrains', 'gp-industry' ),
-				esc_html__( 'Planned plant shutdown and turnaround management', 'gp-industry' ),
-				esc_html__( '24/7 emergency repair and on-site line boring', 'gp-industry' ),
+				esc_html__( 'Pre-vetted developers, DevOps architects, and QA automation engineers', 'gp-industry' ),
+				esc_html__( 'Rapid deployment within 24 to 72 hours for critical technical sprints', 'gp-industry' ),
+				esc_html__( 'Flexible engagement models: contractual, contract-to-hire & dedicated pods', 'gp-industry' ),
+				esc_html__( 'Complete payroll, hardware provisioning, and statutory compliance management', 'gp-industry' ),
 			),
-			'plant-maintenance.jpg',
+			'facility-management.jpg',
 		),
 		array(
-			'engineering-prototyping',
-			esc_html__( 'Engineering & Prototyping', 'gp-industry' ),
-			esc_html__( 'CAD/CAM modeling, Finite Element Analysis (FEA) stress simulation, Design for Manufacturability (DFM), and rapid metal prototyping.', 'gp-industry' ),
+			'rpo-solutions',
+			esc_html__( 'RPO Solutions', 'gp-industry' ),
+			esc_html__( 'End-to-end recruitment process outsourcing delivering measurable hiring efficiency, reduced cost-per-hire, and dedicated recruiters.', 'gp-industry' ),
 			array(
-				esc_html__( 'SolidWorks & CATIA parametric 3D CAD modeling', 'gp-industry' ),
-				esc_html__( 'FEA structural, thermal, and fatigue simulations', 'gp-industry' ),
-				esc_html__( 'Rapid functional metal prototyping within 5-7 days', 'gp-industry' ),
-				esc_html__( 'Cost optimization and material substitution studies', 'gp-industry' ),
+				esc_html__( 'Complete management of talent pipeline from sourcing to offer release', 'gp-industry' ),
+				esc_html__( 'Dedicated on-site and remote talent acquisition specialists', 'gp-industry' ),
+				esc_html__( 'Employer branding, candidate journey enhancement, and ATS optimization', 'gp-industry' ),
+				esc_html__( 'Real-time hiring telemetry, SLA compliance dashboards, and audit-ready reporting', 'gp-industry' ),
 			),
-			'engineering-cad.jpg',
+			'payroll-compliance.jpg',
 		),
 	);
 	$service_child_ids = array();
@@ -718,11 +720,11 @@ function gpi_import_demo_pages() {
 		$content  = $fig( $item[4], $item[1] );
 		$content .= $p( $item[2] );
 		$content .= $ul( $item[3] );
-		$content .= $h( esc_html__( 'Our Engineering Process', 'gp-industry' ) );
-		$content .= $h( esc_html__( 'Technical Review & DFM', 'gp-industry' ), 3 ) . $p( esc_html__( 'We analyze CAD drawings, material properties, and operational parameters to optimize for durability and cost.', 'gp-industry' ) );
-		$content .= $h( esc_html__( 'Precision Execution', 'gp-industry' ), 3 ) . $p( esc_html__( 'Manufactured using calibrated CNC equipment with in-process dimensional verifications.', 'gp-industry' ) );
-		$content .= $h( esc_html__( 'Inspection & Documentation', 'gp-industry' ), 3 ) . $p( esc_html__( 'Full dimensional inspection reports, material test certificates, and on-site testing.', 'gp-industry' ) );
-		$content .= gpi_pattern_faq();
+		$content .= $h( esc_html__( 'Consulting Delivery Lifecycle', 'gp-industry' ) );
+		$content .= $h( esc_html__( 'Role Calibration & Market Mapping', 'gp-industry' ), 3 ) . $p( esc_html__( 'We align deeply with your executive team on candidate profiles, cultural nuance, and market compensation benchmarks.', 'gp-industry' ) );
+		$content .= $h( esc_html__( 'Rigorous Vetting & Behavioral Profiling', 'gp-industry' ), 3 ) . $p( esc_html__( 'Every candidate undergoes comprehensive technical, cultural, and situational assessment before dossier presentation.', 'gp-industry' ) );
+		$content .= $h( esc_html__( 'Offer Structuring & Seamless Onboarding', 'gp-industry' ), 3 ) . $p( esc_html__( 'We facilitate neutral offer structuring, formal reference checks, and active notice-period retention management.', 'gp-industry' ) );
+		// FAQ is rendered globally before footer, not duplicated inside page body.
 		$sid = gpi_demo_page(
 			array(
 				'post_title'   => $item[1],
@@ -740,7 +742,7 @@ function gpi_import_demo_pages() {
 		}
 		gpi_demo_featured( $sid, $item[1], $item[4] );
 	}
-	gpi_demo_featured( $services, esc_html__( 'Services', 'gp-industry' ), 'custom-fabrication.jpg' );
+	gpi_demo_featured( $services, esc_html__( 'Services', 'gp-industry' ), 'workforce-outsourcing.jpg' );
 
 	/* Industries, Projects (Case studies), Contact */
 	$industries = gpi_demo_page(

@@ -15,7 +15,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 function gpi_theme_scripts() {
 	wp_enqueue_style( 'nova-google-fonts', gpi_google_fonts_url(), array(), null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
 	wp_enqueue_style( 'nova-variables', GPI_THEME_URI . '/assets/css/variables.css', array(), GPI_THEME_VERSION );
-	wp_enqueue_style( 'nova-main', GPI_THEME_URI . '/assets/css/main.css', array( 'nova-variables' ), GPI_THEME_VERSION );
+	$main_ver = file_exists( GPI_THEME_DIR . '/assets/css/main.css' ) ? filemtime( GPI_THEME_DIR . '/assets/css/main.css' ) : GPI_THEME_VERSION;
+	wp_enqueue_style( 'nova-main', GPI_THEME_URI . '/assets/css/main.css', array( 'nova-variables' ), $main_ver );
 	wp_enqueue_style( 'nova-style', get_stylesheet_uri(), array( 'nova-main' ), GPI_THEME_VERSION );
 
 	wp_add_inline_style( 'nova-variables', gpi_customizer_css() );

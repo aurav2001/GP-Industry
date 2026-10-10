@@ -16,8 +16,13 @@ for ( $gpi_i = 1; $gpi_i <= 4; $gpi_i++ ) {
 		$gpi_pills[] = array( $gpi_number, gpi_get_option( "stat_{$gpi_i}_label" ) );
 	}
 }
-if ( ! $gpi_pills ) {
-	return;
+if ( empty( $gpi_pills ) ) {
+	$gpi_pills = array(
+		array( '100%', esc_html__( 'CMM Quality Tested', 'gp-industry' ) ),
+		array( '&plusmn;0.005mm', esc_html__( 'Machining Tolerance', 'gp-industry' ) ),
+		array( 'ISO 9001', esc_html__( 'Certified Facility', 'gp-industry' ) ),
+		array( '24/7', esc_html__( 'Emergency Support', 'gp-industry' ) ),
+	);
 }
 ?>
 

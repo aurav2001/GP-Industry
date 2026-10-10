@@ -70,7 +70,7 @@ elseif ( current_user_can( 'edit_pages' ) ) :
 	?>
 	<div class="nova-container">
 		<div class="template-hint">
-			<?php gpi_the_icon( 'sparkles', 18 ); ?>
+			<?php gpi_the_icon( 'info', 18 ); ?>
 			<?php
 			printf(
 				wp_kses(

@@ -40,13 +40,13 @@ $gpi_compact = isset( $args['compact'] ) && $args['compact'];
 
 	<ul class="contact-list">
 		<?php if ( $gpi_address ) : ?>
-			<li><span class="contact-icon"><?php gpi_the_icon( 'home', 18 ); ?></span><div><span class="contact-label"><?php esc_html_e( 'Address', 'gp-industry' ); ?></span><span class="contact-value"><?php echo nl2br( esc_html( $gpi_address ) ); ?></span></div></li>
+			<li><span class="contact-icon"><?php gpi_the_icon( 'map-pin', 18 ); ?></span><div><span class="contact-label"><?php esc_html_e( 'Address', 'gp-industry' ); ?></span><span class="contact-value"><?php echo nl2br( esc_html( $gpi_address ) ); ?></span></div></li>
 		<?php endif; ?>
 		<?php if ( $gpi_phone ) : ?>
 			<li><span class="contact-icon"><?php gpi_the_icon( 'phone', 18 ); ?></span><div><span class="contact-label"><?php esc_html_e( 'Phone', 'gp-industry' ); ?></span><a class="contact-value" href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $gpi_phone ) ); ?>"><?php echo esc_html( $gpi_phone ); ?></a></div></li>
 		<?php endif; ?>
 		<?php if ( $gpi_email ) : ?>
-			<li><span class="contact-icon"><?php gpi_the_icon( 'message', 18 ); ?></span><div><span class="contact-label"><?php esc_html_e( 'Email', 'gp-industry' ); ?></span><a class="contact-value" href="mailto:<?php echo esc_attr( antispambot( $gpi_email ) ); ?>"><?php echo esc_html( antispambot( $gpi_email ) ); ?></a></div></li>
+			<li><span class="contact-icon"><?php gpi_the_icon( 'mail', 18 ); ?></span><div><span class="contact-label"><?php esc_html_e( 'Email', 'gp-industry' ); ?></span><a class="contact-value" href="mailto:<?php echo esc_attr( antispambot( $gpi_email ) ); ?>"><?php echo esc_html( antispambot( $gpi_email ) ); ?></a></div></li>
 		<?php endif; ?>
 		<?php if ( $gpi_hours && ! $gpi_compact ) : ?>
 			<li><span class="contact-icon"><?php gpi_the_icon( 'clock', 18 ); ?></span><div><span class="contact-label"><?php esc_html_e( 'Hours', 'gp-industry' ); ?></span><span class="contact-value"><?php echo nl2br( esc_html( $gpi_hours ) ); ?></span></div></li>

@@ -14,6 +14,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
+	<?php if ( ! function_exists( 'has_site_icon' ) || ! has_site_icon() ) : ?>
+		<link rel="icon" type="image/svg+xml" href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/favicon.svg' ); ?>">
+		<link rel="alternate icon" type="image/x-icon" href="<?php echo esc_url( get_template_directory_uri() . '/favicon.ico' ); ?>">
+	<?php endif; ?>
 	<?php wp_head(); ?>
 </head>
 
@@ -35,7 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		?>
 		<div class="topbar" data-topbar-id="<?php echo esc_attr( md5( $gpi_topbar_text . $gpi_topbar_link ) ); ?>">
 			<div class="nova-container topbar-inner">
-				<span class="topbar-text"><?php gpi_the_icon( 'sparkles', 14 ); ?><?php echo esc_html( $gpi_topbar_text ); ?></span>
+				<span class="topbar-text"><?php gpi_the_icon( 'bolt', 14 ); ?><?php echo esc_html( $gpi_topbar_text ); ?></span>
 				<?php if ( $gpi_topbar_link && $gpi_topbar_cta ) : ?>
 					<a class="topbar-link" href="<?php echo esc_url( $gpi_topbar_link ); ?>"><?php echo esc_html( $gpi_topbar_cta ); ?><?php gpi_the_icon( 'arrow-right', 14 ); ?></a>
 				<?php endif; ?>

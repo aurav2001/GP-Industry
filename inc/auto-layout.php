@@ -37,9 +37,12 @@ function gpi_auto_icons() {
  * @param string|null $content Raw content (defaults to current post).
  * @return string HTML.
  */
-function gpi_auto_layout( $content = null ) {
+function gpi_auto_layout( $content = null, $skip_leading_image = false ) {
 	if ( null === $content ) {
 		$content = get_the_content();
+	}
+	if ( function_exists( 'gpi_strip_embedded_faq_from_content' ) ) {
+		$content = gpi_strip_embedded_faq_from_content( $content );
 	}
 	$html = apply_filters( 'the_content', $content );
 	$html = str_replace( ']]>', ']]&gt;', $html );
@@ -118,6 +121,16 @@ function gpi_auto_layout( $content = null ) {
 				break;
 			default:
 				$items[] = array( 'type' => 'raw', 'html' => $outer, 'text' => $text );
+		}
+	}
+
+	if ( empty( $items ) ) {
+		return '';
+	}
+
+	if ( $skip_leading_image ) {
+		while ( ! empty( $items ) && 'image' === $items[0]['type'] ) {
+			array_shift( $items );
 		}
 	}
 
@@ -318,7 +331,7 @@ function gpi_auto_render_block( $block, $in_card = false ) {
 				: '<figure class="auto-media" data-reveal>' . wp_kses_post( $block['html'] ) . '</figure>';
 
 		case 'quote':
-			return '<div class="auto-quote" data-reveal>' . gpi_icon( 'sparkles', 20 ) . wp_kses_post( $block['html'] ) . '</div>';
+			return '<div class="auto-quote" data-reveal>' . gpi_icon( 'quote', 20 ) . wp_kses_post( $block['html'] ) . '</div>';
 
 		case 'raw':
 			return '<div class="entry-content is-wide auto-raw">' . $block['html'] . '</div>';
@@ -334,9 +347,12 @@ function gpi_auto_render_block( $block, $in_card = false ) {
 
 /**
  * Output the auto layout for the current post, falling back to plain content.
+ *
+ * @param string|null $content            Raw content (defaults to current post).
+ * @param bool        $skip_leading_image Whether to skip leading full-width image.
  */
-function gpi_the_auto_layout() {
-	$html = gpi_auto_layout();
+function gpi_the_auto_layout( $content = null, $skip_leading_image = false ) {
+	$html = gpi_auto_layout( $content, $skip_leading_image );
 	if ( $html ) {
 		echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built from wp_kses_post()'d fragments.
 	}

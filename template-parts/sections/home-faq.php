@@ -13,6 +13,7 @@ $gpi_items = gpi_parse_lines( gpi_get_option( 'home_faq_items' ), 2 );
 if ( ! $gpi_items ) {
 	return;
 }
+$GLOBALS['gpi_faq_rendered'] = true;
 ?>
 
 <section id="faq" class="home-faq section-pad">

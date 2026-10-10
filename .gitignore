@@ -8,3 +8,7 @@ desktop.ini
 # Build artifacts
 *.zip
 node_modules/
+
+# Local preview and scratch files
+preview-*.html
+scratch_*

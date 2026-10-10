@@ -17,6 +17,7 @@ $gpi_image = gpi_get_option( 'home_about_image' );
 if ( ! $gpi_image ) {
 	$gpi_image = GPI_THEME_URI . '/assets/images/about-facility.jpg';
 }
+$gpi_image = gpi_protocol_adaptive_url( $gpi_image );
 $gpi_list  = gpi_parse_lines( gpi_get_option( 'home_about_list' ), 1 );
 $gpi_btn   = gpi_get_option( 'home_about_btn' );
 $gpi_badge = gpi_get_option( 'home_about_badge' );

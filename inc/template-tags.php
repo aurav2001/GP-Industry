@@ -160,7 +160,7 @@ if ( ! function_exists( 'gpi_post_thumbnail' ) ) :
 			if ( $card_img ) {
 				echo '<img src="' . esc_url( $card_img ) . '" alt="' . the_title_attribute( array( 'echo' => false ) ) . '" loading="lazy" class="post-thumbnail-img">';
 			} else {
-				echo '<span class="thumb-placeholder">' . gpi_icon( 'sparkles', 36 ) . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo '<span class="thumb-placeholder">' . gpi_icon( 'factory', 36 ) . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			}
 		}
 		echo '</a>';
@@ -181,30 +181,30 @@ if ( ! function_exists( 'gpi_breadcrumbs' ) ) :
 		}
 
 		$items   = array();
-		$items[] = '<a href="' . esc_url( home_url( '/' ) ) . '">' . gpi_icon( 'home', 14 ) . '<span>' . esc_html__( 'Home', 'gp-industry' ) . '</span></a>';
+		$items[] = '<a href="' . esc_url( home_url( '/' ) ) . '" class="crumb-link crumb-home">' . gpi_icon( 'home', 14 ) . '<span>' . esc_html__( 'Home', 'gp-industry' ) . '</span></a>';
 
 		if ( is_home() ) {
-			$items[] = '<span aria-current="page">' . esc_html( single_post_title( '', false ) ) . '</span>';
+			$items[] = '<span class="crumb-current" aria-current="page">' . esc_html( single_post_title( '', false ) ) . '</span>';
 		} elseif ( is_singular( 'post' ) ) {
 			$cats = get_the_category();
 			if ( ! empty( $cats ) ) {
-				$items[] = '<a href="' . esc_url( get_category_link( $cats[0]->term_id ) ) . '">' . esc_html( $cats[0]->name ) . '</a>';
+				$items[] = '<a href="' . esc_url( get_category_link( $cats[0]->term_id ) ) . '" class="crumb-link">' . esc_html( $cats[0]->name ) . '</a>';
 			}
-			$items[] = '<span aria-current="page">' . esc_html( get_the_title() ) . '</span>';
+			$items[] = '<span class="crumb-current" aria-current="page">' . esc_html( get_the_title() ) . '</span>';
 		} elseif ( is_page() ) {
 			$ancestors = array_reverse( get_post_ancestors( get_the_ID() ) );
 			foreach ( $ancestors as $ancestor ) {
-				$items[] = '<a href="' . esc_url( get_permalink( $ancestor ) ) . '">' . esc_html( get_the_title( $ancestor ) ) . '</a>';
+				$items[] = '<a href="' . esc_url( get_permalink( $ancestor ) ) . '" class="crumb-link">' . esc_html( get_the_title( $ancestor ) ) . '</a>';
 			}
-			$items[] = '<span aria-current="page">' . esc_html( get_the_title() ) . '</span>';
+			$items[] = '<span class="crumb-current" aria-current="page">' . esc_html( get_the_title() ) . '</span>';
 		} elseif ( is_singular() ) {
-			$items[] = '<span aria-current="page">' . esc_html( get_the_title() ) . '</span>';
+			$items[] = '<span class="crumb-current" aria-current="page">' . esc_html( get_the_title() ) . '</span>';
 		} elseif ( is_search() ) {
-			$items[] = '<span aria-current="page">' . esc_html__( 'Search', 'gp-industry' ) . '</span>';
+			$items[] = '<span class="crumb-current" aria-current="page">' . esc_html__( 'Search', 'gp-industry' ) . '</span>';
 		} elseif ( is_404() ) {
-			$items[] = '<span aria-current="page">' . esc_html__( 'Not found', 'gp-industry' ) . '</span>';
+			$items[] = '<span class="crumb-current" aria-current="page">' . esc_html__( 'Not found', 'gp-industry' ) . '</span>';
 		} elseif ( is_archive() ) {
-			$items[] = '<span aria-current="page">' . wp_strip_all_tags( get_the_archive_title() ) . '</span>';
+			$items[] = '<span class="crumb-current" aria-current="page">' . wp_strip_all_tags( get_the_archive_title() ) . '</span>';
 		}
 
 		echo '<nav class="breadcrumbs" aria-label="' . esc_attr__( 'Breadcrumb', 'gp-industry' ) . '">';
