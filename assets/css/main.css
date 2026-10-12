@@ -12928,7 +12928,153 @@ body,
 		overflow: hidden !important;
 	}
 
-	/* Convert all multi-column metrics/strips to 2 columns on tablets/mobile */
+	/* Home About Section & Split Layouts (Zero Clipping Armor) */
+	.home-about-grid {
+		display: flex !important;
+		flex-direction: column !important;
+		gap: 2rem !important;
+		width: 100% !important;
+		max-width: 100% !important;
+	}
+
+	.home-about-media,
+	.home-about-content {
+		width: 100% !important;
+		max-width: 100% !important;
+		min-width: 0 !important;
+		overflow: visible !important;
+	}
+
+	.home-about-frame {
+		width: 100% !important;
+		max-width: 100% !important;
+		border-radius: var(--radius-xl) !important;
+		overflow: hidden !important;
+	}
+
+	.home-about-frame img {
+		width: 100% !important;
+		max-width: 100% !important;
+		height: auto !important;
+		aspect-ratio: 16 / 10 !important;
+		object-fit: cover !important;
+		display: block !important;
+	}
+
+	.home-about-badge {
+		position: static !important;
+		margin-top: -1.75rem !important;
+		margin-inline: 1rem !important;
+		max-width: calc(100% - 2rem) !important;
+		right: auto !important;
+		bottom: auto !important;
+		box-sizing: border-box !important;
+	}
+
+	/* Checklists & Content Formatting on Mobile */
+	.home-about-list,
+	.auto-checklist {
+		display: grid !important;
+		grid-template-columns: 1fr !important;
+		width: 100% !important;
+		max-width: 100% !important;
+		gap: 0.75rem !important;
+		box-sizing: border-box !important;
+	}
+
+	.auto-checklist li,
+	.home-about-list li {
+		width: 100% !important;
+		max-width: 100% !important;
+		padding: 0.75rem 1rem !important;
+		font-size: 0.92rem !important;
+		box-sizing: border-box !important;
+		display: flex !important;
+		align-items: flex-start !important;
+		gap: 0.65rem !important;
+	}
+
+	.auto-checklist li span,
+	.home-about-list li span {
+		flex: 1 !important;
+		min-width: 0 !important;
+		word-break: break-word !important;
+		overflow-wrap: break-word !important;
+	}
+
+	.section-title,
+	.section-text,
+	.section-eyebrow,
+	.entry-content,
+	.entry-content p,
+	.entry-content h2,
+	.entry-content h3 {
+		max-width: 100% !important;
+		word-break: break-word !important;
+		overflow-wrap: break-word !important;
+		box-sizing: border-box !important;
+	}
+
+	.section-title {
+		font-size: clamp(1.6rem, 5.5vw, 2.25rem) !important;
+		line-height: 1.2 !important;
+	}
+
+	.section-text {
+		font-size: 0.98rem !important;
+		line-height: 1.65 !important;
+	}
+
+	/* Split Grids & Zigzag Rows */
+	.zigzag-inner,
+	.consult-zigzag-row,
+	.consult-zigzag-row-reverse,
+	.split-row,
+	.page-hero-split .page-hero-inner,
+	.single-prod-hero-inner {
+		display: flex !important;
+		flex-direction: column !important;
+		gap: 2rem !important;
+		width: 100% !important;
+		max-width: 100% !important;
+	}
+
+	.zigzag-media,
+	.zigzag-content,
+	.consult-zigzag-visual,
+	.consult-zigzag-content {
+		width: 100% !important;
+		max-width: 100% !important;
+		min-width: 0 !important;
+	}
+
+	/* Card & Section Grids */
+	.features-grid,
+	.industries-grid,
+	.home-products-grid,
+	.prod-grid,
+	.process-grid,
+	.auto-process-grid,
+	.testimonials-grid,
+	.posts-grid {
+		grid-template-columns: 1fr !important;
+		gap: 1.25rem !important;
+		width: 100% !important;
+		max-width: 100% !important;
+	}
+
+	.feature-card,
+	.industry-card,
+	.product-card,
+	.process-card,
+	.post-card,
+	.testimonial-card {
+		width: 100% !important;
+		max-width: 100% !important;
+		box-sizing: border-box !important;
+	}
+
+	/* Multi-column metrics/strips convert to 2 columns on tablets/mobile */
 	.service-spec-strip,
 	.about-metrics-grid,
 	.consult-metrics-grid,
@@ -12943,6 +13089,9 @@ body,
 	.b2b-industries-grid {
 		grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
 		gap: 1rem !important;
+		width: 100% !important;
+		max-width: 100% !important;
+		box-sizing: border-box !important;
 	}
 
 	.spec-strip-item:not(:last-child),
@@ -12950,10 +13099,20 @@ body,
 		border-right: none !important;
 		padding-right: 0 !important;
 	}
+
+	/* Performance & 60fps Smooth Scroll */
+	.feature-card,
+	.auto-card,
+	.service-card,
+	.home-about-frame,
+	.hero-media-frame {
+		backdrop-filter: none !important;
+		-webkit-backdrop-filter: none !important;
+	}
 }
 
 @media (max-width: 576px) {
-	/* Stack buttons and metrics to 1 column on small phones */
+	/* Small Phone Optimizations */
 	.hero-actions {
 		flex-direction: column !important;
 		align-items: stretch !important;

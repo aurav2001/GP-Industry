@@ -300,8 +300,17 @@
 						io.unobserve(entry.target);
 					}
 				});
-			}, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
-			revealEls.forEach(function (el) { io.observe(el); });
+			}, { rootMargin: '100px 0px 100px 0px', threshold: 0.01 });
+
+			revealEls.forEach(function (el) {
+				// Instantly reveal elements already visible in viewport to prevent stutter
+				var rect = el.getBoundingClientRect();
+				if (rect.top < window.innerHeight + 80) {
+					el.classList.add('is-revealed');
+				} else {
+					io.observe(el);
+				}
+			});
 		} else {
 			revealEls.forEach(function (el) { el.classList.add('is-revealed'); });
 		}
