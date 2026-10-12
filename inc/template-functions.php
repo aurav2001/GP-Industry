@@ -21,7 +21,17 @@ function gpi_get_option( $key, $default = null ) {
 		$defaults = gpi_option_defaults();
 		$default  = isset( $defaults[ $key ] ) ? $defaults[ $key ] : '';
 	}
-	return get_theme_mod( 'gpi_' . $key, $default );
+	$val = get_theme_mod( 'gpi_' . $key, $default );
+
+	// Smart URL resolution for CTA / Contact buttons so they never break as dummy anchors.
+	if ( ( 'header_cta_url' === $key || 'cta_btn_url' === $key ) && ( empty( $val ) || '#contact' === $val || '#' === $val ) ) {
+		if ( function_exists( 'gpi_get_contact_url' ) ) {
+			return gpi_get_contact_url();
+		}
+		return home_url( '/contact/' );
+	}
+
+	return $val;
 }
 
 /**
@@ -506,6 +516,24 @@ function gpi_get_page_link_by_path( $path, $fallback = '' ) {
 	}
 
 	return $fallback ? $fallback : home_url( '/' . $clean_path . '/' );
+}
+
+/**
+ * Helper to get the Contact page URL reliably.
+ *
+ * @return string
+ */
+function gpi_get_contact_url() {
+	return gpi_get_page_link_by_path( 'contact', home_url( '/contact/' ) );
+}
+
+/**
+ * Helper to get the Services page URL reliably.
+ *
+ * @return string
+ */
+function gpi_get_services_url() {
+	return gpi_get_page_link_by_path( 'services', home_url( '/services/' ) );
 }
 
 /**

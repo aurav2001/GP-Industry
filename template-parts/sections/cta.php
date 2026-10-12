@@ -19,7 +19,7 @@ if ( ! $gpi_title ) {
 }
 ?>
 
-<section id="contact" class="cta-section section-pad">
+<section id="cta-banner" class="cta-section section-pad" data-anchor="cta">
 	<div class="nova-container">
 		<div class="cta-banner" data-reveal>
 			<div class="cta-orb" aria-hidden="true"></div>

@@ -27,7 +27,7 @@ if ( empty( $gpi_features ) ) {
 }
 ?>
 
-<section id="features" class="features-section section-pad">
+<section id="services" class="features-section section-pad" data-anchor="features">
 	<div class="nova-container">
 		<?php
 		gpi_section_heading(

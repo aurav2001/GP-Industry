@@ -351,15 +351,34 @@
 	document.addEventListener('click', function (e) {
 		var link = e.target.closest('a[href^="#"]');
 		if (!link) { return; }
-		var id = link.getAttribute('href').slice(1);
+		var href = link.getAttribute('href');
+		if (!href || href === '#') { return; }
+		var id = href.slice(1);
 		if (!id) { return; }
-		var target = document.getElementById(id);
-		if (!target) { return; }
-		e.preventDefault();
-		var offset = (header ? header.offsetHeight : 0) + 16;
-		var top = target.getBoundingClientRect().top + window.scrollY - offset;
-		window.scrollTo({ top: top, behavior: reduceMotion ? 'auto' : 'smooth' });
-		if (history.pushState) { history.pushState(null, '', '#' + id); }
+
+		var target = document.getElementById(id) || document.querySelector('[data-anchor="' + id + '"]');
+		if (target) {
+			e.preventDefault();
+			var offset = (header ? header.offsetHeight : 0) + 16;
+			var top = target.getBoundingClientRect().top + window.scrollY - offset;
+			window.scrollTo({ top: top, behavior: reduceMotion ? 'auto' : 'smooth' });
+			if (history.pushState) { history.pushState(null, '', '#' + id); }
+		} else {
+			// Fallback routing if anchor is not on current page
+			if (id === 'contact' || id === 'inquire') {
+				e.preventDefault();
+				window.location.href = '/contact/';
+			} else if (id === 'services' || id === 'features') {
+				e.preventDefault();
+				window.location.href = '/services/';
+			} else if (id === 'products') {
+				e.preventDefault();
+				window.location.href = '/products/';
+			} else if (id === 'about') {
+				e.preventDefault();
+				window.location.href = '/about-us/';
+			}
+		}
 	});
 
 	/* ------------------------------------------------------------------

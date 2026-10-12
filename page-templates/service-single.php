@@ -66,7 +66,7 @@ while ( have_posts() ) :
 					</div>
 
 					<div class="single-prod-actions">
-						<a href="#contact" class="btn btn-primary btn-lg">
+						<a href="<?php echo esc_url( $gpi_cta_url ); ?>" class="btn btn-primary btn-lg">
 							<span><?php esc_html_e( 'Request Engineering Proposal', 'gp-industry' ); ?></span>
 							<?php gpi_the_icon( 'arrow-right', 16 ); ?>
 						</a>
