@@ -13191,6 +13191,13 @@ body,
 		backdrop-filter: none !important;
 		-webkit-backdrop-filter: none !important;
 	}
+
+	.back-to-top {
+		width: 44px !important;
+		height: 44px !important;
+		right: 1.25rem !important;
+		bottom: 1.25rem !important;
+	}
 }
 
 @media (max-width: 576px) {
@@ -13219,5 +13226,20 @@ body,
 	.b2b-industries-grid {
 		grid-template-columns: 1fr !important;
 		gap: 0.85rem !important;
+	}
+
+	/* Sleek mobile back-to-top button */
+	.back-to-top {
+		width: 40px !important;
+		height: 40px !important;
+		right: 1rem !important;
+		bottom: 1.25rem !important;
+		box-shadow: 0 4px 15px rgba(79, 70, 229, 0.35) !important;
+	}
+
+	.back-to-top svg {
+		width: 18px !important;
+		height: 18px !important;
+		stroke-width: 2.5px !important;
 	}
 }

@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'GPI_THEME_VERSION', '3.2.4' );
+define( 'GPI_THEME_VERSION', '3.2.5' );
 define( 'GPI_THEME_DIR', get_template_directory() );
 
 /**
