@@ -74,27 +74,15 @@ function gpi_repair_page_templates() {
 }
 
 /**
- * Automatically set up demo content and GP-Industry menu on theme activation.
+ * Set welcome notice on theme activation.
  */
 function gpi_on_theme_activation() {
-	gpi_auto_setup_theme_content();
 	set_transient( 'gpi_show_setup_notice', 1, WEEK_IN_SECONDS );
 }
 add_action( 'after_switch_theme', 'gpi_on_theme_activation' );
 
 /**
- * Ensure theme content and menu are initialized even if theme was activated before update.
- */
-function gpi_maybe_auto_setup() {
-	if ( ! get_option( 'gpi_auto_setup_completed_v7' ) ) {
-		gpi_auto_setup_theme_content();
-		update_option( 'gpi_auto_setup_completed_v7', 1 );
-	}
-}
-add_action( 'init', 'gpi_maybe_auto_setup' );
-
-/**
- * Main auto setup function.
+ * Main auto setup function (callable manually from setup page).
  */
 function gpi_auto_setup_theme_content() {
 	gpi_repair_page_templates();
